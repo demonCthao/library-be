@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2023",
+    "ignoreDeprecations": "6.0",
     "outDir": "dist",
     "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["./src/types", "./node_modules/@types"]
   }
 }
