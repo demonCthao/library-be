@@ -1,8 +1,46 @@
-import { Router } from "express";
-import { getUsers } from "../controllers/user.controller";
-import { paginationMiddleware } from "../common/pagination.middleware";
+import { Router } from 'express';
+import { UserController } from '../controllers/user.controller';
 
 const router = Router();
+const controller = new UserController();
+
+/**
+ * @swagger
+ * /api/v1/users:
+ *   get:
+ *     summary: Get list of users
+ *     tags: [Users]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Page number
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           example: 10
+ *         description: Items per page
+ *       - in: query
+ *         name: orderBy
+ *         schema:
+ *           type: string
+ *           example: first_name
+ *         description: Field to sort by
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           example: desc
+ *         description: Sort order
+ *     responses:
+ *       200:
+ *         description: List of users
+ */
+router.get('/', controller.findAll.bind(controller));
 
 /**
  * @swagger
@@ -14,13 +52,93 @@ const router = Router();
 /**
  * @swagger
  * /api/v1/users:
- *   get:
- *     summary: Get list of users
+ *   post:
+ *     summary: Create new user
  *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - card_id
+ *               - first_name
+ *               - last_name
+ *               - email
+ *             properties:
+ *               card_id:
+ *                 type: string
+ *                 example: "CARD001"
+ *               first_name:
+ *                 type: string
+ *                 example: "John"
+ *               last_name:
+ *                 type: string
+ *                 example: "Doe"
+ *               email:
+ *                 type: string
+ *                 example: "john@example.com"
+ *     responses:
+ *       201:
+ *         description: User created
+ */
+router.post('/', controller.store.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *   put:
+ *     summary: Update user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: 1
+ *         description: User ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *                 example: "John"
+ *               last_name:
+ *                 type: string
+ *                 example: "Doe"
+ *               email:
+ *                 type: string
+ *                 example: "john@example.com"
  *     responses:
  *       200:
- *         description: Success
+ *         description: User updated
  */
-router.get("/", paginationMiddleware, getUsers);
+router.put('/:id', controller.update.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *   delete:
+ *     summary: Delete user
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: User deleted
+ */
+router.delete('/:id', controller.destroy.bind(controller));
 
 export default router;
