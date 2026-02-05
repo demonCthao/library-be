@@ -1,14 +1,50 @@
-import { NextFunction, Request, Response } from "express";
-import { UserService } from "../services/user.service";
-import { sendSuccess } from "../common/response.helper";
+import { Request, Response, NextFunction } from 'express';
+import UserService from '../services/user.service';
+import { BaseController } from './base.controller';
 
-const getUsers = async (req: Request, res: Response, next: NextFunction) => {
-    const page = Number(req.query.page) || 1;
-    const limit = Number(req.query.limit) || 10;
+export class UserController extends BaseController<UserService> {
+    constructor() {
+        super(new UserService());
+    }
 
-    const data = await UserService.getUsers(page, limit);
-    
-    return sendSuccess(res, data.users, data.total)
-};
+    async store(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await this.service.store(req.body);
+            return res.status(201).json(user);
+        } catch (err) {
+            next(err);
+        }
+    }
 
-export { getUsers };
+    async findAll(req: Request, res: Response, next: NextFunction) {
+        try {
+            const users = await this.service.findAll(req.query);
+            return res.json(users);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async update(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await this.service.update(
+                req.params.id as string,
+                req.body
+            );
+            return res.json(user);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async destroy(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await this.service.destroy(
+                req.params.id as string,
+            );
+            return res.json(user);
+        } catch (err) {
+            next(err);
+        }
+    }
+}
