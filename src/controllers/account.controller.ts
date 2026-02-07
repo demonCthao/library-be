@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import UserService from '../services/user.service';
-import { BaseController } from './base.controller';
+import { AccountService } from "../services/account.service";
+import { BaseController } from "./base.controller";
 
-export class UserController extends BaseController<UserService> {
+export class AccountController extends BaseController<AccountService> {
     constructor() {
-        super(new UserService());
+        super(new AccountService());
     }
 
     async store(req: Request, res: Response, next: NextFunction) {

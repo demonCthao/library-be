@@ -8,6 +8,20 @@ const options: swaggerJsdoc.Options = {
       version: "1.0.0",
       description: "API cho đồ án Xây Dựng Quản Lý Thư Viện",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
     servers: [
       {
         url: "http://localhost:3000",
