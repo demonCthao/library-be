@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "mysql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n}\n\nmodel users {\n  card_id    String @id @db.VarChar(20)\n  first_name String @db.Text\n  last_name  String @db.Text\n  email      String @db.Text\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n}\n\nmodel users {\n  card_id    String     @id @db.VarChar(20)\n  first_name String     @db.Text\n  last_name  String     @db.Text\n  email      String     @db.Text\n  role       String?    @db.Char(10)\n  accounts   accounts[]\n}\n\nmodel accounts {\n  account_id      Int       @id @default(autoincrement())\n  user_name       String    @unique(map: \"user_name\") @db.VarChar(20)\n  user_pass       String    @db.Text\n  lang            String    @db.VarChar(20)\n  card_id         String    @db.VarChar(20)\n  locked_until    DateTime? @db.DateTime(0)\n  failed_attempts Int       @default(0) @db.UnsignedTinyInt\n  last_login_ip   String?   @db.VarChar(45)\n  users           users     @relation(fields: [card_id], references: [card_id], onUpdate: Restrict, map: \"fk_users\")\n\n  @@index([card_id], map: \"fk_users\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"users\":{\"fields\":[{\"name\":\"card_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"users\":{\"fields\":[{\"name\":\"card_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"accounts\",\"relationName\":\"accountsTousers\"}],\"dbName\":null},\"accounts\":{\"fields\":[{\"name\":\"account_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_pass\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lang\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"card_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"locked_until\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"failed_attempts\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"last_login_ip\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"users\",\"relationName\":\"accountsTousers\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,6 +185,16 @@ export interface PrismaClient<
     * ```
     */
   get users(): Prisma.usersDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.accounts`: Exposes CRUD operations for the **accounts** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Accounts
+    * const accounts = await prisma.accounts.findMany()
+    * ```
+    */
+  get accounts(): Prisma.accountsDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

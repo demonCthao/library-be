@@ -1,4 +1,4 @@
-import { AlreadyExistsError, NotFoundError } from "../common/errors";
+import { AlreadyExistsException, NotFoundException } from "../exceptions";
 import { Prisma, users } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
@@ -7,14 +7,14 @@ import { BaseService } from "./base.service";
 export class UserService extends BaseService<users> {
 
   async store(data: Prisma.usersCreateInput): Promise<users> {
-    const checkExist = prisma.users.findUnique({
+    const checkExist = await prisma.users.findUnique({
       where: {
         card_id: data.card_id
       }
     });
 
     if (!!checkExist) {
-      throw new AlreadyExistsError("User")
+      throw new AlreadyExistsException("User")
     }
 
     return prisma.users.create({ data });
@@ -43,14 +43,14 @@ export class UserService extends BaseService<users> {
     });
 
     if (!res) {
-      throw new NotFoundError('User');
+      throw new NotFoundException('User');
     }
 
     return res;
   }
 
   async destroy(id: string): Promise<users> {
-    return prisma.users.delete({
+    return await prisma.users.delete({
       where: { card_id: id }
     });
   }

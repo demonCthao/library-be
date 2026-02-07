@@ -51,7 +51,8 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  users: 'users'
+  users: 'users',
+  accounts: 'accounts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,10 +75,25 @@ export const UsersScalarFieldEnum = {
   card_id: 'card_id',
   first_name: 'first_name',
   last_name: 'last_name',
-  email: 'email'
+  email: 'email',
+  role: 'role'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const AccountsScalarFieldEnum = {
+  account_id: 'account_id',
+  user_name: 'user_name',
+  user_pass: 'user_pass',
+  lang: 'lang',
+  card_id: 'card_id',
+  locked_until: 'locked_until',
+  failed_attempts: 'failed_attempts',
+  last_login_ip: 'last_login_ip'
+} as const
+
+export type AccountsScalarFieldEnum = (typeof AccountsScalarFieldEnum)[keyof typeof AccountsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -88,12 +104,32 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const usersOrderByRelevanceFieldEnum = {
   card_id: 'card_id',
   first_name: 'first_name',
   last_name: 'last_name',
-  email: 'email'
+  email: 'email',
+  role: 'role'
 } as const
 
 export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
+
+
+export const accountsOrderByRelevanceFieldEnum = {
+  user_name: 'user_name',
+  user_pass: 'user_pass',
+  lang: 'lang',
+  card_id: 'card_id',
+  last_login_ip: 'last_login_ip'
+} as const
+
+export type accountsOrderByRelevanceFieldEnum = (typeof accountsOrderByRelevanceFieldEnum)[keyof typeof accountsOrderByRelevanceFieldEnum]
 

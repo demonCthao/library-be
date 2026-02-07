@@ -384,7 +384,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  users: 'users'
+  users: 'users',
+  accounts: 'accounts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -400,7 +401,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users"
+    modelProps: "users" | "accounts"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -470,6 +471,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    accounts: {
+      payload: Prisma.$accountsPayload<ExtArgs>
+      fields: Prisma.accountsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.accountsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.accountsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        findFirst: {
+          args: Prisma.accountsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.accountsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        findMany: {
+          args: Prisma.accountsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>[]
+        }
+        create: {
+          args: Prisma.accountsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        createMany: {
+          args: Prisma.accountsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.accountsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        update: {
+          args: Prisma.accountsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        deleteMany: {
+          args: Prisma.accountsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.accountsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.accountsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$accountsPayload>
+        }
+        aggregate: {
+          args: Prisma.AccountsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAccounts>
+        }
+        groupBy: {
+          args: Prisma.accountsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.accountsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AccountsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -513,10 +580,25 @@ export const UsersScalarFieldEnum = {
   card_id: 'card_id',
   first_name: 'first_name',
   last_name: 'last_name',
-  email: 'email'
+  email: 'email',
+  role: 'role'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
+
+
+export const AccountsScalarFieldEnum = {
+  account_id: 'account_id',
+  user_name: 'user_name',
+  user_pass: 'user_pass',
+  lang: 'lang',
+  card_id: 'card_id',
+  locked_until: 'locked_until',
+  failed_attempts: 'failed_attempts',
+  last_login_ip: 'last_login_ip'
+} as const
+
+export type AccountsScalarFieldEnum = (typeof AccountsScalarFieldEnum)[keyof typeof AccountsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -527,14 +609,34 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const usersOrderByRelevanceFieldEnum = {
   card_id: 'card_id',
   first_name: 'first_name',
   last_name: 'last_name',
-  email: 'email'
+  email: 'email',
+  role: 'role'
 } as const
 
 export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
+
+
+export const accountsOrderByRelevanceFieldEnum = {
+  user_name: 'user_name',
+  user_pass: 'user_pass',
+  lang: 'lang',
+  card_id: 'card_id',
+  last_login_ip: 'last_login_ip'
+} as const
+
+export type accountsOrderByRelevanceFieldEnum = (typeof accountsOrderByRelevanceFieldEnum)[keyof typeof accountsOrderByRelevanceFieldEnum]
 
 
 
@@ -554,6 +656,20 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'Float'
+ */
+export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 /**
@@ -652,6 +768,7 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   users?: Prisma.usersOmit
+  accounts?: Prisma.accountsOmit
 }
 
 /* Types for Logging */
