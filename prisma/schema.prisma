@@ -8,8 +8,174 @@ datasource db {
 }
 
 model users {
-  card_id    String @id @db.VarChar(20)
-  first_name String @db.Text
-  last_name  String @db.Text
-  email      String @db.Text
+  id         Int           @id @default(autoincrement())
+  full_name  String?       @db.VarChar(100)
+  email      String?       @db.VarChar(100)
+  phone      String?       @db.VarChar(20)
+  role       users_role
+  status     users_status? @default(active)
+  lang       String?       @default("vi") @db.VarChar(10)
+  created_at DateTime      @default(now()) @db.Timestamp(0)
+  updated_at DateTime      @default(now()) @db.Timestamp(0)
+  accounts   accounts?
+}
+
+model authors {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(100)
+  bio          String?        @db.Text
+  book_authors book_authors[]
+}
+
+model book_authors {
+  book_id   Int
+  author_id Int
+  books     books   @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "book_authors_ibfk_1")
+  authors   authors @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "book_authors_ibfk_2")
+
+  @@id([book_id, author_id])
+  @@index([author_id], map: "author_id")
+}
+
+model book_copies {
+  id             Int                 @id @default(autoincrement())
+  book_id        Int
+  copy_code      String              @unique(map: "copy_code") @db.VarChar(50)
+  status         book_copies_status? @default(available)
+  location       String?             @db.VarChar(100)
+  books          books               @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "book_copies_ibfk_1")
+  borrow_details borrow_details[]
+
+  @@index([book_id], map: "book_id")
+}
+
+model books {
+  id                 Int            @id @default(autoincrement())
+  isbn               String?        @unique(map: "isbn") @db.VarChar(20)
+  title              String         @db.VarChar(255)
+  description        String?        @db.Text
+  publish_year       Int?
+  language           String?        @db.VarChar(50)
+  pages              Int?
+  publisher_id       Int?
+  category_id        Int?
+  created_at         DateTime       @default(now()) @db.Timestamp(0)
+  stock_quantity     Int            @default(0)
+  borrowed_quantity  Int            @default(0)
+  reserved_quantity  Int            @default(0)
+  available_quantity Int            @default(0)
+  book_authors       book_authors[]
+  book_copies        book_copies[]
+  publishers         publishers?    @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
+  categories         categories?    @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
+
+  @@index([category_id], map: "category_id")
+  @@index([publisher_id], map: "publisher_id")
+}
+
+model borrow_details {
+  borrow_id      Int
+  book_copy_id   Int
+  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_details_ibfk_1")
+  book_copies    book_copies    @relation(fields: [book_copy_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_details_ibfk_2")
+
+  @@id([borrow_id, book_copy_id])
+  @@index([book_copy_id], map: "book_copy_id")
+}
+
+model borrow_records {
+  id             Int                    @id @default(autoincrement())
+  reader_id      Int
+  borrow_date    DateTime               @db.Date
+  due_date       DateTime               @db.Date
+  return_date    DateTime?              @db.Date
+  status         borrow_records_status? @default(borrowing)
+  borrow_details borrow_details[]
+  readers        readers                @relation(fields: [reader_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_records_ibfk_1")
+  fines          fines[]
+
+  @@index([reader_id], map: "reader_id")
+}
+
+model categories {
+  id               Int          @id @default(autoincrement())
+  name             String       @db.VarChar(100)
+  parent_id        Int?
+  books            books[]
+  categories       categories?  @relation("categoriesTocategories", fields: [parent_id], references: [id], onUpdate: Restrict, map: "categories_ibfk_1")
+  other_categories categories[] @relation("categoriesTocategories")
+
+  @@index([parent_id], map: "parent_id")
+}
+
+model fines {
+  id             Int            @id @default(autoincrement())
+  borrow_id      Int
+  amount         Decimal        @db.Decimal(10, 2)
+  reason         String?        @db.VarChar(255)
+  paid           Boolean?       @default(false)
+  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fines_ibfk_1")
+
+  @@index([borrow_id], map: "borrow_id")
+}
+
+model publishers {
+  id      Int     @id @default(autoincrement())
+  name    String  @db.VarChar(150)
+  address String? @db.VarChar(255)
+  books   books[]
+}
+
+model readers {
+  id             Int              @id @default(autoincrement())
+  reader_code    String           @unique(map: "reader_code") @db.VarChar(20)
+  full_name      String           @db.VarChar(100)
+  date_of_birth  DateTime?        @db.Date
+  gender         readers_gender?
+  email          String?          @db.VarChar(100)
+  phone          String?          @db.VarChar(20)
+  address        String?          @db.VarChar(255)
+  created_at     DateTime         @default(now()) @db.Timestamp(0)
+  borrow_records borrow_records[]
+}
+
+model accounts {
+  id              Int       @id @default(autoincrement())
+  user_id         Int       @unique(map: "user_id")
+  username        String    @unique(map: "username") @db.VarChar(50)
+  password        String    @db.VarChar(255)
+  failed_attempts Int?      @default(0)
+  locked_until    DateTime? @db.DateTime(0)
+  created_at      DateTime  @default(now()) @db.Timestamp(0)
+  updated_at      DateTime  @default(now()) @db.Timestamp(0)
+  users           users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_accounts_user")
+}
+
+enum book_copies_status {
+  available
+  borrowed
+  lost
+  damaged
+}
+
+enum readers_gender {
+  male
+  female
+  other
+}
+
+enum borrow_records_status {
+  borrowing
+  returned
+  overdue
+}
+
+enum users_role {
+  admin
+  librarian
+}
+
+enum users_status {
+  active
+  inactive
 }

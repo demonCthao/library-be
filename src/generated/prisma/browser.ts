@@ -23,6 +23,56 @@ export * from './enums';
  */
 export type users = Prisma.usersModel
 /**
+ * Model authors
+ * 
+ */
+export type authors = Prisma.authorsModel
+/**
+ * Model book_authors
+ * 
+ */
+export type book_authors = Prisma.book_authorsModel
+/**
+ * Model book_copies
+ * 
+ */
+export type book_copies = Prisma.book_copiesModel
+/**
+ * Model books
+ * 
+ */
+export type books = Prisma.booksModel
+/**
+ * Model borrow_details
+ * 
+ */
+export type borrow_details = Prisma.borrow_detailsModel
+/**
+ * Model borrow_records
+ * 
+ */
+export type borrow_records = Prisma.borrow_recordsModel
+/**
+ * Model categories
+ * 
+ */
+export type categories = Prisma.categoriesModel
+/**
+ * Model fines
+ * 
+ */
+export type fines = Prisma.finesModel
+/**
+ * Model publishers
+ * 
+ */
+export type publishers = Prisma.publishersModel
+/**
+ * Model readers
+ * 
+ */
+export type readers = Prisma.readersModel
+/**
  * Model accounts
  * 
  */

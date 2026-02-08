@@ -27,91 +27,95 @@ export type AggregateAccounts = {
 }
 
 export type AccountsAvgAggregateOutputType = {
-  account_id: number | null
+  id: number | null
+  user_id: number | null
   failed_attempts: number | null
 }
 
 export type AccountsSumAggregateOutputType = {
-  account_id: number | null
+  id: number | null
+  user_id: number | null
   failed_attempts: number | null
 }
 
 export type AccountsMinAggregateOutputType = {
-  account_id: number | null
-  user_name: string | null
-  user_pass: string | null
-  lang: string | null
-  card_id: string | null
-  locked_until: Date | null
+  id: number | null
+  user_id: number | null
+  username: string | null
+  password: string | null
   failed_attempts: number | null
-  last_login_ip: string | null
+  locked_until: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type AccountsMaxAggregateOutputType = {
-  account_id: number | null
-  user_name: string | null
-  user_pass: string | null
-  lang: string | null
-  card_id: string | null
-  locked_until: Date | null
+  id: number | null
+  user_id: number | null
+  username: string | null
+  password: string | null
   failed_attempts: number | null
-  last_login_ip: string | null
+  locked_until: Date | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type AccountsCountAggregateOutputType = {
-  account_id: number
-  user_name: number
-  user_pass: number
-  lang: number
-  card_id: number
-  locked_until: number
+  id: number
+  user_id: number
+  username: number
+  password: number
   failed_attempts: number
-  last_login_ip: number
+  locked_until: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
 export type AccountsAvgAggregateInputType = {
-  account_id?: true
+  id?: true
+  user_id?: true
   failed_attempts?: true
 }
 
 export type AccountsSumAggregateInputType = {
-  account_id?: true
+  id?: true
+  user_id?: true
   failed_attempts?: true
 }
 
 export type AccountsMinAggregateInputType = {
-  account_id?: true
-  user_name?: true
-  user_pass?: true
-  lang?: true
-  card_id?: true
-  locked_until?: true
+  id?: true
+  user_id?: true
+  username?: true
+  password?: true
   failed_attempts?: true
-  last_login_ip?: true
+  locked_until?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type AccountsMaxAggregateInputType = {
-  account_id?: true
-  user_name?: true
-  user_pass?: true
-  lang?: true
-  card_id?: true
-  locked_until?: true
+  id?: true
+  user_id?: true
+  username?: true
+  password?: true
   failed_attempts?: true
-  last_login_ip?: true
+  locked_until?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type AccountsCountAggregateInputType = {
-  account_id?: true
-  user_name?: true
-  user_pass?: true
-  lang?: true
-  card_id?: true
-  locked_until?: true
+  id?: true
+  user_id?: true
+  username?: true
+  password?: true
   failed_attempts?: true
-  last_login_ip?: true
+  locked_until?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -202,14 +206,14 @@ export type accountsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 export type AccountsGroupByOutputType = {
-  account_id: number
-  user_name: string
-  user_pass: string
-  lang: string
-  card_id: string
+  id: number
+  user_id: number
+  username: string
+  password: string
+  failed_attempts: number | null
   locked_until: Date | null
-  failed_attempts: number
-  last_login_ip: string | null
+  created_at: Date
+  updated_at: Date
   _count: AccountsCountAggregateOutputType | null
   _avg: AccountsAvgAggregateOutputType | null
   _sum: AccountsSumAggregateOutputType | null
@@ -236,54 +240,54 @@ export type accountsWhereInput = {
   AND?: Prisma.accountsWhereInput | Prisma.accountsWhereInput[]
   OR?: Prisma.accountsWhereInput[]
   NOT?: Prisma.accountsWhereInput | Prisma.accountsWhereInput[]
-  account_id?: Prisma.IntFilter<"accounts"> | number
-  user_name?: Prisma.StringFilter<"accounts"> | string
-  user_pass?: Prisma.StringFilter<"accounts"> | string
-  lang?: Prisma.StringFilter<"accounts"> | string
-  card_id?: Prisma.StringFilter<"accounts"> | string
+  id?: Prisma.IntFilter<"accounts"> | number
+  user_id?: Prisma.IntFilter<"accounts"> | number
+  username?: Prisma.StringFilter<"accounts"> | string
+  password?: Prisma.StringFilter<"accounts"> | string
+  failed_attempts?: Prisma.IntNullableFilter<"accounts"> | number | null
   locked_until?: Prisma.DateTimeNullableFilter<"accounts"> | Date | string | null
-  failed_attempts?: Prisma.IntFilter<"accounts"> | number
-  last_login_ip?: Prisma.StringNullableFilter<"accounts"> | string | null
+  created_at?: Prisma.DateTimeFilter<"accounts"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"accounts"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
 }
 
 export type accountsOrderByWithRelationInput = {
-  account_id?: Prisma.SortOrder
-  user_name?: Prisma.SortOrder
-  user_pass?: Prisma.SortOrder
-  lang?: Prisma.SortOrder
-  card_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  failed_attempts?: Prisma.SortOrderInput | Prisma.SortOrder
   locked_until?: Prisma.SortOrderInput | Prisma.SortOrder
-  failed_attempts?: Prisma.SortOrder
-  last_login_ip?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   users?: Prisma.usersOrderByWithRelationInput
   _relevance?: Prisma.accountsOrderByRelevanceInput
 }
 
 export type accountsWhereUniqueInput = Prisma.AtLeast<{
-  account_id?: number
-  user_name?: string
+  id?: number
+  user_id?: number
+  username?: string
   AND?: Prisma.accountsWhereInput | Prisma.accountsWhereInput[]
   OR?: Prisma.accountsWhereInput[]
   NOT?: Prisma.accountsWhereInput | Prisma.accountsWhereInput[]
-  user_pass?: Prisma.StringFilter<"accounts"> | string
-  lang?: Prisma.StringFilter<"accounts"> | string
-  card_id?: Prisma.StringFilter<"accounts"> | string
+  password?: Prisma.StringFilter<"accounts"> | string
+  failed_attempts?: Prisma.IntNullableFilter<"accounts"> | number | null
   locked_until?: Prisma.DateTimeNullableFilter<"accounts"> | Date | string | null
-  failed_attempts?: Prisma.IntFilter<"accounts"> | number
-  last_login_ip?: Prisma.StringNullableFilter<"accounts"> | string | null
+  created_at?: Prisma.DateTimeFilter<"accounts"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"accounts"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.usersWhereInput>
-}, "account_id" | "user_name">
+}, "id" | "user_id" | "username">
 
 export type accountsOrderByWithAggregationInput = {
-  account_id?: Prisma.SortOrder
-  user_name?: Prisma.SortOrder
-  user_pass?: Prisma.SortOrder
-  lang?: Prisma.SortOrder
-  card_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  password?: Prisma.SortOrder
+  failed_attempts?: Prisma.SortOrderInput | Prisma.SortOrder
   locked_until?: Prisma.SortOrderInput | Prisma.SortOrder
-  failed_attempts?: Prisma.SortOrder
-  last_login_ip?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.accountsCountOrderByAggregateInput
   _avg?: Prisma.accountsAvgOrderByAggregateInput
   _max?: Prisma.accountsMaxOrderByAggregateInput
@@ -295,97 +299,92 @@ export type accountsScalarWhereWithAggregatesInput = {
   AND?: Prisma.accountsScalarWhereWithAggregatesInput | Prisma.accountsScalarWhereWithAggregatesInput[]
   OR?: Prisma.accountsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.accountsScalarWhereWithAggregatesInput | Prisma.accountsScalarWhereWithAggregatesInput[]
-  account_id?: Prisma.IntWithAggregatesFilter<"accounts"> | number
-  user_name?: Prisma.StringWithAggregatesFilter<"accounts"> | string
-  user_pass?: Prisma.StringWithAggregatesFilter<"accounts"> | string
-  lang?: Prisma.StringWithAggregatesFilter<"accounts"> | string
-  card_id?: Prisma.StringWithAggregatesFilter<"accounts"> | string
+  id?: Prisma.IntWithAggregatesFilter<"accounts"> | number
+  user_id?: Prisma.IntWithAggregatesFilter<"accounts"> | number
+  username?: Prisma.StringWithAggregatesFilter<"accounts"> | string
+  password?: Prisma.StringWithAggregatesFilter<"accounts"> | string
+  failed_attempts?: Prisma.IntNullableWithAggregatesFilter<"accounts"> | number | null
   locked_until?: Prisma.DateTimeNullableWithAggregatesFilter<"accounts"> | Date | string | null
-  failed_attempts?: Prisma.IntWithAggregatesFilter<"accounts"> | number
-  last_login_ip?: Prisma.StringNullableWithAggregatesFilter<"accounts"> | string | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"accounts"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"accounts"> | Date | string
 }
 
 export type accountsCreateInput = {
-  user_name: string
-  user_pass: string
-  lang: string
+  username: string
+  password: string
+  failed_attempts?: number | null
   locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
   users: Prisma.usersCreateNestedOneWithoutAccountsInput
 }
 
 export type accountsUncheckedCreateInput = {
-  account_id?: number
-  user_name: string
-  user_pass: string
-  lang: string
-  card_id: string
+  id?: number
+  user_id: number
+  username: string
+  password: string
+  failed_attempts?: number | null
   locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type accountsUpdateInput = {
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.usersUpdateOneRequiredWithoutAccountsNestedInput
 }
 
 export type accountsUncheckedUpdateInput = {
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type accountsCreateManyInput = {
-  account_id?: number
-  user_name: string
-  user_pass: string
-  lang: string
-  card_id: string
+  id?: number
+  user_id: number
+  username: string
+  password: string
+  failed_attempts?: number | null
   locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type accountsUpdateManyMutationInput = {
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type accountsUncheckedUpdateManyInput = {
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type AccountsListRelationFilter = {
-  every?: Prisma.accountsWhereInput
-  some?: Prisma.accountsWhereInput
-  none?: Prisma.accountsWhereInput
-}
-
-export type accountsOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type AccountsNullableScalarRelationFilter = {
+  is?: Prisma.accountsWhereInput | null
+  isNot?: Prisma.accountsWhereInput | null
 }
 
 export type accountsOrderByRelevanceInput = {
@@ -395,119 +394,99 @@ export type accountsOrderByRelevanceInput = {
 }
 
 export type accountsCountOrderByAggregateInput = {
-  account_id?: Prisma.SortOrder
-  user_name?: Prisma.SortOrder
-  user_pass?: Prisma.SortOrder
-  lang?: Prisma.SortOrder
-  card_id?: Prisma.SortOrder
-  locked_until?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   failed_attempts?: Prisma.SortOrder
-  last_login_ip?: Prisma.SortOrder
+  locked_until?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type accountsAvgOrderByAggregateInput = {
-  account_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   failed_attempts?: Prisma.SortOrder
 }
 
 export type accountsMaxOrderByAggregateInput = {
-  account_id?: Prisma.SortOrder
-  user_name?: Prisma.SortOrder
-  user_pass?: Prisma.SortOrder
-  lang?: Prisma.SortOrder
-  card_id?: Prisma.SortOrder
-  locked_until?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   failed_attempts?: Prisma.SortOrder
-  last_login_ip?: Prisma.SortOrder
+  locked_until?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type accountsMinOrderByAggregateInput = {
-  account_id?: Prisma.SortOrder
-  user_name?: Prisma.SortOrder
-  user_pass?: Prisma.SortOrder
-  lang?: Prisma.SortOrder
-  card_id?: Prisma.SortOrder
-  locked_until?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   failed_attempts?: Prisma.SortOrder
-  last_login_ip?: Prisma.SortOrder
+  locked_until?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type accountsSumOrderByAggregateInput = {
-  account_id?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
   failed_attempts?: Prisma.SortOrder
 }
 
-export type accountsCreateNestedManyWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput> | Prisma.accountsCreateWithoutUsersInput[] | Prisma.accountsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput | Prisma.accountsCreateOrConnectWithoutUsersInput[]
-  createMany?: Prisma.accountsCreateManyUsersInputEnvelope
-  connect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
+export type accountsCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput
+  connect?: Prisma.accountsWhereUniqueInput
 }
 
-export type accountsUncheckedCreateNestedManyWithoutUsersInput = {
-  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput> | Prisma.accountsCreateWithoutUsersInput[] | Prisma.accountsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput | Prisma.accountsCreateOrConnectWithoutUsersInput[]
-  createMany?: Prisma.accountsCreateManyUsersInputEnvelope
-  connect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
+export type accountsUncheckedCreateNestedOneWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput
+  connect?: Prisma.accountsWhereUniqueInput
 }
 
-export type accountsUpdateManyWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput> | Prisma.accountsCreateWithoutUsersInput[] | Prisma.accountsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput | Prisma.accountsCreateOrConnectWithoutUsersInput[]
-  upsert?: Prisma.accountsUpsertWithWhereUniqueWithoutUsersInput | Prisma.accountsUpsertWithWhereUniqueWithoutUsersInput[]
-  createMany?: Prisma.accountsCreateManyUsersInputEnvelope
-  set?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  disconnect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  delete?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  connect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  update?: Prisma.accountsUpdateWithWhereUniqueWithoutUsersInput | Prisma.accountsUpdateWithWhereUniqueWithoutUsersInput[]
-  updateMany?: Prisma.accountsUpdateManyWithWhereWithoutUsersInput | Prisma.accountsUpdateManyWithWhereWithoutUsersInput[]
-  deleteMany?: Prisma.accountsScalarWhereInput | Prisma.accountsScalarWhereInput[]
+export type accountsUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.accountsUpsertWithoutUsersInput
+  disconnect?: Prisma.accountsWhereInput | boolean
+  delete?: Prisma.accountsWhereInput | boolean
+  connect?: Prisma.accountsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.accountsUpdateToOneWithWhereWithoutUsersInput, Prisma.accountsUpdateWithoutUsersInput>, Prisma.accountsUncheckedUpdateWithoutUsersInput>
 }
 
-export type accountsUncheckedUpdateManyWithoutUsersNestedInput = {
-  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput> | Prisma.accountsCreateWithoutUsersInput[] | Prisma.accountsUncheckedCreateWithoutUsersInput[]
-  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput | Prisma.accountsCreateOrConnectWithoutUsersInput[]
-  upsert?: Prisma.accountsUpsertWithWhereUniqueWithoutUsersInput | Prisma.accountsUpsertWithWhereUniqueWithoutUsersInput[]
-  createMany?: Prisma.accountsCreateManyUsersInputEnvelope
-  set?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  disconnect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  delete?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  connect?: Prisma.accountsWhereUniqueInput | Prisma.accountsWhereUniqueInput[]
-  update?: Prisma.accountsUpdateWithWhereUniqueWithoutUsersInput | Prisma.accountsUpdateWithWhereUniqueWithoutUsersInput[]
-  updateMany?: Prisma.accountsUpdateManyWithWhereWithoutUsersInput | Prisma.accountsUpdateManyWithWhereWithoutUsersInput[]
-  deleteMany?: Prisma.accountsScalarWhereInput | Prisma.accountsScalarWhereInput[]
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
+export type accountsUncheckedUpdateOneWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
+  connectOrCreate?: Prisma.accountsCreateOrConnectWithoutUsersInput
+  upsert?: Prisma.accountsUpsertWithoutUsersInput
+  disconnect?: Prisma.accountsWhereInput | boolean
+  delete?: Prisma.accountsWhereInput | boolean
+  connect?: Prisma.accountsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.accountsUpdateToOneWithWhereWithoutUsersInput, Prisma.accountsUpdateWithoutUsersInput>, Prisma.accountsUncheckedUpdateWithoutUsersInput>
 }
 
 export type accountsCreateWithoutUsersInput = {
-  user_name: string
-  user_pass: string
-  lang: string
+  username: string
+  password: string
+  failed_attempts?: number | null
   locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type accountsUncheckedCreateWithoutUsersInput = {
-  account_id?: number
-  user_name: string
-  user_pass: string
-  lang: string
+  id?: number
+  username: string
+  password: string
+  failed_attempts?: number | null
   locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type accountsCreateOrConnectWithoutUsersInput = {
@@ -515,108 +494,64 @@ export type accountsCreateOrConnectWithoutUsersInput = {
   create: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
 }
 
-export type accountsCreateManyUsersInputEnvelope = {
-  data: Prisma.accountsCreateManyUsersInput | Prisma.accountsCreateManyUsersInput[]
-  skipDuplicates?: boolean
-}
-
-export type accountsUpsertWithWhereUniqueWithoutUsersInput = {
-  where: Prisma.accountsWhereUniqueInput
+export type accountsUpsertWithoutUsersInput = {
   update: Prisma.XOR<Prisma.accountsUpdateWithoutUsersInput, Prisma.accountsUncheckedUpdateWithoutUsersInput>
   create: Prisma.XOR<Prisma.accountsCreateWithoutUsersInput, Prisma.accountsUncheckedCreateWithoutUsersInput>
+  where?: Prisma.accountsWhereInput
 }
 
-export type accountsUpdateWithWhereUniqueWithoutUsersInput = {
-  where: Prisma.accountsWhereUniqueInput
+export type accountsUpdateToOneWithWhereWithoutUsersInput = {
+  where?: Prisma.accountsWhereInput
   data: Prisma.XOR<Prisma.accountsUpdateWithoutUsersInput, Prisma.accountsUncheckedUpdateWithoutUsersInput>
 }
 
-export type accountsUpdateManyWithWhereWithoutUsersInput = {
-  where: Prisma.accountsScalarWhereInput
-  data: Prisma.XOR<Prisma.accountsUpdateManyMutationInput, Prisma.accountsUncheckedUpdateManyWithoutUsersInput>
-}
-
-export type accountsScalarWhereInput = {
-  AND?: Prisma.accountsScalarWhereInput | Prisma.accountsScalarWhereInput[]
-  OR?: Prisma.accountsScalarWhereInput[]
-  NOT?: Prisma.accountsScalarWhereInput | Prisma.accountsScalarWhereInput[]
-  account_id?: Prisma.IntFilter<"accounts"> | number
-  user_name?: Prisma.StringFilter<"accounts"> | string
-  user_pass?: Prisma.StringFilter<"accounts"> | string
-  lang?: Prisma.StringFilter<"accounts"> | string
-  card_id?: Prisma.StringFilter<"accounts"> | string
-  locked_until?: Prisma.DateTimeNullableFilter<"accounts"> | Date | string | null
-  failed_attempts?: Prisma.IntFilter<"accounts"> | number
-  last_login_ip?: Prisma.StringNullableFilter<"accounts"> | string | null
-}
-
-export type accountsCreateManyUsersInput = {
-  account_id?: number
-  user_name: string
-  user_pass: string
-  lang: string
-  locked_until?: Date | string | null
-  failed_attempts?: number
-  last_login_ip?: string | null
-}
-
 export type accountsUpdateWithoutUsersInput = {
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type accountsUncheckedUpdateWithoutUsersInput = {
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  failed_attempts?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type accountsUncheckedUpdateManyWithoutUsersInput = {
-  account_id?: Prisma.IntFieldUpdateOperationsInput | number
-  user_name?: Prisma.StringFieldUpdateOperationsInput | string
-  user_pass?: Prisma.StringFieldUpdateOperationsInput | string
-  lang?: Prisma.StringFieldUpdateOperationsInput | string
-  locked_until?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  failed_attempts?: Prisma.IntFieldUpdateOperationsInput | number
-  last_login_ip?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type accountsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  account_id?: boolean
-  user_name?: boolean
-  user_pass?: boolean
-  lang?: boolean
-  card_id?: boolean
-  locked_until?: boolean
+  id?: boolean
+  user_id?: boolean
+  username?: boolean
+  password?: boolean
   failed_attempts?: boolean
-  last_login_ip?: boolean
+  locked_until?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   users?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["accounts"]>
 
 
 
 export type accountsSelectScalar = {
-  account_id?: boolean
-  user_name?: boolean
-  user_pass?: boolean
-  lang?: boolean
-  card_id?: boolean
-  locked_until?: boolean
+  id?: boolean
+  user_id?: boolean
+  username?: boolean
+  password?: boolean
   failed_attempts?: boolean
-  last_login_ip?: boolean
+  locked_until?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type accountsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"account_id" | "user_name" | "user_pass" | "lang" | "card_id" | "locked_until" | "failed_attempts" | "last_login_ip", ExtArgs["result"]["accounts"]>
+export type accountsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_id" | "username" | "password" | "failed_attempts" | "locked_until" | "created_at" | "updated_at", ExtArgs["result"]["accounts"]>
 export type accountsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.usersDefaultArgs<ExtArgs>
 }
@@ -627,14 +562,14 @@ export type $accountsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     users: Prisma.$usersPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    account_id: number
-    user_name: string
-    user_pass: string
-    lang: string
-    card_id: string
+    id: number
+    user_id: number
+    username: string
+    password: string
+    failed_attempts: number | null
     locked_until: Date | null
-    failed_attempts: number
-    last_login_ip: string | null
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["accounts"]>
   composites: {}
 }
@@ -718,8 +653,8 @@ export interface accountsDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * // Get first 10 Accounts
    * const accounts = await prisma.accounts.findMany({ take: 10 })
    * 
-   * // Only select the `account_id`
-   * const accountsWithAccount_idOnly = await prisma.accounts.findMany({ select: { account_id: true } })
+   * // Only select the `id`
+   * const accountsWithIdOnly = await prisma.accounts.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends accountsFindManyArgs>(args?: Prisma.SelectSubset<T, accountsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$accountsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -1005,14 +940,14 @@ export interface Prisma__accountsClient<T, Null = never, ExtArgs extends runtime
  * Fields of the accounts model
  */
 export interface accountsFieldRefs {
-  readonly account_id: Prisma.FieldRef<"accounts", 'Int'>
-  readonly user_name: Prisma.FieldRef<"accounts", 'String'>
-  readonly user_pass: Prisma.FieldRef<"accounts", 'String'>
-  readonly lang: Prisma.FieldRef<"accounts", 'String'>
-  readonly card_id: Prisma.FieldRef<"accounts", 'String'>
-  readonly locked_until: Prisma.FieldRef<"accounts", 'DateTime'>
+  readonly id: Prisma.FieldRef<"accounts", 'Int'>
+  readonly user_id: Prisma.FieldRef<"accounts", 'Int'>
+  readonly username: Prisma.FieldRef<"accounts", 'String'>
+  readonly password: Prisma.FieldRef<"accounts", 'String'>
   readonly failed_attempts: Prisma.FieldRef<"accounts", 'Int'>
-  readonly last_login_ip: Prisma.FieldRef<"accounts", 'String'>
+  readonly locked_until: Prisma.FieldRef<"accounts", 'DateTime'>
+  readonly created_at: Prisma.FieldRef<"accounts", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"accounts", 'DateTime'>
 }
     
 

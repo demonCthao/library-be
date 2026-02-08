@@ -12,13 +12,25 @@ const controller = new UserController();
  *     tags: [Users]
  *     parameters:
  *       - in: query
- *         name: page
+ *         name: fullName
+ *         schema:
+ *           type: string
+ *           example: 
+ *         description: Full Name
+ *       - in: query
+ *         name: phone
+ *         schema:
+ *           type: string
+ *           example: 
+ *         description: Phone
+ *       - in: query
+ *         name: pageIndex
  *         schema:
  *           type: integer
  *           example: 1
  *         description: Page number
  *       - in: query
- *         name: limit
+ *         name: pageSize
  *         schema:
  *           type: integer
  *           example: 10
@@ -27,7 +39,7 @@ const controller = new UserController();
  *         name: orderBy
  *         schema:
  *           type: string
- *           example: first_name
+ *           example: fullName
  *         description: Field to sort by
  *       - in: query
  *         name: order

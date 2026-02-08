@@ -9,5 +9,15 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/users'
+export type * from './models/authors'
+export type * from './models/book_authors'
+export type * from './models/book_copies'
+export type * from './models/books'
+export type * from './models/borrow_details'
+export type * from './models/borrow_records'
+export type * from './models/categories'
+export type * from './models/fines'
+export type * from './models/publishers'
+export type * from './models/readers'
 export type * from './models/accounts'
 export type * from './commonInputTypes'

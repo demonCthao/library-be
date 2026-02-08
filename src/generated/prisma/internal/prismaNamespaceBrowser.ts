@@ -52,6 +52,16 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   users: 'users',
+  authors: 'authors',
+  book_authors: 'book_authors',
+  book_copies: 'book_copies',
+  books: 'books',
+  borrow_details: 'borrow_details',
+  borrow_records: 'borrow_records',
+  categories: 'categories',
+  fines: 'fines',
+  publishers: 'publishers',
+  readers: 'readers',
   accounts: 'accounts'
 } as const
 
@@ -72,25 +82,141 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 
 export const UsersScalarFieldEnum = {
-  card_id: 'card_id',
-  first_name: 'first_name',
-  last_name: 'last_name',
+  id: 'id',
+  full_name: 'full_name',
   email: 'email',
-  role: 'role'
+  phone: 'phone',
+  role: 'role',
+  status: 'status',
+  lang: 'lang',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
+export const AuthorsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  bio: 'bio'
+} as const
+
+export type AuthorsScalarFieldEnum = (typeof AuthorsScalarFieldEnum)[keyof typeof AuthorsScalarFieldEnum]
+
+
+export const Book_authorsScalarFieldEnum = {
+  book_id: 'book_id',
+  author_id: 'author_id'
+} as const
+
+export type Book_authorsScalarFieldEnum = (typeof Book_authorsScalarFieldEnum)[keyof typeof Book_authorsScalarFieldEnum]
+
+
+export const Book_copiesScalarFieldEnum = {
+  id: 'id',
+  book_id: 'book_id',
+  copy_code: 'copy_code',
+  status: 'status',
+  location: 'location'
+} as const
+
+export type Book_copiesScalarFieldEnum = (typeof Book_copiesScalarFieldEnum)[keyof typeof Book_copiesScalarFieldEnum]
+
+
+export const BooksScalarFieldEnum = {
+  id: 'id',
+  isbn: 'isbn',
+  title: 'title',
+  description: 'description',
+  publish_year: 'publish_year',
+  language: 'language',
+  pages: 'pages',
+  publisher_id: 'publisher_id',
+  category_id: 'category_id',
+  created_at: 'created_at',
+  stock_quantity: 'stock_quantity',
+  borrowed_quantity: 'borrowed_quantity',
+  reserved_quantity: 'reserved_quantity',
+  available_quantity: 'available_quantity'
+} as const
+
+export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof BooksScalarFieldEnum]
+
+
+export const Borrow_detailsScalarFieldEnum = {
+  borrow_id: 'borrow_id',
+  book_copy_id: 'book_copy_id'
+} as const
+
+export type Borrow_detailsScalarFieldEnum = (typeof Borrow_detailsScalarFieldEnum)[keyof typeof Borrow_detailsScalarFieldEnum]
+
+
+export const Borrow_recordsScalarFieldEnum = {
+  id: 'id',
+  reader_id: 'reader_id',
+  borrow_date: 'borrow_date',
+  due_date: 'due_date',
+  return_date: 'return_date',
+  status: 'status'
+} as const
+
+export type Borrow_recordsScalarFieldEnum = (typeof Borrow_recordsScalarFieldEnum)[keyof typeof Borrow_recordsScalarFieldEnum]
+
+
+export const CategoriesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  parent_id: 'parent_id'
+} as const
+
+export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
+
+
+export const FinesScalarFieldEnum = {
+  id: 'id',
+  borrow_id: 'borrow_id',
+  amount: 'amount',
+  reason: 'reason',
+  paid: 'paid'
+} as const
+
+export type FinesScalarFieldEnum = (typeof FinesScalarFieldEnum)[keyof typeof FinesScalarFieldEnum]
+
+
+export const PublishersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  address: 'address'
+} as const
+
+export type PublishersScalarFieldEnum = (typeof PublishersScalarFieldEnum)[keyof typeof PublishersScalarFieldEnum]
+
+
+export const ReadersScalarFieldEnum = {
+  id: 'id',
+  reader_code: 'reader_code',
+  full_name: 'full_name',
+  date_of_birth: 'date_of_birth',
+  gender: 'gender',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  created_at: 'created_at'
+} as const
+
+export type ReadersScalarFieldEnum = (typeof ReadersScalarFieldEnum)[keyof typeof ReadersScalarFieldEnum]
+
+
 export const AccountsScalarFieldEnum = {
-  account_id: 'account_id',
-  user_name: 'user_name',
-  user_pass: 'user_pass',
-  lang: 'lang',
-  card_id: 'card_id',
-  locked_until: 'locked_until',
+  id: 'id',
+  user_id: 'user_id',
+  username: 'username',
+  password: 'password',
   failed_attempts: 'failed_attempts',
-  last_login_ip: 'last_login_ip'
+  locked_until: 'locked_until',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
 export type AccountsScalarFieldEnum = (typeof AccountsScalarFieldEnum)[keyof typeof AccountsScalarFieldEnum]
@@ -113,22 +239,77 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const usersOrderByRelevanceFieldEnum = {
-  card_id: 'card_id',
-  first_name: 'first_name',
-  last_name: 'last_name',
+  full_name: 'full_name',
   email: 'email',
-  role: 'role'
+  phone: 'phone',
+  lang: 'lang'
 } as const
 
 export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
 
 
+export const authorsOrderByRelevanceFieldEnum = {
+  name: 'name',
+  bio: 'bio'
+} as const
+
+export type authorsOrderByRelevanceFieldEnum = (typeof authorsOrderByRelevanceFieldEnum)[keyof typeof authorsOrderByRelevanceFieldEnum]
+
+
+export const book_copiesOrderByRelevanceFieldEnum = {
+  copy_code: 'copy_code',
+  location: 'location'
+} as const
+
+export type book_copiesOrderByRelevanceFieldEnum = (typeof book_copiesOrderByRelevanceFieldEnum)[keyof typeof book_copiesOrderByRelevanceFieldEnum]
+
+
+export const booksOrderByRelevanceFieldEnum = {
+  isbn: 'isbn',
+  title: 'title',
+  description: 'description',
+  language: 'language'
+} as const
+
+export type booksOrderByRelevanceFieldEnum = (typeof booksOrderByRelevanceFieldEnum)[keyof typeof booksOrderByRelevanceFieldEnum]
+
+
+export const categoriesOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type categoriesOrderByRelevanceFieldEnum = (typeof categoriesOrderByRelevanceFieldEnum)[keyof typeof categoriesOrderByRelevanceFieldEnum]
+
+
+export const finesOrderByRelevanceFieldEnum = {
+  reason: 'reason'
+} as const
+
+export type finesOrderByRelevanceFieldEnum = (typeof finesOrderByRelevanceFieldEnum)[keyof typeof finesOrderByRelevanceFieldEnum]
+
+
+export const publishersOrderByRelevanceFieldEnum = {
+  name: 'name',
+  address: 'address'
+} as const
+
+export type publishersOrderByRelevanceFieldEnum = (typeof publishersOrderByRelevanceFieldEnum)[keyof typeof publishersOrderByRelevanceFieldEnum]
+
+
+export const readersOrderByRelevanceFieldEnum = {
+  reader_code: 'reader_code',
+  full_name: 'full_name',
+  email: 'email',
+  phone: 'phone',
+  address: 'address'
+} as const
+
+export type readersOrderByRelevanceFieldEnum = (typeof readersOrderByRelevanceFieldEnum)[keyof typeof readersOrderByRelevanceFieldEnum]
+
+
 export const accountsOrderByRelevanceFieldEnum = {
-  user_name: 'user_name',
-  user_pass: 'user_pass',
-  lang: 'lang',
-  card_id: 'card_id',
-  last_login_ip: 'last_login_ip'
+  username: 'username',
+  password: 'password'
 } as const
 
 export type accountsOrderByRelevanceFieldEnum = (typeof accountsOrderByRelevanceFieldEnum)[keyof typeof accountsOrderByRelevanceFieldEnum]

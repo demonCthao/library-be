@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "mysql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n}\n\nmodel users {\n  card_id    String     @id @db.VarChar(20)\n  first_name String     @db.Text\n  last_name  String     @db.Text\n  email      String     @db.Text\n  role       String?    @db.Char(10)\n  accounts   accounts[]\n}\n\nmodel accounts {\n  account_id      Int       @id @default(autoincrement())\n  user_name       String    @unique(map: \"user_name\") @db.VarChar(20)\n  user_pass       String    @db.Text\n  lang            String    @db.VarChar(20)\n  card_id         String    @db.VarChar(20)\n  locked_until    DateTime? @db.DateTime(0)\n  failed_attempts Int       @default(0) @db.UnsignedTinyInt\n  last_login_ip   String?   @db.VarChar(45)\n  users           users     @relation(fields: [card_id], references: [card_id], onUpdate: Restrict, map: \"fk_users\")\n\n  @@index([card_id], map: \"fk_users\")\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n}\n\nmodel users {\n  id         Int           @id @default(autoincrement())\n  full_name  String?       @db.VarChar(100)\n  email      String?       @db.VarChar(100)\n  phone      String?       @db.VarChar(20)\n  role       users_role\n  status     users_status? @default(active)\n  lang       String?       @default(\"vi\") @db.VarChar(10)\n  created_at DateTime      @default(now()) @db.Timestamp(0)\n  updated_at DateTime      @default(now()) @db.Timestamp(0)\n  accounts   accounts?\n}\n\nmodel authors {\n  id           Int            @id @default(autoincrement())\n  name         String         @db.VarChar(100)\n  bio          String?        @db.Text\n  book_authors book_authors[]\n}\n\nmodel book_authors {\n  book_id   Int\n  author_id Int\n  books     books   @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"book_authors_ibfk_1\")\n  authors   authors @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"book_authors_ibfk_2\")\n\n  @@id([book_id, author_id])\n  @@index([author_id], map: \"author_id\")\n}\n\nmodel book_copies {\n  id             Int                 @id @default(autoincrement())\n  book_id        Int\n  copy_code      String              @unique(map: \"copy_code\") @db.VarChar(50)\n  status         book_copies_status? @default(available)\n  location       String?             @db.VarChar(100)\n  books          books               @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"book_copies_ibfk_1\")\n  borrow_details borrow_details[]\n\n  @@index([book_id], map: \"book_id\")\n}\n\nmodel books {\n  id                 Int            @id @default(autoincrement())\n  isbn               String?        @unique(map: \"isbn\") @db.VarChar(20)\n  title              String         @db.VarChar(255)\n  description        String?        @db.Text\n  publish_year       Int?\n  language           String?        @db.VarChar(50)\n  pages              Int?\n  publisher_id       Int?\n  category_id        Int?\n  created_at         DateTime       @default(now()) @db.Timestamp(0)\n  stock_quantity     Int            @default(0)\n  borrowed_quantity  Int            @default(0)\n  reserved_quantity  Int            @default(0)\n  available_quantity Int            @default(0)\n  book_authors       book_authors[]\n  book_copies        book_copies[]\n  publishers         publishers?    @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: \"books_ibfk_1\")\n  categories         categories?    @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: \"books_ibfk_2\")\n\n  @@index([category_id], map: \"category_id\")\n  @@index([publisher_id], map: \"publisher_id\")\n}\n\nmodel borrow_details {\n  borrow_id      Int\n  book_copy_id   Int\n  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"borrow_details_ibfk_1\")\n  book_copies    book_copies    @relation(fields: [book_copy_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"borrow_details_ibfk_2\")\n\n  @@id([borrow_id, book_copy_id])\n  @@index([book_copy_id], map: \"book_copy_id\")\n}\n\nmodel borrow_records {\n  id             Int                    @id @default(autoincrement())\n  reader_id      Int\n  borrow_date    DateTime               @db.Date\n  due_date       DateTime               @db.Date\n  return_date    DateTime?              @db.Date\n  status         borrow_records_status? @default(borrowing)\n  borrow_details borrow_details[]\n  readers        readers                @relation(fields: [reader_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"borrow_records_ibfk_1\")\n  fines          fines[]\n\n  @@index([reader_id], map: \"reader_id\")\n}\n\nmodel categories {\n  id               Int          @id @default(autoincrement())\n  name             String       @db.VarChar(100)\n  parent_id        Int?\n  books            books[]\n  categories       categories?  @relation(\"categoriesTocategories\", fields: [parent_id], references: [id], onUpdate: Restrict, map: \"categories_ibfk_1\")\n  other_categories categories[] @relation(\"categoriesTocategories\")\n\n  @@index([parent_id], map: \"parent_id\")\n}\n\nmodel fines {\n  id             Int            @id @default(autoincrement())\n  borrow_id      Int\n  amount         Decimal        @db.Decimal(10, 2)\n  reason         String?        @db.VarChar(255)\n  paid           Boolean?       @default(false)\n  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"fines_ibfk_1\")\n\n  @@index([borrow_id], map: \"borrow_id\")\n}\n\nmodel publishers {\n  id      Int     @id @default(autoincrement())\n  name    String  @db.VarChar(150)\n  address String? @db.VarChar(255)\n  books   books[]\n}\n\nmodel readers {\n  id             Int              @id @default(autoincrement())\n  reader_code    String           @unique(map: \"reader_code\") @db.VarChar(20)\n  full_name      String           @db.VarChar(100)\n  date_of_birth  DateTime?        @db.Date\n  gender         readers_gender?\n  email          String?          @db.VarChar(100)\n  phone          String?          @db.VarChar(20)\n  address        String?          @db.VarChar(255)\n  created_at     DateTime         @default(now()) @db.Timestamp(0)\n  borrow_records borrow_records[]\n}\n\nmodel accounts {\n  id              Int       @id @default(autoincrement())\n  user_id         Int       @unique(map: \"user_id\")\n  username        String    @unique(map: \"username\") @db.VarChar(50)\n  password        String    @db.VarChar(255)\n  failed_attempts Int?      @default(0)\n  locked_until    DateTime? @db.DateTime(0)\n  created_at      DateTime  @default(now()) @db.Timestamp(0)\n  updated_at      DateTime  @default(now()) @db.Timestamp(0)\n  users           users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: \"fk_accounts_user\")\n}\n\nenum book_copies_status {\n  available\n  borrowed\n  lost\n  damaged\n}\n\nenum readers_gender {\n  male\n  female\n  other\n}\n\nenum borrow_records_status {\n  borrowing\n  returned\n  overdue\n}\n\nenum users_role {\n  admin\n  librarian\n}\n\nenum users_status {\n  active\n  inactive\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"users\":{\"fields\":[{\"name\":\"card_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"accounts\",\"relationName\":\"accountsTousers\"}],\"dbName\":null},\"accounts\":{\"fields\":[{\"name\":\"account_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_pass\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lang\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"card_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"locked_until\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"failed_attempts\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"last_login_ip\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"users\",\"relationName\":\"accountsTousers\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"full_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"users_role\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"users_status\"},{\"name\":\"lang\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"accounts\",\"kind\":\"object\",\"type\":\"accounts\",\"relationName\":\"accountsTousers\"}],\"dbName\":null},\"authors\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"book_authors\",\"kind\":\"object\",\"type\":\"book_authors\",\"relationName\":\"authorsTobook_authors\"}],\"dbName\":null},\"book_authors\":{\"fields\":[{\"name\":\"book_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"author_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"books\",\"kind\":\"object\",\"type\":\"books\",\"relationName\":\"book_authorsTobooks\"},{\"name\":\"authors\",\"kind\":\"object\",\"type\":\"authors\",\"relationName\":\"authorsTobook_authors\"}],\"dbName\":null},\"book_copies\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"book_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"copy_code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"book_copies_status\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"books\",\"kind\":\"object\",\"type\":\"books\",\"relationName\":\"book_copiesTobooks\"},{\"name\":\"borrow_details\",\"kind\":\"object\",\"type\":\"borrow_details\",\"relationName\":\"book_copiesToborrow_details\"}],\"dbName\":null},\"books\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isbn\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publish_year\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"language\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pages\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"publisher_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"category_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"stock_quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"borrowed_quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"reserved_quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"available_quantity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"book_authors\",\"kind\":\"object\",\"type\":\"book_authors\",\"relationName\":\"book_authorsTobooks\"},{\"name\":\"book_copies\",\"kind\":\"object\",\"type\":\"book_copies\",\"relationName\":\"book_copiesTobooks\"},{\"name\":\"publishers\",\"kind\":\"object\",\"type\":\"publishers\",\"relationName\":\"booksTopublishers\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"categories\",\"relationName\":\"booksTocategories\"}],\"dbName\":null},\"borrow_details\":{\"fields\":[{\"name\":\"borrow_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"book_copy_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"borrow_records\",\"kind\":\"object\",\"type\":\"borrow_records\",\"relationName\":\"borrow_detailsToborrow_records\"},{\"name\":\"book_copies\",\"kind\":\"object\",\"type\":\"book_copies\",\"relationName\":\"book_copiesToborrow_details\"}],\"dbName\":null},\"borrow_records\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"reader_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"borrow_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"due_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"return_date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"status\",\"kind\":\"enum\",\"type\":\"borrow_records_status\"},{\"name\":\"borrow_details\",\"kind\":\"object\",\"type\":\"borrow_details\",\"relationName\":\"borrow_detailsToborrow_records\"},{\"name\":\"readers\",\"kind\":\"object\",\"type\":\"readers\",\"relationName\":\"borrow_recordsToreaders\"},{\"name\":\"fines\",\"kind\":\"object\",\"type\":\"fines\",\"relationName\":\"borrow_recordsTofines\"}],\"dbName\":null},\"categories\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"parent_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"books\",\"kind\":\"object\",\"type\":\"books\",\"relationName\":\"booksTocategories\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"categories\",\"relationName\":\"categoriesTocategories\"},{\"name\":\"other_categories\",\"kind\":\"object\",\"type\":\"categories\",\"relationName\":\"categoriesTocategories\"}],\"dbName\":null},\"fines\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"borrow_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"amount\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"reason\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"paid\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"borrow_records\",\"kind\":\"object\",\"type\":\"borrow_records\",\"relationName\":\"borrow_recordsTofines\"}],\"dbName\":null},\"publishers\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"books\",\"kind\":\"object\",\"type\":\"books\",\"relationName\":\"booksTopublishers\"}],\"dbName\":null},\"readers\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"reader_code\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"full_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date_of_birth\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"gender\",\"kind\":\"enum\",\"type\":\"readers_gender\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"address\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"borrow_records\",\"kind\":\"object\",\"type\":\"borrow_records\",\"relationName\":\"borrow_recordsToreaders\"}],\"dbName\":null},\"accounts\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"failed_attempts\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"locked_until\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"users\",\"kind\":\"object\",\"type\":\"users\",\"relationName\":\"accountsTousers\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,6 +185,106 @@ export interface PrismaClient<
     * ```
     */
   get users(): Prisma.usersDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.authors`: Exposes CRUD operations for the **authors** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Authors
+    * const authors = await prisma.authors.findMany()
+    * ```
+    */
+  get authors(): Prisma.authorsDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.book_authors`: Exposes CRUD operations for the **book_authors** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Book_authors
+    * const book_authors = await prisma.book_authors.findMany()
+    * ```
+    */
+  get book_authors(): Prisma.book_authorsDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.book_copies`: Exposes CRUD operations for the **book_copies** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Book_copies
+    * const book_copies = await prisma.book_copies.findMany()
+    * ```
+    */
+  get book_copies(): Prisma.book_copiesDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.books`: Exposes CRUD operations for the **books** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Books
+    * const books = await prisma.books.findMany()
+    * ```
+    */
+  get books(): Prisma.booksDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.borrow_details`: Exposes CRUD operations for the **borrow_details** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Borrow_details
+    * const borrow_details = await prisma.borrow_details.findMany()
+    * ```
+    */
+  get borrow_details(): Prisma.borrow_detailsDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.borrow_records`: Exposes CRUD operations for the **borrow_records** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Borrow_records
+    * const borrow_records = await prisma.borrow_records.findMany()
+    * ```
+    */
+  get borrow_records(): Prisma.borrow_recordsDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.categories`: Exposes CRUD operations for the **categories** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Categories
+    * const categories = await prisma.categories.findMany()
+    * ```
+    */
+  get categories(): Prisma.categoriesDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.fines`: Exposes CRUD operations for the **fines** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Fines
+    * const fines = await prisma.fines.findMany()
+    * ```
+    */
+  get fines(): Prisma.finesDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.publishers`: Exposes CRUD operations for the **publishers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Publishers
+    * const publishers = await prisma.publishers.findMany()
+    * ```
+    */
+  get publishers(): Prisma.publishersDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.readers`: Exposes CRUD operations for the **readers** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Readers
+    * const readers = await prisma.readers.findMany()
+    * ```
+    */
+  get readers(): Prisma.readersDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
    * `prisma.accounts`: Exposes CRUD operations for the **accounts** model.

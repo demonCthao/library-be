@@ -1,6 +1,6 @@
 export interface FindAllQuery {
-  page?: number;
-  limit?: number;
+  pageIndex?: number;
+  pageSize?: number;
   orderBy?: string;
   order?: 'asc' | 'desc';
 }
