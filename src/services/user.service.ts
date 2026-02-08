@@ -1,44 +1,56 @@
-import { AlreadyExistsException, NotFoundException } from "../exceptions";
+import { NotFoundException } from "../exceptions";
 import { Prisma, users } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
 
+interface FindUserQuery extends FindAllQuery {
+  fullName?: string;
+  phone?: string
+}
+
 export class UserService extends BaseService<users> {
 
   async store(data: Prisma.usersCreateInput): Promise<users> {
-    const checkExist = await prisma.users.findUnique({
-      where: {
-        card_id: data.card_id
-      }
-    });
-
-    if (!!checkExist) {
-      throw new AlreadyExistsException("User")
-    }
-
     return prisma.users.create({ data });
   }
 
-  async findAll({ page = 1, limit = 10 }: FindAllQuery = {}): Promise<PaginatedResult<users>> {
-    const pageSearch = Number(page) || 1;
-    const limitSearch = Number(limit) || 10;
+  async findAll({ pageIndex = 1, pageSize = 10, fullName = "", phone = "" }: FindUserQuery): Promise<PaginatedResult<users>> {
+    const pageSearch = Math.max(1, Number(pageIndex)) || 1;
+    const limitSearch = Number(pageSize) || 10;
 
-    const [list, total] = await Promise.all([
-      prisma.users.findMany({
-        skip: (pageSearch - 1) * limitSearch,
-        take: limitSearch,
-        orderBy: { first_name: 'desc' }
-      }),
-      prisma.users.count()
-    ]);
+    const users = await prisma.users.findMany({
+      skip: (pageSearch - 1) * limitSearch,
+      take: limitSearch,
+      orderBy: { full_name: 'desc' },
+      where: {
+        full_name: {
+          contains: fullName,
+        },
+        phone: {
+          contains: phone
+        }
+      },
+      include: {
+        accounts: {
+          select: {
+            id: true,
+            username: true,
+            failed_attempts: true,
+            locked_until: true,
+            created_at: true,
+            updated_at: true,
+          }
+        }
+      }
+    })
 
-    return { list, total };
+    return { list: users, total: users.length };
   }
 
-  async update(id: string, data: Partial<users>): Promise<users> {
+  async update(id: number, data: Partial<users>): Promise<users> {
     const res = await prisma.users.update({
-      where: { card_id: id },
+      where: { id: Number(id) },
       data
     });
 
@@ -49,9 +61,9 @@ export class UserService extends BaseService<users> {
     return res;
   }
 
-  async destroy(id: string): Promise<users> {
+  async destroy(id: number): Promise<users> {
     return await prisma.users.delete({
-      where: { card_id: id }
+      where: { id: id }
     });
   }
 }

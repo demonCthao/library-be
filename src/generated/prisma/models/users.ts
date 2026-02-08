@@ -20,58 +20,100 @@ export type usersModel = runtime.Types.Result.DefaultSelection<Prisma.$usersPayl
 
 export type AggregateUsers = {
   _count: UsersCountAggregateOutputType | null
+  _avg: UsersAvgAggregateOutputType | null
+  _sum: UsersSumAggregateOutputType | null
   _min: UsersMinAggregateOutputType | null
   _max: UsersMaxAggregateOutputType | null
 }
 
+export type UsersAvgAggregateOutputType = {
+  id: number | null
+}
+
+export type UsersSumAggregateOutputType = {
+  id: number | null
+}
+
 export type UsersMinAggregateOutputType = {
-  card_id: string | null
-  first_name: string | null
-  last_name: string | null
+  id: number | null
+  full_name: string | null
   email: string | null
-  role: string | null
+  phone: string | null
+  role: $Enums.users_role | null
+  status: $Enums.users_status | null
+  lang: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsersMaxAggregateOutputType = {
-  card_id: string | null
-  first_name: string | null
-  last_name: string | null
+  id: number | null
+  full_name: string | null
   email: string | null
-  role: string | null
+  phone: string | null
+  role: $Enums.users_role | null
+  status: $Enums.users_status | null
+  lang: string | null
+  created_at: Date | null
+  updated_at: Date | null
 }
 
 export type UsersCountAggregateOutputType = {
-  card_id: number
-  first_name: number
-  last_name: number
+  id: number
+  full_name: number
   email: number
+  phone: number
   role: number
+  status: number
+  lang: number
+  created_at: number
+  updated_at: number
   _all: number
 }
 
 
+export type UsersAvgAggregateInputType = {
+  id?: true
+}
+
+export type UsersSumAggregateInputType = {
+  id?: true
+}
+
 export type UsersMinAggregateInputType = {
-  card_id?: true
-  first_name?: true
-  last_name?: true
+  id?: true
+  full_name?: true
   email?: true
+  phone?: true
   role?: true
+  status?: true
+  lang?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type UsersMaxAggregateInputType = {
-  card_id?: true
-  first_name?: true
-  last_name?: true
+  id?: true
+  full_name?: true
   email?: true
+  phone?: true
   role?: true
+  status?: true
+  lang?: true
+  created_at?: true
+  updated_at?: true
 }
 
 export type UsersCountAggregateInputType = {
-  card_id?: true
-  first_name?: true
-  last_name?: true
+  id?: true
+  full_name?: true
   email?: true
+  phone?: true
   role?: true
+  status?: true
+  lang?: true
+  created_at?: true
+  updated_at?: true
   _all?: true
 }
 
@@ -113,6 +155,18 @@ export type UsersAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UsersAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UsersSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UsersMinAggregateInputType
@@ -143,17 +197,25 @@ export type usersGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: UsersCountAggregateInputType | true
+  _avg?: UsersAvgAggregateInputType
+  _sum?: UsersSumAggregateInputType
   _min?: UsersMinAggregateInputType
   _max?: UsersMaxAggregateInputType
 }
 
 export type UsersGroupByOutputType = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role: string | null
+  id: number
+  full_name: string | null
+  email: string | null
+  phone: string | null
+  role: $Enums.users_role
+  status: $Enums.users_status | null
+  lang: string | null
+  created_at: Date
+  updated_at: Date
   _count: UsersCountAggregateOutputType | null
+  _avg: UsersAvgAggregateOutputType | null
+  _sum: UsersSumAggregateOutputType | null
   _min: UsersMinAggregateOutputType | null
   _max: UsersMaxAggregateOutputType | null
 }
@@ -177,116 +239,163 @@ export type usersWhereInput = {
   AND?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
   OR?: Prisma.usersWhereInput[]
   NOT?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
-  card_id?: Prisma.StringFilter<"users"> | string
-  first_name?: Prisma.StringFilter<"users"> | string
-  last_name?: Prisma.StringFilter<"users"> | string
-  email?: Prisma.StringFilter<"users"> | string
-  role?: Prisma.StringNullableFilter<"users"> | string | null
-  accounts?: Prisma.AccountsListRelationFilter
+  id?: Prisma.IntFilter<"users"> | number
+  full_name?: Prisma.StringNullableFilter<"users"> | string | null
+  email?: Prisma.StringNullableFilter<"users"> | string | null
+  phone?: Prisma.StringNullableFilter<"users"> | string | null
+  role?: Prisma.Enumusers_roleFilter<"users"> | $Enums.users_role
+  status?: Prisma.Enumusers_statusNullableFilter<"users"> | $Enums.users_status | null
+  lang?: Prisma.StringNullableFilter<"users"> | string | null
+  created_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  accounts?: Prisma.XOR<Prisma.AccountsNullableScalarRelationFilter, Prisma.accountsWhereInput> | null
 }
 
 export type usersOrderByWithRelationInput = {
-  card_id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
-  accounts?: Prisma.accountsOrderByRelationAggregateInput
+  id?: Prisma.SortOrder
+  full_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  lang?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+  accounts?: Prisma.accountsOrderByWithRelationInput
   _relevance?: Prisma.usersOrderByRelevanceInput
 }
 
 export type usersWhereUniqueInput = Prisma.AtLeast<{
-  card_id?: string
+  id?: number
   AND?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
   OR?: Prisma.usersWhereInput[]
   NOT?: Prisma.usersWhereInput | Prisma.usersWhereInput[]
-  first_name?: Prisma.StringFilter<"users"> | string
-  last_name?: Prisma.StringFilter<"users"> | string
-  email?: Prisma.StringFilter<"users"> | string
-  role?: Prisma.StringNullableFilter<"users"> | string | null
-  accounts?: Prisma.AccountsListRelationFilter
-}, "card_id">
+  full_name?: Prisma.StringNullableFilter<"users"> | string | null
+  email?: Prisma.StringNullableFilter<"users"> | string | null
+  phone?: Prisma.StringNullableFilter<"users"> | string | null
+  role?: Prisma.Enumusers_roleFilter<"users"> | $Enums.users_role
+  status?: Prisma.Enumusers_statusNullableFilter<"users"> | $Enums.users_status | null
+  lang?: Prisma.StringNullableFilter<"users"> | string | null
+  created_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
+  accounts?: Prisma.XOR<Prisma.AccountsNullableScalarRelationFilter, Prisma.accountsWhereInput> | null
+}, "id">
 
 export type usersOrderByWithAggregationInput = {
-  card_id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  role?: Prisma.SortOrderInput | Prisma.SortOrder
+  id?: Prisma.SortOrder
+  full_name?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
+  lang?: Prisma.SortOrderInput | Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
   _count?: Prisma.usersCountOrderByAggregateInput
+  _avg?: Prisma.usersAvgOrderByAggregateInput
   _max?: Prisma.usersMaxOrderByAggregateInput
   _min?: Prisma.usersMinOrderByAggregateInput
+  _sum?: Prisma.usersSumOrderByAggregateInput
 }
 
 export type usersScalarWhereWithAggregatesInput = {
   AND?: Prisma.usersScalarWhereWithAggregatesInput | Prisma.usersScalarWhereWithAggregatesInput[]
   OR?: Prisma.usersScalarWhereWithAggregatesInput[]
   NOT?: Prisma.usersScalarWhereWithAggregatesInput | Prisma.usersScalarWhereWithAggregatesInput[]
-  card_id?: Prisma.StringWithAggregatesFilter<"users"> | string
-  first_name?: Prisma.StringWithAggregatesFilter<"users"> | string
-  last_name?: Prisma.StringWithAggregatesFilter<"users"> | string
-  email?: Prisma.StringWithAggregatesFilter<"users"> | string
-  role?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  id?: Prisma.IntWithAggregatesFilter<"users"> | number
+  full_name?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  email?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  role?: Prisma.Enumusers_roleWithAggregatesFilter<"users"> | $Enums.users_role
+  status?: Prisma.Enumusers_statusNullableWithAggregatesFilter<"users"> | $Enums.users_status | null
+  lang?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  created_at?: Prisma.DateTimeWithAggregatesFilter<"users"> | Date | string
+  updated_at?: Prisma.DateTimeWithAggregatesFilter<"users"> | Date | string
 }
 
 export type usersCreateInput = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role?: string | null
-  accounts?: Prisma.accountsCreateNestedManyWithoutUsersInput
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsCreateNestedOneWithoutUsersInput
 }
 
 export type usersUncheckedCreateInput = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role?: string | null
-  accounts?: Prisma.accountsUncheckedCreateNestedManyWithoutUsersInput
+  id?: number
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  accounts?: Prisma.accountsUncheckedCreateNestedOneWithoutUsersInput
 }
 
 export type usersUpdateInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.accountsUpdateManyWithoutUsersNestedInput
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUpdateOneWithoutUsersNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  accounts?: Prisma.accountsUncheckedUpdateManyWithoutUsersNestedInput
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.accountsUncheckedUpdateOneWithoutUsersNestedInput
 }
 
 export type usersCreateManyInput = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role?: string | null
+  id?: number
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type usersUpdateManyMutationInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type usersUncheckedUpdateManyInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type usersOrderByRelevanceInput = {
@@ -296,27 +405,47 @@ export type usersOrderByRelevanceInput = {
 }
 
 export type usersCountOrderByAggregateInput = {
-  card_id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  full_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  lang?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type usersAvgOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type usersMaxOrderByAggregateInput = {
-  card_id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  full_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  lang?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
 }
 
 export type usersMinOrderByAggregateInput = {
-  card_id?: Prisma.SortOrder
-  first_name?: Prisma.SortOrder
-  last_name?: Prisma.SortOrder
+  id?: Prisma.SortOrder
+  full_name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
   role?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  lang?: Prisma.SortOrder
+  created_at?: Prisma.SortOrder
+  updated_at?: Prisma.SortOrder
+}
+
+export type usersSumOrderByAggregateInput = {
+  id?: Prisma.SortOrder
 }
 
 export type UsersScalarRelationFilter = {
@@ -324,12 +453,28 @@ export type UsersScalarRelationFilter = {
   isNot?: Prisma.usersWhereInput
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type Enumusers_roleFieldUpdateOperationsInput = {
+  set?: $Enums.users_role
+}
+
+export type NullableEnumusers_statusFieldUpdateOperationsInput = {
+  set?: $Enums.users_status | null
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type usersCreateNestedOneWithoutAccountsInput = {
@@ -347,19 +492,26 @@ export type usersUpdateOneRequiredWithoutAccountsNestedInput = {
 }
 
 export type usersCreateWithoutAccountsInput = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role?: string | null
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type usersUncheckedCreateWithoutAccountsInput = {
-  card_id: string
-  first_name: string
-  last_name: string
-  email: string
-  role?: string | null
+  id?: number
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
 }
 
 export type usersCreateOrConnectWithoutAccountsInput = {
@@ -379,89 +531,77 @@ export type usersUpdateToOneWithWhereWithoutAccountsInput = {
 }
 
 export type usersUpdateWithoutAccountsInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type usersUncheckedUpdateWithoutAccountsInput = {
-  card_id?: Prisma.StringFieldUpdateOperationsInput | string
-  first_name?: Prisma.StringFieldUpdateOperationsInput | string
-  last_name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-
-/**
- * Count Type UsersCountOutputType
- */
-
-export type UsersCountOutputType = {
-  accounts: number
-}
-
-export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  accounts?: boolean | UsersCountOutputTypeCountAccountsArgs
-}
-
-/**
- * UsersCountOutputType without action
- */
-export type UsersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the UsersCountOutputType
-   */
-  select?: Prisma.UsersCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UsersCountOutputType without action
- */
-export type UsersCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.accountsWhereInput
-}
 
 
 export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
-  card_id?: boolean
-  first_name?: boolean
-  last_name?: boolean
+  id?: boolean
+  full_name?: boolean
   email?: boolean
+  phone?: boolean
   role?: boolean
+  status?: boolean
+  lang?: boolean
+  created_at?: boolean
+  updated_at?: boolean
   accounts?: boolean | Prisma.users$accountsArgs<ExtArgs>
-  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
 
 
 export type usersSelectScalar = {
-  card_id?: boolean
-  first_name?: boolean
-  last_name?: boolean
+  id?: boolean
+  full_name?: boolean
   email?: boolean
+  phone?: boolean
   role?: boolean
+  status?: boolean
+  lang?: boolean
+  created_at?: boolean
+  updated_at?: boolean
 }
 
-export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"card_id" | "first_name" | "last_name" | "email" | "role", ExtArgs["result"]["users"]>
+export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "full_name" | "email" | "phone" | "role" | "status" | "lang" | "created_at" | "updated_at", ExtArgs["result"]["users"]>
 export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.users$accountsArgs<ExtArgs>
-  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "users"
   objects: {
-    accounts: Prisma.$accountsPayload<ExtArgs>[]
+    accounts: Prisma.$accountsPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    card_id: string
-    first_name: string
-    last_name: string
-    email: string
-    role: string | null
+    id: number
+    full_name: string | null
+    email: string | null
+    phone: string | null
+    role: $Enums.users_role
+    status: $Enums.users_status | null
+    lang: string | null
+    created_at: Date
+    updated_at: Date
   }, ExtArgs["result"]["users"]>
   composites: {}
 }
@@ -545,8 +685,8 @@ export interface usersDelegate<ExtArgs extends runtime.Types.Extensions.Internal
    * // Get first 10 Users
    * const users = await prisma.users.findMany({ take: 10 })
    * 
-   * // Only select the `card_id`
-   * const usersWithCard_idOnly = await prisma.users.findMany({ select: { card_id: true } })
+   * // Only select the `id`
+   * const usersWithIdOnly = await prisma.users.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends usersFindManyArgs>(args?: Prisma.SelectSubset<T, usersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -802,7 +942,7 @@ readonly fields: usersFieldRefs;
  */
 export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  accounts<T extends Prisma.users$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$accountsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  accounts<T extends Prisma.users$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$accountsArgs<ExtArgs>>): Prisma.Prisma__accountsClient<runtime.Types.Result.GetResult<Prisma.$accountsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -832,11 +972,15 @@ export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the users model
  */
 export interface usersFieldRefs {
-  readonly card_id: Prisma.FieldRef<"users", 'String'>
-  readonly first_name: Prisma.FieldRef<"users", 'String'>
-  readonly last_name: Prisma.FieldRef<"users", 'String'>
+  readonly id: Prisma.FieldRef<"users", 'Int'>
+  readonly full_name: Prisma.FieldRef<"users", 'String'>
   readonly email: Prisma.FieldRef<"users", 'String'>
-  readonly role: Prisma.FieldRef<"users", 'String'>
+  readonly phone: Prisma.FieldRef<"users", 'String'>
+  readonly role: Prisma.FieldRef<"users", 'users_role'>
+  readonly status: Prisma.FieldRef<"users", 'users_status'>
+  readonly lang: Prisma.FieldRef<"users", 'String'>
+  readonly created_at: Prisma.FieldRef<"users", 'DateTime'>
+  readonly updated_at: Prisma.FieldRef<"users", 'DateTime'>
 }
     
 
@@ -1196,11 +1340,6 @@ export type users$accountsArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   include?: Prisma.accountsInclude<ExtArgs> | null
   where?: Prisma.accountsWhereInput
-  orderBy?: Prisma.accountsOrderByWithRelationInput | Prisma.accountsOrderByWithRelationInput[]
-  cursor?: Prisma.accountsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AccountsScalarFieldEnum | Prisma.AccountsScalarFieldEnum[]
 }
 
 /**

@@ -9,6 +9,6 @@ const router = Router();
 
 router.use("/users", authMiddleware, userRouter);
 router.use("/auth", loginRateLimit, authRouter);
-router.use("/accounts",authMiddleware, accountRouter);
+router.use("/accounts", authMiddleware, accountRouter);
 
 export default router;

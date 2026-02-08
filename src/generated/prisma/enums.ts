@@ -9,7 +9,45 @@
 * 🟢 You can import this file directly.
 */
 
+export const book_copies_status = {
+  available: 'available',
+  borrowed: 'borrowed',
+  lost: 'lost',
+  damaged: 'damaged'
+} as const
+
+export type book_copies_status = (typeof book_copies_status)[keyof typeof book_copies_status]
 
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const readers_gender = {
+  male: 'male',
+  female: 'female',
+  other: 'other'
+} as const
+
+export type readers_gender = (typeof readers_gender)[keyof typeof readers_gender]
+
+
+export const borrow_records_status = {
+  borrowing: 'borrowing',
+  returned: 'returned',
+  overdue: 'overdue'
+} as const
+
+export type borrow_records_status = (typeof borrow_records_status)[keyof typeof borrow_records_status]
+
+
+export const users_role = {
+  admin: 'admin',
+  librarian: 'librarian'
+} as const
+
+export type users_role = (typeof users_role)[keyof typeof users_role]
+
+
+export const users_status = {
+  active: 'active',
+  inactive: 'inactive'
+} as const
+
+export type users_status = (typeof users_status)[keyof typeof users_status]

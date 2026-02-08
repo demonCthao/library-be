@@ -24,12 +24,12 @@ const controller = new AuthController();
  *           schema:
  *             type: object
  *             required:
- *               - user_name
- *               - user_pass
+ *               - username
+ *               - password
  *             properties:
- *               user_name:
+ *               username:
  *                 type: string
- *               user_pass:
+ *               password:
  *                 type: string
  *     responses:
  *       200:

@@ -8,10 +8,22 @@ const JWT_SECRET = process.env.JWT_SECRET!;
 const JWT_EXPIRES_IN = '1h';
 
 export class AuthService {
-    async login(user_name: string, user_pass: string, req: Request) {
+    async login(username: string, password: string, req: Request) {
         const account = await prisma.accounts.findFirst({
-            where: { user_name },
-            include: { users: true },
+            where: { username: username },
+            include: {
+                users: {
+                    select: {
+                        full_name: true,
+                        lang: true,
+                        created_at: true,
+                        phone: true,
+                        role: true,
+                        status: true,
+                        email: true
+                    }
+                }
+            }
         });
 
         if (!account) {
@@ -27,10 +39,10 @@ export class AuthService {
             );
         }
 
-        const isMatch = await bcrypt.compare(user_pass, account.user_pass);
+        const isMatch = await bcrypt.compare(password, account.password);
 
         if (!isMatch) {
-            const failedAttempts = account.failed_attempts + 1;
+            const failedAttempts = account.failed_attempts?? 0 + 1;
             const updateFailedAttempts = {
                 failed_attempts: failedAttempts,
                 locked_until: account.locked_until,
@@ -43,14 +55,19 @@ export class AuthService {
                 );
             }
 
-            await prisma.accounts.update({ where: { account_id: account.account_id }, data: updateFailedAttempts })
+            await prisma.users.update({ where: { id: account.id }, data: updateFailedAttempts })
 
             throw new UnauthorizedException('Sai tài khoản hoặc mật khẩu');
         }
 
         const payload = {
-            userId: account.users.card_id,
-            userName: account.user_name,
+            userId: account.id,
+            userName: account.username,
+            lang: account.users.lang,
+            fullName: account.users.full_name,
+            loginAt: new Date().getTime(),
+            role: account.users.role,
+            email: account.users.email
         };
 
         const accessToken = jwt.sign(payload, JWT_SECRET, {
@@ -59,7 +76,7 @@ export class AuthService {
 
         await prisma.accounts.update({
             where: {
-                account_id: account.account_id,
+                id: account.id,
             },
             data: {
                 failed_attempts: 0,
@@ -68,11 +85,8 @@ export class AuthService {
         })
 
         return {
-            accessToken,
-            user: account.users,
-            account: {
-                lang: account.lang
-            }
+            access_token: accessToken,
+            user: account.users
         };
     }
 }
