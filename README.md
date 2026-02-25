@@ -14,6 +14,7 @@ DATABASE_PASSWORD=""
 DATABASE_NAME="library_db"
 DATABASE_HOST="localhost"
 DATABASE_PORT=3306
+JWT_SECRET=super-secret-key
 
 ## SQL
 DROP DATABASE IF EXISTS library_db;
