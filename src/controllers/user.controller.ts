@@ -30,7 +30,7 @@ export class UserController extends BaseController<UserService> {
     async update(req: Request, res: Response, next: NextFunction) {
         try {
             const user = await this.service.update(
-                req.params.id as string,
+                Number(req.params.id),
                 req.body
             );
 
@@ -43,7 +43,7 @@ export class UserController extends BaseController<UserService> {
     async destroy(req: Request, res: Response, next: NextFunction) {
         try {
             const user = await this.service.destroy(
-                req.params.id as string,
+                Number(req.params.id),
             );
 
             return this.ok(res, user);
