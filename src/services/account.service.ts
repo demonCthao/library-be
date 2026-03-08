@@ -1,4 +1,5 @@
-import { AlreadyExistsException, BadRequestException } from "../exceptions";
+import bcrypt from 'bcrypt';
+import { AlreadyExistsException, BadRequestException, NotFoundException } from "../exceptions";
 import { accounts, Prisma } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { hashPass } from "../lib/utils";
@@ -6,17 +7,17 @@ import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
 
 const accountSafeSelect = {
-  id: true,
-  user_id: true,
-  username: true,
-  failed_attempts: true,
-  locked_until: true,
-  created_at: true,
-  updated_at: true,
+    id: true,
+    user_id: true,
+    username: true,
+    failed_attempts: true,
+    locked_until: true,
+    created_at: true,
+    updated_at: true,
 } as const
 
 type AccountSafe = Prisma.accountsGetPayload<{
-  select: typeof accountSafeSelect
+    select: typeof accountSafeSelect
 }>
 
 export class AccountService extends BaseService<AccountSafe> {
@@ -83,5 +84,33 @@ export class AccountService extends BaseService<AccountSafe> {
 
     async destroy(id: string): Promise<AccountSafe> {
         throw new BadRequestException();
+    }
+
+    async changePassword(userName: string, currentPassword: string, newPassword: string): Promise<AccountSafe> {
+
+        const account = await prisma.accounts.findUnique({
+            where: {
+                username: userName,
+            },
+        });
+
+        if (!account) {
+            throw new NotFoundException("Sai tài khoản hoặc mật khẩu");
+        }
+
+        const isMatch = await bcrypt.compare(currentPassword, account.password);
+
+        if (!isMatch) {
+            throw new NotFoundException("Sai mật khẩu");
+        }
+
+        const hash = await hashPass(newPassword);
+
+        return await prisma.accounts.update({
+            where: { username: userName },
+            data: {
+                password: hash,
+            }
+        });
     }
 }

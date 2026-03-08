@@ -58,11 +58,11 @@ export const ModelName = {
   books: 'books',
   borrow_details: 'borrow_details',
   borrow_records: 'borrow_records',
-  categories: 'categories',
-  fines: 'fines',
   publishers: 'publishers',
   readers: 'readers',
-  accounts: 'accounts'
+  accounts: 'accounts',
+  categories: 'categories',
+  fines: 'fines'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,7 +90,8 @@ export const UsersScalarFieldEnum = {
   status: 'status',
   lang: 'lang',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  avatar_path: 'avatar_path'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -138,7 +139,8 @@ export const BooksScalarFieldEnum = {
   stock_quantity: 'stock_quantity',
   borrowed_quantity: 'borrowed_quantity',
   reserved_quantity: 'reserved_quantity',
-  available_quantity: 'available_quantity'
+  available_quantity: 'available_quantity',
+  avatar_path: 'avatar_path'
 } as const
 
 export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof BooksScalarFieldEnum]
@@ -158,36 +160,19 @@ export const Borrow_recordsScalarFieldEnum = {
   borrow_date: 'borrow_date',
   due_date: 'due_date',
   return_date: 'return_date',
-  status: 'status'
+  status: 'status',
+  borrow_code: 'borrow_code'
 } as const
 
 export type Borrow_recordsScalarFieldEnum = (typeof Borrow_recordsScalarFieldEnum)[keyof typeof Borrow_recordsScalarFieldEnum]
 
 
-export const CategoriesScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  parent_id: 'parent_id'
-} as const
-
-export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
-
-
-export const FinesScalarFieldEnum = {
-  id: 'id',
-  borrow_id: 'borrow_id',
-  amount: 'amount',
-  reason: 'reason',
-  paid: 'paid'
-} as const
-
-export type FinesScalarFieldEnum = (typeof FinesScalarFieldEnum)[keyof typeof FinesScalarFieldEnum]
-
-
 export const PublishersScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  address: 'address'
+  address: 'address',
+  phone: 'phone',
+  email: 'email'
 } as const
 
 export type PublishersScalarFieldEnum = (typeof PublishersScalarFieldEnum)[keyof typeof PublishersScalarFieldEnum]
@@ -222,6 +207,26 @@ export const AccountsScalarFieldEnum = {
 export type AccountsScalarFieldEnum = (typeof AccountsScalarFieldEnum)[keyof typeof AccountsScalarFieldEnum]
 
 
+export const CategoriesScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  parent_id: 'parent_id'
+} as const
+
+export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
+
+
+export const FinesScalarFieldEnum = {
+  id: 'id',
+  borrow_id: 'borrow_id',
+  amount: 'amount',
+  reason: 'reason',
+  paid: 'paid'
+} as const
+
+export type FinesScalarFieldEnum = (typeof FinesScalarFieldEnum)[keyof typeof FinesScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -242,7 +247,8 @@ export const usersOrderByRelevanceFieldEnum = {
   full_name: 'full_name',
   email: 'email',
   phone: 'phone',
-  lang: 'lang'
+  lang: 'lang',
+  avatar_path: 'avatar_path'
 } as const
 
 export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
@@ -268,29 +274,25 @@ export const booksOrderByRelevanceFieldEnum = {
   isbn: 'isbn',
   title: 'title',
   description: 'description',
-  language: 'language'
+  language: 'language',
+  avatar_path: 'avatar_path'
 } as const
 
 export type booksOrderByRelevanceFieldEnum = (typeof booksOrderByRelevanceFieldEnum)[keyof typeof booksOrderByRelevanceFieldEnum]
 
 
-export const categoriesOrderByRelevanceFieldEnum = {
-  name: 'name'
+export const borrow_recordsOrderByRelevanceFieldEnum = {
+  borrow_code: 'borrow_code'
 } as const
 
-export type categoriesOrderByRelevanceFieldEnum = (typeof categoriesOrderByRelevanceFieldEnum)[keyof typeof categoriesOrderByRelevanceFieldEnum]
-
-
-export const finesOrderByRelevanceFieldEnum = {
-  reason: 'reason'
-} as const
-
-export type finesOrderByRelevanceFieldEnum = (typeof finesOrderByRelevanceFieldEnum)[keyof typeof finesOrderByRelevanceFieldEnum]
+export type borrow_recordsOrderByRelevanceFieldEnum = (typeof borrow_recordsOrderByRelevanceFieldEnum)[keyof typeof borrow_recordsOrderByRelevanceFieldEnum]
 
 
 export const publishersOrderByRelevanceFieldEnum = {
   name: 'name',
-  address: 'address'
+  address: 'address',
+  phone: 'phone',
+  email: 'email'
 } as const
 
 export type publishersOrderByRelevanceFieldEnum = (typeof publishersOrderByRelevanceFieldEnum)[keyof typeof publishersOrderByRelevanceFieldEnum]
@@ -313,4 +315,18 @@ export const accountsOrderByRelevanceFieldEnum = {
 } as const
 
 export type accountsOrderByRelevanceFieldEnum = (typeof accountsOrderByRelevanceFieldEnum)[keyof typeof accountsOrderByRelevanceFieldEnum]
+
+
+export const categoriesOrderByRelevanceFieldEnum = {
+  name: 'name'
+} as const
+
+export type categoriesOrderByRelevanceFieldEnum = (typeof categoriesOrderByRelevanceFieldEnum)[keyof typeof categoriesOrderByRelevanceFieldEnum]
+
+
+export const finesOrderByRelevanceFieldEnum = {
+  reason: 'reason'
+} as const
+
+export type finesOrderByRelevanceFieldEnum = (typeof finesOrderByRelevanceFieldEnum)[keyof typeof finesOrderByRelevanceFieldEnum]
 

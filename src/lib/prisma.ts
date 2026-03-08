@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import { PrismaClient } from '../generated/prisma/client';
+import { Prisma, PrismaClient } from '../generated/prisma/client';
 
 const adapter = new PrismaMariaDb({
   host: process.env.DATABASE_HOST,
@@ -11,4 +11,33 @@ const adapter = new PrismaMariaDb({
 });
 const prisma = new PrismaClient({ adapter });
 
-export { prisma }
+type FilterType = "string" | "number";
+
+function buildPrismaFilter(
+  type: "string",
+  value: unknown
+): Prisma.StringFilter | undefined;
+
+function buildPrismaFilter(
+  type: "number",
+  value: unknown
+): Prisma.IntNullableFilter<"books"> | undefined;
+
+function buildPrismaFilter(
+  type: FilterType,
+  value: unknown
+): Prisma.StringFilter | Prisma.IntNullableFilter<"books"> | undefined {
+  if (!value?.toString().trim()) return undefined;
+
+  if (type === "number") {
+    const num = Number(value);
+    if (Number.isNaN(num)) return undefined;
+    return { equals: num };
+  }
+
+  return {
+    contains: String(value),
+  };
+}
+
+export { prisma, buildPrismaFilter }

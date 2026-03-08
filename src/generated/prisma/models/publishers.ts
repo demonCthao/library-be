@@ -38,18 +38,24 @@ export type PublishersMinAggregateOutputType = {
   id: number | null
   name: string | null
   address: string | null
+  phone: string | null
+  email: string | null
 }
 
 export type PublishersMaxAggregateOutputType = {
   id: number | null
   name: string | null
   address: string | null
+  phone: string | null
+  email: string | null
 }
 
 export type PublishersCountAggregateOutputType = {
   id: number
   name: number
   address: number
+  phone: number
+  email: number
   _all: number
 }
 
@@ -66,18 +72,24 @@ export type PublishersMinAggregateInputType = {
   id?: true
   name?: true
   address?: true
+  phone?: true
+  email?: true
 }
 
 export type PublishersMaxAggregateInputType = {
   id?: true
   name?: true
   address?: true
+  phone?: true
+  email?: true
 }
 
 export type PublishersCountAggregateInputType = {
   id?: true
   name?: true
   address?: true
+  phone?: true
+  email?: true
   _all?: true
 }
 
@@ -171,6 +183,8 @@ export type PublishersGroupByOutputType = {
   id: number
   name: string
   address: string | null
+  phone: string | null
+  email: string
   _count: PublishersCountAggregateOutputType | null
   _avg: PublishersAvgAggregateOutputType | null
   _sum: PublishersSumAggregateOutputType | null
@@ -200,6 +214,8 @@ export type publishersWhereInput = {
   id?: Prisma.IntFilter<"publishers"> | number
   name?: Prisma.StringFilter<"publishers"> | string
   address?: Prisma.StringNullableFilter<"publishers"> | string | null
+  phone?: Prisma.StringNullableFilter<"publishers"> | string | null
+  email?: Prisma.StringFilter<"publishers"> | string
   books?: Prisma.BooksListRelationFilter
 }
 
@@ -207,6 +223,8 @@ export type publishersOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   books?: Prisma.booksOrderByRelationAggregateInput
   _relevance?: Prisma.publishersOrderByRelevanceInput
 }
@@ -218,6 +236,8 @@ export type publishersWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.publishersWhereInput | Prisma.publishersWhereInput[]
   name?: Prisma.StringFilter<"publishers"> | string
   address?: Prisma.StringNullableFilter<"publishers"> | string | null
+  phone?: Prisma.StringNullableFilter<"publishers"> | string | null
+  email?: Prisma.StringFilter<"publishers"> | string
   books?: Prisma.BooksListRelationFilter
 }, "id">
 
@@ -225,6 +245,8 @@ export type publishersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  email?: Prisma.SortOrder
   _count?: Prisma.publishersCountOrderByAggregateInput
   _avg?: Prisma.publishersAvgOrderByAggregateInput
   _max?: Prisma.publishersMaxOrderByAggregateInput
@@ -239,11 +261,15 @@ export type publishersScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"publishers"> | number
   name?: Prisma.StringWithAggregatesFilter<"publishers"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"publishers"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"publishers"> | string | null
+  email?: Prisma.StringWithAggregatesFilter<"publishers"> | string
 }
 
 export type publishersCreateInput = {
   name: string
   address?: string | null
+  phone?: string | null
+  email: string
   books?: Prisma.booksCreateNestedManyWithoutPublishersInput
 }
 
@@ -251,12 +277,16 @@ export type publishersUncheckedCreateInput = {
   id?: number
   name: string
   address?: string | null
+  phone?: string | null
+  email: string
   books?: Prisma.booksUncheckedCreateNestedManyWithoutPublishersInput
 }
 
 export type publishersUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   books?: Prisma.booksUpdateManyWithoutPublishersNestedInput
 }
 
@@ -264,6 +294,8 @@ export type publishersUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
   books?: Prisma.booksUncheckedUpdateManyWithoutPublishersNestedInput
 }
 
@@ -271,17 +303,23 @@ export type publishersCreateManyInput = {
   id?: number
   name: string
   address?: string | null
+  phone?: string | null
+  email: string
 }
 
 export type publishersUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type publishersUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PublishersNullableScalarRelationFilter = {
@@ -299,6 +337,8 @@ export type publishersCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  email?: Prisma.SortOrder
 }
 
 export type publishersAvgOrderByAggregateInput = {
@@ -309,12 +349,16 @@ export type publishersMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  email?: Prisma.SortOrder
 }
 
 export type publishersMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  email?: Prisma.SortOrder
 }
 
 export type publishersSumOrderByAggregateInput = {
@@ -340,12 +384,16 @@ export type publishersUpdateOneWithoutBooksNestedInput = {
 export type publishersCreateWithoutBooksInput = {
   name: string
   address?: string | null
+  phone?: string | null
+  email: string
 }
 
 export type publishersUncheckedCreateWithoutBooksInput = {
   id?: number
   name: string
   address?: string | null
+  phone?: string | null
+  email: string
 }
 
 export type publishersCreateOrConnectWithoutBooksInput = {
@@ -367,12 +415,16 @@ export type publishersUpdateToOneWithWhereWithoutBooksInput = {
 export type publishersUpdateWithoutBooksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type publishersUncheckedUpdateWithoutBooksInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -410,6 +462,8 @@ export type publishersSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   id?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
+  email?: boolean
   books?: boolean | Prisma.publishers$booksArgs<ExtArgs>
   _count?: boolean | Prisma.PublishersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["publishers"]>
@@ -420,9 +474,11 @@ export type publishersSelectScalar = {
   id?: boolean
   name?: boolean
   address?: boolean
+  phone?: boolean
+  email?: boolean
 }
 
-export type publishersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address", ExtArgs["result"]["publishers"]>
+export type publishersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "address" | "phone" | "email", ExtArgs["result"]["publishers"]>
 export type publishersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   books?: boolean | Prisma.publishers$booksArgs<ExtArgs>
   _count?: boolean | Prisma.PublishersCountOutputTypeDefaultArgs<ExtArgs>
@@ -437,6 +493,8 @@ export type $publishersPayload<ExtArgs extends runtime.Types.Extensions.Internal
     id: number
     name: string
     address: string | null
+    phone: string | null
+    email: string
   }, ExtArgs["result"]["publishers"]>
   composites: {}
 }
@@ -810,6 +868,8 @@ export interface publishersFieldRefs {
   readonly id: Prisma.FieldRef<"publishers", 'Int'>
   readonly name: Prisma.FieldRef<"publishers", 'String'>
   readonly address: Prisma.FieldRef<"publishers", 'String'>
+  readonly phone: Prisma.FieldRef<"publishers", 'String'>
+  readonly email: Prisma.FieldRef<"publishers", 'String'>
 }
     
 

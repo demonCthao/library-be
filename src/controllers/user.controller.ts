@@ -51,4 +51,28 @@ export class UserController extends BaseController<UserService> {
             next(err);
         }
     }
+
+    async getProfileByID(req: Request, res: Response, next: NextFunction) {
+        try {
+            const user = await this.service.getProfileByID(
+                Number(req.params.id),
+                req.user
+            );
+
+            return this.ok(res, user);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+
+    async exportExcel(_req: Request, res: Response, next: NextFunction) {
+        try {
+            const file = await this.service.exportUsers(res);
+
+            return this.ok(res, file);
+        } catch (err) {
+            next(err);
+        }
+    }
 }

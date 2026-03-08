@@ -257,6 +257,23 @@ export type Enumborrow_records_statusNullableWithAggregatesFilter<$PrismaModel =
   _max?: Prisma.NestedEnumborrow_records_statusNullableFilter<$PrismaModel>
 }
 
+export type Enumreaders_genderNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
+  in?: $Enums.readers_gender[] | null
+  notIn?: $Enums.readers_gender[] | null
+  not?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel> | $Enums.readers_gender | null
+}
+
+export type Enumreaders_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
+  in?: $Enums.readers_gender[] | null
+  notIn?: $Enums.readers_gender[] | null
+  not?: Prisma.NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.readers_gender | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
+}
+
 export type DecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[]
@@ -295,23 +312,6 @@ export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
-}
-
-export type Enumreaders_genderNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
-  in?: $Enums.readers_gender[] | null
-  notIn?: $Enums.readers_gender[] | null
-  not?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel> | $Enums.readers_gender | null
-}
-
-export type Enumreaders_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
-  in?: $Enums.readers_gender[] | null
-  notIn?: $Enums.readers_gender[] | null
-  not?: Prisma.NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.readers_gender | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
 }
 
 export type NestedIntFilter<$PrismaModel = never> = {
@@ -574,6 +574,23 @@ export type NestedEnumborrow_records_statusNullableWithAggregatesFilter<$PrismaM
   _max?: Prisma.NestedEnumborrow_records_statusNullableFilter<$PrismaModel>
 }
 
+export type NestedEnumreaders_genderNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
+  in?: $Enums.readers_gender[] | null
+  notIn?: $Enums.readers_gender[] | null
+  not?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel> | $Enums.readers_gender | null
+}
+
+export type NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
+  in?: $Enums.readers_gender[] | null
+  notIn?: $Enums.readers_gender[] | null
+  not?: Prisma.NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.readers_gender | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
+}
+
 export type NestedDecimalFilter<$PrismaModel = never> = {
   equals?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   in?: runtime.Decimal[] | runtime.DecimalJsLike[] | number[] | string[]
@@ -612,23 +629,6 @@ export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
-}
-
-export type NestedEnumreaders_genderNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
-  in?: $Enums.readers_gender[] | null
-  notIn?: $Enums.readers_gender[] | null
-  not?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel> | $Enums.readers_gender | null
-}
-
-export type NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.readers_gender | Prisma.Enumreaders_genderFieldRefInput<$PrismaModel> | null
-  in?: $Enums.readers_gender[] | null
-  notIn?: $Enums.readers_gender[] | null
-  not?: Prisma.NestedEnumreaders_genderNullableWithAggregatesFilter<$PrismaModel> | $Enums.readers_gender | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumreaders_genderNullableFilter<$PrismaModel>
 }
 
 

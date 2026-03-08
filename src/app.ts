@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import cors from "cors";
+import path from "path";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger";
 import router from "./routes";
@@ -10,7 +11,8 @@ const allowedOrigins = [
   "http://127.0.0.1:5173",
   "http://127.0.0.1:3000",
   "http://localhost:5173",
-]
+];
+const uploadsPath = path.join(process.cwd(), "src/uploads");
 
 app.use(express.json());
 app.use(
@@ -24,6 +26,10 @@ app.use(
     },
     credentials: true,
   })
+);
+app.use(
+  "/uploads",
+  express.static(uploadsPath)
 );
 app.use("/api/v1", router);
 app.use(errorMiddleware)
