@@ -153,4 +153,36 @@ router.put('/:id', controller.update.bind(controller));
  */
 router.delete('/:id', controller.destroy.bind(controller));
 
+/**
+ * @swagger
+ * /api/v1/users/profile/{id}:
+ *   get:
+ *     summary: Get profile user by ID
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: User ID
+ *     responses:
+ *       200:
+ *         description: Get User By ID
+ */
+router.get("/profile/:id", controller.getProfileByID.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/users/excel:
+ *   post:
+ *     summary: Export user
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Export Excel User
+ */
+router.post("/excel", controller.exportExcel.bind(controller));
+
 export default router;

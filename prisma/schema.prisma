@@ -8,16 +8,17 @@ datasource db {
 }
 
 model users {
-  id         Int           @id @default(autoincrement())
-  full_name  String?       @db.VarChar(100)
-  email      String?       @db.VarChar(100)
-  phone      String?       @db.VarChar(20)
-  role       users_role
-  status     users_status? @default(active)
-  lang       String?       @default("vi") @db.VarChar(10)
-  created_at DateTime      @default(now()) @db.Timestamp(0)
-  updated_at DateTime      @default(now()) @db.Timestamp(0)
-  accounts   accounts?
+  id          Int           @id @default(autoincrement())
+  full_name   String?       @db.VarChar(100)
+  email       String?       @db.VarChar(100)
+  phone       String?       @db.VarChar(20)
+  role        users_role
+  status      users_status? @default(active)
+  lang        String?       @default("vi") @db.VarChar(10)
+  created_at  DateTime      @default(now()) @db.Timestamp(0)
+  updated_at  DateTime      @default(now()) @db.Timestamp(0)
+  avatar_path String?       @db.VarChar(255)
+  accounts    accounts?
 }
 
 model authors {
@@ -64,6 +65,7 @@ model books {
   borrowed_quantity  Int            @default(0)
   reserved_quantity  Int            @default(0)
   available_quantity Int            @default(0)
+  avatar_path        String?        @db.VarChar(255)
   book_authors       book_authors[]
   book_copies        book_copies[]
   publishers         publishers?    @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
@@ -90,6 +92,7 @@ model borrow_records {
   due_date       DateTime               @db.Date
   return_date    DateTime?              @db.Date
   status         borrow_records_status? @default(borrowing)
+  borrow_code    String                 @db.Char(20)
   borrow_details borrow_details[]
   readers        readers                @relation(fields: [reader_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_records_ibfk_1")
   fines          fines[]
@@ -97,32 +100,12 @@ model borrow_records {
   @@index([reader_id], map: "reader_id")
 }
 
-model categories {
-  id               Int          @id @default(autoincrement())
-  name             String       @db.VarChar(100)
-  parent_id        Int?
-  books            books[]
-  categories       categories?  @relation("categoriesTocategories", fields: [parent_id], references: [id], onUpdate: Restrict, map: "categories_ibfk_1")
-  other_categories categories[] @relation("categoriesTocategories")
-
-  @@index([parent_id], map: "parent_id")
-}
-
-model fines {
-  id             Int            @id @default(autoincrement())
-  borrow_id      Int
-  amount         Decimal        @db.Decimal(10, 2)
-  reason         String?        @db.VarChar(255)
-  paid           Boolean?       @default(false)
-  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fines_ibfk_1")
-
-  @@index([borrow_id], map: "borrow_id")
-}
-
 model publishers {
   id      Int     @id @default(autoincrement())
   name    String  @db.VarChar(150)
   address String? @db.VarChar(255)
+  phone   String? @db.Char(20)
+  email   String  @db.Char(50)
   books   books[]
 }
 
@@ -149,6 +132,28 @@ model accounts {
   created_at      DateTime  @default(now()) @db.Timestamp(0)
   updated_at      DateTime  @default(now()) @db.Timestamp(0)
   users           users     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_accounts_user")
+}
+
+model categories {
+  id               Int          @id @default(autoincrement())
+  name             String       @db.VarChar(100)
+  parent_id        Int?
+  books            books[]
+  categories       categories?  @relation("categoriesTocategories", fields: [parent_id], references: [id], onUpdate: Restrict, map: "categories_ibfk_1")
+  other_categories categories[] @relation("categoriesTocategories")
+
+  @@index([parent_id], map: "parent_id")
+}
+
+model fines {
+  id             Int            @id @default(autoincrement())
+  borrow_id      Int
+  amount         Decimal        @db.Decimal(10, 2)
+  reason         String?        @db.VarChar(255)
+  paid           Boolean?       @default(false)
+  borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fines_ibfk_1")
+
+  @@index([borrow_id], map: "borrow_id")
 }
 
 enum book_copies_status {

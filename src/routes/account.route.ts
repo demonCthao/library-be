@@ -113,5 +113,37 @@ router.post('/', controller.store.bind(controller));
  */
 router.put('/', controller.update.bind(controller));
 
+/**
+ * @swagger
+ * /api/v1/accounts/change-pass:
+ *   post:
+ *     summary: Update Account
+ *     tags: [Accounts]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - userName
+ *               - currentPass
+ *               - newPassword
+ *             properties:
+ *               userName:
+ *                 type: string
+ *                 example: 
+ *               currentPassword:
+ *                 type: string
+ *                 example: 
+ *               newPassword:
+ *                 type: string
+ *                 example: 
+ *     responses:
+ *       201:
+ *         description: Account updated
+ */
+router.post("/change-pass", controller.changePassword.bind(controller));
+
 
 export default router;

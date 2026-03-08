@@ -5,7 +5,7 @@ import { prisma } from "../lib/prisma";
 import { Request } from 'express';
 
 const JWT_SECRET = process.env.JWT_SECRET!;
-const JWT_EXPIRES_IN = '1h';
+const JWT_EXPIRES_IN = '12h';
 
 export class AuthService {
     async login(username: string, password: string, req: Request) {

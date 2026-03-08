@@ -43,6 +43,7 @@ export type Borrow_recordsMinAggregateOutputType = {
   due_date: Date | null
   return_date: Date | null
   status: $Enums.borrow_records_status | null
+  borrow_code: string | null
 }
 
 export type Borrow_recordsMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type Borrow_recordsMaxAggregateOutputType = {
   due_date: Date | null
   return_date: Date | null
   status: $Enums.borrow_records_status | null
+  borrow_code: string | null
 }
 
 export type Borrow_recordsCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type Borrow_recordsCountAggregateOutputType = {
   due_date: number
   return_date: number
   status: number
+  borrow_code: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type Borrow_recordsMinAggregateInputType = {
   due_date?: true
   return_date?: true
   status?: true
+  borrow_code?: true
 }
 
 export type Borrow_recordsMaxAggregateInputType = {
@@ -91,6 +95,7 @@ export type Borrow_recordsMaxAggregateInputType = {
   due_date?: true
   return_date?: true
   status?: true
+  borrow_code?: true
 }
 
 export type Borrow_recordsCountAggregateInputType = {
@@ -100,6 +105,7 @@ export type Borrow_recordsCountAggregateInputType = {
   due_date?: true
   return_date?: true
   status?: true
+  borrow_code?: true
   _all?: true
 }
 
@@ -196,6 +202,7 @@ export type Borrow_recordsGroupByOutputType = {
   due_date: Date
   return_date: Date | null
   status: $Enums.borrow_records_status | null
+  borrow_code: string
   _count: Borrow_recordsCountAggregateOutputType | null
   _avg: Borrow_recordsAvgAggregateOutputType | null
   _sum: Borrow_recordsSumAggregateOutputType | null
@@ -228,6 +235,7 @@ export type borrow_recordsWhereInput = {
   due_date?: Prisma.DateTimeFilter<"borrow_records"> | Date | string
   return_date?: Prisma.DateTimeNullableFilter<"borrow_records"> | Date | string | null
   status?: Prisma.Enumborrow_records_statusNullableFilter<"borrow_records"> | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFilter<"borrow_records"> | string
   borrow_details?: Prisma.Borrow_detailsListRelationFilter
   readers?: Prisma.XOR<Prisma.ReadersScalarRelationFilter, Prisma.readersWhereInput>
   fines?: Prisma.FinesListRelationFilter
@@ -240,9 +248,11 @@ export type borrow_recordsOrderByWithRelationInput = {
   due_date?: Prisma.SortOrder
   return_date?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
+  borrow_code?: Prisma.SortOrder
   borrow_details?: Prisma.borrow_detailsOrderByRelationAggregateInput
   readers?: Prisma.readersOrderByWithRelationInput
   fines?: Prisma.finesOrderByRelationAggregateInput
+  _relevance?: Prisma.borrow_recordsOrderByRelevanceInput
 }
 
 export type borrow_recordsWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +265,7 @@ export type borrow_recordsWhereUniqueInput = Prisma.AtLeast<{
   due_date?: Prisma.DateTimeFilter<"borrow_records"> | Date | string
   return_date?: Prisma.DateTimeNullableFilter<"borrow_records"> | Date | string | null
   status?: Prisma.Enumborrow_records_statusNullableFilter<"borrow_records"> | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFilter<"borrow_records"> | string
   borrow_details?: Prisma.Borrow_detailsListRelationFilter
   readers?: Prisma.XOR<Prisma.ReadersScalarRelationFilter, Prisma.readersWhereInput>
   fines?: Prisma.FinesListRelationFilter
@@ -267,6 +278,7 @@ export type borrow_recordsOrderByWithAggregationInput = {
   due_date?: Prisma.SortOrder
   return_date?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
+  borrow_code?: Prisma.SortOrder
   _count?: Prisma.borrow_recordsCountOrderByAggregateInput
   _avg?: Prisma.borrow_recordsAvgOrderByAggregateInput
   _max?: Prisma.borrow_recordsMaxOrderByAggregateInput
@@ -284,6 +296,7 @@ export type borrow_recordsScalarWhereWithAggregatesInput = {
   due_date?: Prisma.DateTimeWithAggregatesFilter<"borrow_records"> | Date | string
   return_date?: Prisma.DateTimeNullableWithAggregatesFilter<"borrow_records"> | Date | string | null
   status?: Prisma.Enumborrow_records_statusNullableWithAggregatesFilter<"borrow_records"> | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringWithAggregatesFilter<"borrow_records"> | string
 }
 
 export type borrow_recordsCreateInput = {
@@ -291,6 +304,7 @@ export type borrow_recordsCreateInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBorrow_recordsInput
   readers: Prisma.readersCreateNestedOneWithoutBorrow_recordsInput
   fines?: Prisma.finesCreateNestedManyWithoutBorrow_recordsInput
@@ -303,6 +317,7 @@ export type borrow_recordsUncheckedCreateInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBorrow_recordsInput
   fines?: Prisma.finesUncheckedCreateNestedManyWithoutBorrow_recordsInput
 }
@@ -312,6 +327,7 @@ export type borrow_recordsUpdateInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBorrow_recordsNestedInput
   readers?: Prisma.readersUpdateOneRequiredWithoutBorrow_recordsNestedInput
   fines?: Prisma.finesUpdateManyWithoutBorrow_recordsNestedInput
@@ -324,6 +340,7 @@ export type borrow_recordsUncheckedUpdateInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsNestedInput
   fines?: Prisma.finesUncheckedUpdateManyWithoutBorrow_recordsNestedInput
 }
@@ -335,6 +352,7 @@ export type borrow_recordsCreateManyInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
 }
 
 export type borrow_recordsUpdateManyMutationInput = {
@@ -342,6 +360,7 @@ export type borrow_recordsUpdateManyMutationInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type borrow_recordsUncheckedUpdateManyInput = {
@@ -351,11 +370,18 @@ export type borrow_recordsUncheckedUpdateManyInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type Borrow_recordsScalarRelationFilter = {
   is?: Prisma.borrow_recordsWhereInput
   isNot?: Prisma.borrow_recordsWhereInput
+}
+
+export type borrow_recordsOrderByRelevanceInput = {
+  fields: Prisma.borrow_recordsOrderByRelevanceFieldEnum | Prisma.borrow_recordsOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type borrow_recordsCountOrderByAggregateInput = {
@@ -365,6 +391,7 @@ export type borrow_recordsCountOrderByAggregateInput = {
   due_date?: Prisma.SortOrder
   return_date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  borrow_code?: Prisma.SortOrder
 }
 
 export type borrow_recordsAvgOrderByAggregateInput = {
@@ -379,6 +406,7 @@ export type borrow_recordsMaxOrderByAggregateInput = {
   due_date?: Prisma.SortOrder
   return_date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  borrow_code?: Prisma.SortOrder
 }
 
 export type borrow_recordsMinOrderByAggregateInput = {
@@ -388,6 +416,7 @@ export type borrow_recordsMinOrderByAggregateInput = {
   due_date?: Prisma.SortOrder
   return_date?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  borrow_code?: Prisma.SortOrder
 }
 
 export type borrow_recordsSumOrderByAggregateInput = {
@@ -425,20 +454,6 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
 
 export type NullableEnumborrow_records_statusFieldUpdateOperationsInput = {
   set?: $Enums.borrow_records_status | null
-}
-
-export type borrow_recordsCreateNestedOneWithoutFinesInput = {
-  create?: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
-  connectOrCreate?: Prisma.borrow_recordsCreateOrConnectWithoutFinesInput
-  connect?: Prisma.borrow_recordsWhereUniqueInput
-}
-
-export type borrow_recordsUpdateOneRequiredWithoutFinesNestedInput = {
-  create?: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
-  connectOrCreate?: Prisma.borrow_recordsCreateOrConnectWithoutFinesInput
-  upsert?: Prisma.borrow_recordsUpsertWithoutFinesInput
-  connect?: Prisma.borrow_recordsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.borrow_recordsUpdateToOneWithWhereWithoutFinesInput, Prisma.borrow_recordsUpdateWithoutFinesInput>, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
 }
 
 export type borrow_recordsCreateNestedManyWithoutReadersInput = {
@@ -483,11 +498,26 @@ export type borrow_recordsUncheckedUpdateManyWithoutReadersNestedInput = {
   deleteMany?: Prisma.borrow_recordsScalarWhereInput | Prisma.borrow_recordsScalarWhereInput[]
 }
 
+export type borrow_recordsCreateNestedOneWithoutFinesInput = {
+  create?: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
+  connectOrCreate?: Prisma.borrow_recordsCreateOrConnectWithoutFinesInput
+  connect?: Prisma.borrow_recordsWhereUniqueInput
+}
+
+export type borrow_recordsUpdateOneRequiredWithoutFinesNestedInput = {
+  create?: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
+  connectOrCreate?: Prisma.borrow_recordsCreateOrConnectWithoutFinesInput
+  upsert?: Prisma.borrow_recordsUpsertWithoutFinesInput
+  connect?: Prisma.borrow_recordsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.borrow_recordsUpdateToOneWithWhereWithoutFinesInput, Prisma.borrow_recordsUpdateWithoutFinesInput>, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
+}
+
 export type borrow_recordsCreateWithoutBorrow_detailsInput = {
   borrow_date: Date | string
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   readers: Prisma.readersCreateNestedOneWithoutBorrow_recordsInput
   fines?: Prisma.finesCreateNestedManyWithoutBorrow_recordsInput
 }
@@ -499,6 +529,7 @@ export type borrow_recordsUncheckedCreateWithoutBorrow_detailsInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   fines?: Prisma.finesUncheckedCreateNestedManyWithoutBorrow_recordsInput
 }
 
@@ -523,6 +554,7 @@ export type borrow_recordsUpdateWithoutBorrow_detailsInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   readers?: Prisma.readersUpdateOneRequiredWithoutBorrow_recordsNestedInput
   fines?: Prisma.finesUpdateManyWithoutBorrow_recordsNestedInput
 }
@@ -534,61 +566,8 @@ export type borrow_recordsUncheckedUpdateWithoutBorrow_detailsInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   fines?: Prisma.finesUncheckedUpdateManyWithoutBorrow_recordsNestedInput
-}
-
-export type borrow_recordsCreateWithoutFinesInput = {
-  borrow_date: Date | string
-  due_date: Date | string
-  return_date?: Date | string | null
-  status?: $Enums.borrow_records_status | null
-  borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBorrow_recordsInput
-  readers: Prisma.readersCreateNestedOneWithoutBorrow_recordsInput
-}
-
-export type borrow_recordsUncheckedCreateWithoutFinesInput = {
-  id?: number
-  reader_id: number
-  borrow_date: Date | string
-  due_date: Date | string
-  return_date?: Date | string | null
-  status?: $Enums.borrow_records_status | null
-  borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBorrow_recordsInput
-}
-
-export type borrow_recordsCreateOrConnectWithoutFinesInput = {
-  where: Prisma.borrow_recordsWhereUniqueInput
-  create: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
-}
-
-export type borrow_recordsUpsertWithoutFinesInput = {
-  update: Prisma.XOR<Prisma.borrow_recordsUpdateWithoutFinesInput, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
-  create: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
-  where?: Prisma.borrow_recordsWhereInput
-}
-
-export type borrow_recordsUpdateToOneWithWhereWithoutFinesInput = {
-  where?: Prisma.borrow_recordsWhereInput
-  data: Prisma.XOR<Prisma.borrow_recordsUpdateWithoutFinesInput, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
-}
-
-export type borrow_recordsUpdateWithoutFinesInput = {
-  borrow_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
-  borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBorrow_recordsNestedInput
-  readers?: Prisma.readersUpdateOneRequiredWithoutBorrow_recordsNestedInput
-}
-
-export type borrow_recordsUncheckedUpdateWithoutFinesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_id?: Prisma.IntFieldUpdateOperationsInput | number
-  borrow_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
-  borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsNestedInput
 }
 
 export type borrow_recordsCreateWithoutReadersInput = {
@@ -596,6 +575,7 @@ export type borrow_recordsCreateWithoutReadersInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBorrow_recordsInput
   fines?: Prisma.finesCreateNestedManyWithoutBorrow_recordsInput
 }
@@ -606,6 +586,7 @@ export type borrow_recordsUncheckedCreateWithoutReadersInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBorrow_recordsInput
   fines?: Prisma.finesUncheckedCreateNestedManyWithoutBorrow_recordsInput
 }
@@ -646,6 +627,65 @@ export type borrow_recordsScalarWhereInput = {
   due_date?: Prisma.DateTimeFilter<"borrow_records"> | Date | string
   return_date?: Prisma.DateTimeNullableFilter<"borrow_records"> | Date | string | null
   status?: Prisma.Enumborrow_records_statusNullableFilter<"borrow_records"> | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFilter<"borrow_records"> | string
+}
+
+export type borrow_recordsCreateWithoutFinesInput = {
+  borrow_date: Date | string
+  due_date: Date | string
+  return_date?: Date | string | null
+  status?: $Enums.borrow_records_status | null
+  borrow_code: string
+  borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBorrow_recordsInput
+  readers: Prisma.readersCreateNestedOneWithoutBorrow_recordsInput
+}
+
+export type borrow_recordsUncheckedCreateWithoutFinesInput = {
+  id?: number
+  reader_id: number
+  borrow_date: Date | string
+  due_date: Date | string
+  return_date?: Date | string | null
+  status?: $Enums.borrow_records_status | null
+  borrow_code: string
+  borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBorrow_recordsInput
+}
+
+export type borrow_recordsCreateOrConnectWithoutFinesInput = {
+  where: Prisma.borrow_recordsWhereUniqueInput
+  create: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
+}
+
+export type borrow_recordsUpsertWithoutFinesInput = {
+  update: Prisma.XOR<Prisma.borrow_recordsUpdateWithoutFinesInput, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
+  create: Prisma.XOR<Prisma.borrow_recordsCreateWithoutFinesInput, Prisma.borrow_recordsUncheckedCreateWithoutFinesInput>
+  where?: Prisma.borrow_recordsWhereInput
+}
+
+export type borrow_recordsUpdateToOneWithWhereWithoutFinesInput = {
+  where?: Prisma.borrow_recordsWhereInput
+  data: Prisma.XOR<Prisma.borrow_recordsUpdateWithoutFinesInput, Prisma.borrow_recordsUncheckedUpdateWithoutFinesInput>
+}
+
+export type borrow_recordsUpdateWithoutFinesInput = {
+  borrow_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
+  borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBorrow_recordsNestedInput
+  readers?: Prisma.readersUpdateOneRequiredWithoutBorrow_recordsNestedInput
+}
+
+export type borrow_recordsUncheckedUpdateWithoutFinesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  reader_id?: Prisma.IntFieldUpdateOperationsInput | number
+  borrow_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
+  borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsNestedInput
 }
 
 export type borrow_recordsCreateManyReadersInput = {
@@ -654,6 +694,7 @@ export type borrow_recordsCreateManyReadersInput = {
   due_date: Date | string
   return_date?: Date | string | null
   status?: $Enums.borrow_records_status | null
+  borrow_code: string
 }
 
 export type borrow_recordsUpdateWithoutReadersInput = {
@@ -661,6 +702,7 @@ export type borrow_recordsUpdateWithoutReadersInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBorrow_recordsNestedInput
   fines?: Prisma.finesUpdateManyWithoutBorrow_recordsNestedInput
 }
@@ -671,6 +713,7 @@ export type borrow_recordsUncheckedUpdateWithoutReadersInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsNestedInput
   fines?: Prisma.finesUncheckedUpdateManyWithoutBorrow_recordsNestedInput
 }
@@ -681,6 +724,7 @@ export type borrow_recordsUncheckedUpdateManyWithoutReadersInput = {
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   return_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.NullableEnumborrow_records_statusFieldUpdateOperationsInput | $Enums.borrow_records_status | null
+  borrow_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -730,6 +774,7 @@ export type borrow_recordsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   due_date?: boolean
   return_date?: boolean
   status?: boolean
+  borrow_code?: boolean
   borrow_details?: boolean | Prisma.borrow_records$borrow_detailsArgs<ExtArgs>
   readers?: boolean | Prisma.readersDefaultArgs<ExtArgs>
   fines?: boolean | Prisma.borrow_records$finesArgs<ExtArgs>
@@ -745,9 +790,10 @@ export type borrow_recordsSelectScalar = {
   due_date?: boolean
   return_date?: boolean
   status?: boolean
+  borrow_code?: boolean
 }
 
-export type borrow_recordsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_id" | "borrow_date" | "due_date" | "return_date" | "status", ExtArgs["result"]["borrow_records"]>
+export type borrow_recordsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_id" | "borrow_date" | "due_date" | "return_date" | "status" | "borrow_code", ExtArgs["result"]["borrow_records"]>
 export type borrow_recordsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   borrow_details?: boolean | Prisma.borrow_records$borrow_detailsArgs<ExtArgs>
   readers?: boolean | Prisma.readersDefaultArgs<ExtArgs>
@@ -769,6 +815,7 @@ export type $borrow_recordsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     due_date: Date
     return_date: Date | null
     status: $Enums.borrow_records_status | null
+    borrow_code: string
   }, ExtArgs["result"]["borrow_records"]>
   composites: {}
 }
@@ -1147,6 +1194,7 @@ export interface borrow_recordsFieldRefs {
   readonly due_date: Prisma.FieldRef<"borrow_records", 'DateTime'>
   readonly return_date: Prisma.FieldRef<"borrow_records", 'DateTime'>
   readonly status: Prisma.FieldRef<"borrow_records", 'borrow_records_status'>
+  readonly borrow_code: Prisma.FieldRef<"borrow_records", 'String'>
 }
     
 

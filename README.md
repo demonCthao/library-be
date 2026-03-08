@@ -33,6 +33,7 @@ CREATE TABLE users (
   role ENUM('admin', 'librarian') NOT NULL,
   status ENUM('active', 'inactive') DEFAULT 'active',
   lang VARCHAR(10) DEFAULT 'vi',
+  avatar_path VARCHAR(255) NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ON UPDATE CURRENT_TIMESTAMP
@@ -79,7 +80,9 @@ CREATE TABLE authors (
 CREATE TABLE publishers (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(150) NOT NULL,
-  address VARCHAR(255)
+  address VARCHAR(255),
+  phone char(20),
+  email char(50) NOT NULL
 );
 
 CREATE TABLE categories (
@@ -102,6 +105,7 @@ CREATE TABLE books (
   pages INT,
   publisher_id INT,
   category_id INT,
+  avatar_path VARCHAR(255) NULL,
   stock_quantity INT NOT NULL DEFAULT 0 COMMENT 'Số sách tồn kho',
   borrowed_quantity INT NOT NULL DEFAULT 0 COMMENT 'Số sách đang cho mượn',
   reserved_quantity INT NOT NULL DEFAULT 0 COMMENT 'Số sách đang giữ chỗ',
@@ -150,7 +154,7 @@ CREATE TABLE book_copies (
 CREATE TABLE borrow_records (
   id INT AUTO_INCREMENT PRIMARY KEY,
   reader_id INT NOT NULL,
-
+  borrow_records CHAR(20) NOT NULL,
   borrow_date DATE NOT NULL,
   due_date DATE NOT NULL,
   return_date DATE,
@@ -220,11 +224,11 @@ INSERT INTO authors (name, bio) VALUES
 ('Paulo Coelho', 'Brazilian novelist');
 
 INSERT INTO publishers (name, address) VALUES
-('NXB Trẻ', 'TP.HCM'),
-('NXB Giáo Dục', 'Hà Nội'),
-('O’Reilly Media', 'USA'),
-('Pearson', 'UK'),
-('NXB Kim Đồng', 'Hà Nội');
+('NXB Trẻ', 'TP.HCM', "0833766546", "nxbtre@gmail.com"),
+('NXB Giáo Dục', 'Hà Nội', "nxbgd@gmail.com"),
+('O’Reilly Media', 'USA', "adb@gmail.com"),
+('Pearson', 'UK', "person@gmail.com"),
+('NXB Kim Đồng', 'Hà Nội', "nxbkd@gmail.com");
 
 INSERT INTO categories (name, parent_id) VALUES
 ('Công nghệ thông tin', NULL),
@@ -266,3 +270,13 @@ INSERT INTO fines (borrow_id, amount, reason, paid) VALUES
 (3,100000,'Mất sách',FALSE),
 (4,30000,'Hư hỏng',TRUE),
 (5,0,'Không phạt',TRUE);
+
+CREATE VIEW category_with_children AS
+SELECT 
+  c.id,
+  c.name,
+  c.parent_id,
+  GROUP_CONCAT(child.name SEPARATOR ', ') AS other_category_names
+FROM categories c
+LEFT JOIN categories child ON child.parent_id = c.id
+GROUP BY c.id;

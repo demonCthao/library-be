@@ -53,16 +53,6 @@ export type borrow_details = Prisma.borrow_detailsModel
  */
 export type borrow_records = Prisma.borrow_recordsModel
 /**
- * Model categories
- * 
- */
-export type categories = Prisma.categoriesModel
-/**
- * Model fines
- * 
- */
-export type fines = Prisma.finesModel
-/**
  * Model publishers
  * 
  */
@@ -77,3 +67,13 @@ export type readers = Prisma.readersModel
  * 
  */
 export type accounts = Prisma.accountsModel
+/**
+ * Model categories
+ * 
+ */
+export type categories = Prisma.categoriesModel
+/**
+ * Model fines
+ * 
+ */
+export type fines = Prisma.finesModel

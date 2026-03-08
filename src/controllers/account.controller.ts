@@ -51,4 +51,19 @@ export class AccountController extends BaseController<AccountService> {
             next(err);
         }
     }
+
+    async changePassword(req: Request, res: Response, next: NextFunction) {
+        console.log("🚀 ~ AccountController ~ changePassword ~ req:", req.params)
+        try {
+            const account = await this.service.changePassword(
+                req.body.userName as string,
+                req.body.currentPassword as string,
+                req.body.newPassword as string,
+            );
+
+            return this.ok(res, account);
+        } catch (err) {
+            next(err);
+        }
+    }
 }
