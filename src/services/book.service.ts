@@ -7,6 +7,7 @@ import { books, Prisma } from "../generated/prisma/client";
 import { buildPrismaFilter, prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
+import { BookSearchResult } from "../dto/book-search-result";
 
 interface FindBookQuery extends FindAllQuery {
   title?: string;
@@ -145,7 +146,7 @@ class BookService extends BaseService<books> {
             contains: keyword
           }
         }
-      }); 
+      });
     }
 
     return [];

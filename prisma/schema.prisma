@@ -38,38 +38,26 @@ model book_authors {
   @@index([author_id], map: "author_id")
 }
 
-model book_copies {
-  id             Int                 @id @default(autoincrement())
-  book_id        Int
-  copy_code      String              @unique(map: "copy_code") @db.VarChar(50)
-  status         book_copies_status? @default(available)
-  location       String?             @db.VarChar(100)
-  books          books               @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "book_copies_ibfk_1")
-  borrow_details borrow_details[]
-
-  @@index([book_id], map: "book_id")
-}
-
 model books {
-  id                 Int            @id @default(autoincrement())
-  isbn               String?        @unique(map: "isbn") @db.VarChar(20)
-  title              String         @db.VarChar(255)
-  description        String?        @db.Text
+  id                 Int              @id @default(autoincrement())
+  isbn               String?          @unique(map: "isbn") @db.VarChar(20)
+  title              String           @db.VarChar(255)
+  description        String?          @db.Text
   publish_year       Int?
-  language           String?        @db.VarChar(50)
+  language           String?          @db.VarChar(50)
   pages              Int?
   publisher_id       Int?
   category_id        Int?
-  created_at         DateTime       @default(now()) @db.Timestamp(0)
-  stock_quantity     Int            @default(0)
-  borrowed_quantity  Int            @default(0)
-  reserved_quantity  Int            @default(0)
-  available_quantity Int            @default(0)
-  avatar_path        String?        @db.VarChar(255)
+  created_at         DateTime         @default(now()) @db.Timestamp(0)
+  stock_quantity     Int              @default(0)
+  borrowed_quantity  Int              @default(0)
+  reserved_quantity  Int              @default(0)
+  available_quantity Int              @default(0)
+  avatar_path        String?          @db.VarChar(255)
   book_authors       book_authors[]
-  book_copies        book_copies[]
-  publishers         publishers?    @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
-  categories         categories?    @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
+  publishers         publishers?      @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
+  categories         categories?      @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
+  borrow_details     borrow_details[]
 
   @@index([category_id], map: "category_id")
   @@index([publisher_id], map: "publisher_id")
@@ -77,12 +65,12 @@ model books {
 
 model borrow_details {
   borrow_id      Int
-  book_copy_id   Int
+  book_id        Int
   borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_details_ibfk_1")
-  book_copies    book_copies    @relation(fields: [book_copy_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_details_ibfk_2")
+  books          books          @relation(fields: [book_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_details_ibfk_2")
 
-  @@id([borrow_id, book_copy_id])
-  @@index([book_copy_id], map: "book_copy_id")
+  @@id([borrow_id, book_id])
+  @@index([book_id], map: "book_id")
 }
 
 model borrow_records {
@@ -154,13 +142,6 @@ model fines {
   borrow_records borrow_records @relation(fields: [borrow_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fines_ibfk_1")
 
   @@index([borrow_id], map: "borrow_id")
-}
-
-enum book_copies_status {
-  available
-  borrowed
-  lost
-  damaged
 }
 
 enum readers_gender {

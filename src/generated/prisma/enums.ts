@@ -9,16 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const book_copies_status = {
-  available: 'available',
-  borrowed: 'borrowed',
-  lost: 'lost',
-  damaged: 'damaged'
-} as const
-
-export type book_copies_status = (typeof book_copies_status)[keyof typeof book_copies_status]
-
-
 export const readers_gender = {
   male: 'male',
   female: 'female',

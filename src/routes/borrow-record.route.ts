@@ -91,23 +91,19 @@ router.get('/', controller.findAll.bind(controller));
  *           schema:
  *             type: object
  *             required:
- *               - card_id
- *               - first_name
- *               - last_name
- *               - email
+ *               - due_date
+ *               - reader_id
+ *               - books
  *             properties:
- *               card_id:
+ *               due_date:
  *                 type: string
- *                 example: "CARD001"
- *               first_name:
- *                 type: string
- *                 example: "John"
- *               last_name:
- *                 type: string
- *                 example: "Doe"
- *               email:
- *                 type: string
- *                 example: "john@example.com"
+ *                 example: "22/06/2026"
+ *               reader_id:
+ *                 type: number
+ *                 example: 1
+ *               books:
+ *                 type: array
+ *                 example: [1,2,3]
  *     responses:
  *       201:
  *         description: Borrow Record created

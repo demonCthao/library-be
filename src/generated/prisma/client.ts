@@ -55,11 +55,6 @@ export type authors = Prisma.authorsModel
  */
 export type book_authors = Prisma.book_authorsModel
 /**
- * Model book_copies
- * 
- */
-export type book_copies = Prisma.book_copiesModel
-/**
  * Model books
  * 
  */

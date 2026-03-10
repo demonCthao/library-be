@@ -28,54 +28,54 @@ export type AggregateBorrow_details = {
 
 export type Borrow_detailsAvgAggregateOutputType = {
   borrow_id: number | null
-  book_copy_id: number | null
+  book_id: number | null
 }
 
 export type Borrow_detailsSumAggregateOutputType = {
   borrow_id: number | null
-  book_copy_id: number | null
+  book_id: number | null
 }
 
 export type Borrow_detailsMinAggregateOutputType = {
   borrow_id: number | null
-  book_copy_id: number | null
+  book_id: number | null
 }
 
 export type Borrow_detailsMaxAggregateOutputType = {
   borrow_id: number | null
-  book_copy_id: number | null
+  book_id: number | null
 }
 
 export type Borrow_detailsCountAggregateOutputType = {
   borrow_id: number
-  book_copy_id: number
+  book_id: number
   _all: number
 }
 
 
 export type Borrow_detailsAvgAggregateInputType = {
   borrow_id?: true
-  book_copy_id?: true
+  book_id?: true
 }
 
 export type Borrow_detailsSumAggregateInputType = {
   borrow_id?: true
-  book_copy_id?: true
+  book_id?: true
 }
 
 export type Borrow_detailsMinAggregateInputType = {
   borrow_id?: true
-  book_copy_id?: true
+  book_id?: true
 }
 
 export type Borrow_detailsMaxAggregateInputType = {
   borrow_id?: true
-  book_copy_id?: true
+  book_id?: true
 }
 
 export type Borrow_detailsCountAggregateInputType = {
   borrow_id?: true
-  book_copy_id?: true
+  book_id?: true
   _all?: true
 }
 
@@ -167,7 +167,7 @@ export type borrow_detailsGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type Borrow_detailsGroupByOutputType = {
   borrow_id: number
-  book_copy_id: number
+  book_id: number
   _count: Borrow_detailsCountAggregateOutputType | null
   _avg: Borrow_detailsAvgAggregateOutputType | null
   _sum: Borrow_detailsSumAggregateOutputType | null
@@ -195,32 +195,32 @@ export type borrow_detailsWhereInput = {
   OR?: Prisma.borrow_detailsWhereInput[]
   NOT?: Prisma.borrow_detailsWhereInput | Prisma.borrow_detailsWhereInput[]
   borrow_id?: Prisma.IntFilter<"borrow_details"> | number
-  book_copy_id?: Prisma.IntFilter<"borrow_details"> | number
+  book_id?: Prisma.IntFilter<"borrow_details"> | number
   borrow_records?: Prisma.XOR<Prisma.Borrow_recordsScalarRelationFilter, Prisma.borrow_recordsWhereInput>
-  book_copies?: Prisma.XOR<Prisma.Book_copiesScalarRelationFilter, Prisma.book_copiesWhereInput>
+  books?: Prisma.XOR<Prisma.BooksScalarRelationFilter, Prisma.booksWhereInput>
 }
 
 export type borrow_detailsOrderByWithRelationInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
   borrow_records?: Prisma.borrow_recordsOrderByWithRelationInput
-  book_copies?: Prisma.book_copiesOrderByWithRelationInput
+  books?: Prisma.booksOrderByWithRelationInput
 }
 
 export type borrow_detailsWhereUniqueInput = Prisma.AtLeast<{
-  borrow_id_book_copy_id?: Prisma.borrow_detailsBorrow_idBook_copy_idCompoundUniqueInput
+  borrow_id_book_id?: Prisma.borrow_detailsBorrow_idBook_idCompoundUniqueInput
   AND?: Prisma.borrow_detailsWhereInput | Prisma.borrow_detailsWhereInput[]
   OR?: Prisma.borrow_detailsWhereInput[]
   NOT?: Prisma.borrow_detailsWhereInput | Prisma.borrow_detailsWhereInput[]
   borrow_id?: Prisma.IntFilter<"borrow_details"> | number
-  book_copy_id?: Prisma.IntFilter<"borrow_details"> | number
+  book_id?: Prisma.IntFilter<"borrow_details"> | number
   borrow_records?: Prisma.XOR<Prisma.Borrow_recordsScalarRelationFilter, Prisma.borrow_recordsWhereInput>
-  book_copies?: Prisma.XOR<Prisma.Book_copiesScalarRelationFilter, Prisma.book_copiesWhereInput>
-}, "borrow_id_book_copy_id">
+  books?: Prisma.XOR<Prisma.BooksScalarRelationFilter, Prisma.booksWhereInput>
+}, "borrow_id_book_id">
 
 export type borrow_detailsOrderByWithAggregationInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
   _count?: Prisma.borrow_detailsCountOrderByAggregateInput
   _avg?: Prisma.borrow_detailsAvgOrderByAggregateInput
   _max?: Prisma.borrow_detailsMaxOrderByAggregateInput
@@ -233,32 +233,32 @@ export type borrow_detailsScalarWhereWithAggregatesInput = {
   OR?: Prisma.borrow_detailsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.borrow_detailsScalarWhereWithAggregatesInput | Prisma.borrow_detailsScalarWhereWithAggregatesInput[]
   borrow_id?: Prisma.IntWithAggregatesFilter<"borrow_details"> | number
-  book_copy_id?: Prisma.IntWithAggregatesFilter<"borrow_details"> | number
+  book_id?: Prisma.IntWithAggregatesFilter<"borrow_details"> | number
 }
 
 export type borrow_detailsCreateInput = {
   borrow_records: Prisma.borrow_recordsCreateNestedOneWithoutBorrow_detailsInput
-  book_copies: Prisma.book_copiesCreateNestedOneWithoutBorrow_detailsInput
+  books: Prisma.booksCreateNestedOneWithoutBorrow_detailsInput
 }
 
 export type borrow_detailsUncheckedCreateInput = {
   borrow_id: number
-  book_copy_id: number
+  book_id: number
 }
 
 export type borrow_detailsUpdateInput = {
   borrow_records?: Prisma.borrow_recordsUpdateOneRequiredWithoutBorrow_detailsNestedInput
-  book_copies?: Prisma.book_copiesUpdateOneRequiredWithoutBorrow_detailsNestedInput
+  books?: Prisma.booksUpdateOneRequiredWithoutBorrow_detailsNestedInput
 }
 
 export type borrow_detailsUncheckedUpdateInput = {
   borrow_id?: Prisma.IntFieldUpdateOperationsInput | number
-  book_copy_id?: Prisma.IntFieldUpdateOperationsInput | number
+  book_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type borrow_detailsCreateManyInput = {
   borrow_id: number
-  book_copy_id: number
+  book_id: number
 }
 
 export type borrow_detailsUpdateManyMutationInput = {
@@ -267,7 +267,7 @@ export type borrow_detailsUpdateManyMutationInput = {
 
 export type borrow_detailsUncheckedUpdateManyInput = {
   borrow_id?: Prisma.IntFieldUpdateOperationsInput | number
-  book_copy_id?: Prisma.IntFieldUpdateOperationsInput | number
+  book_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type Borrow_detailsListRelationFilter = {
@@ -280,75 +280,75 @@ export type borrow_detailsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type borrow_detailsBorrow_idBook_copy_idCompoundUniqueInput = {
+export type borrow_detailsBorrow_idBook_idCompoundUniqueInput = {
   borrow_id: number
-  book_copy_id: number
+  book_id: number
 }
 
 export type borrow_detailsCountOrderByAggregateInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
 }
 
 export type borrow_detailsAvgOrderByAggregateInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
 }
 
 export type borrow_detailsMaxOrderByAggregateInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
 }
 
 export type borrow_detailsMinOrderByAggregateInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
 }
 
 export type borrow_detailsSumOrderByAggregateInput = {
   borrow_id?: Prisma.SortOrder
-  book_copy_id?: Prisma.SortOrder
+  book_id?: Prisma.SortOrder
 }
 
-export type borrow_detailsCreateNestedManyWithoutBook_copiesInput = {
-  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput> | Prisma.borrow_detailsCreateWithoutBook_copiesInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput[]
-  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput | Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput[]
-  createMany?: Prisma.borrow_detailsCreateManyBook_copiesInputEnvelope
+export type borrow_detailsCreateNestedManyWithoutBooksInput = {
+  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput> | Prisma.borrow_detailsCreateWithoutBooksInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBooksInput[]
+  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBooksInput | Prisma.borrow_detailsCreateOrConnectWithoutBooksInput[]
+  createMany?: Prisma.borrow_detailsCreateManyBooksInputEnvelope
   connect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
 }
 
-export type borrow_detailsUncheckedCreateNestedManyWithoutBook_copiesInput = {
-  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput> | Prisma.borrow_detailsCreateWithoutBook_copiesInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput[]
-  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput | Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput[]
-  createMany?: Prisma.borrow_detailsCreateManyBook_copiesInputEnvelope
+export type borrow_detailsUncheckedCreateNestedManyWithoutBooksInput = {
+  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput> | Prisma.borrow_detailsCreateWithoutBooksInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBooksInput[]
+  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBooksInput | Prisma.borrow_detailsCreateOrConnectWithoutBooksInput[]
+  createMany?: Prisma.borrow_detailsCreateManyBooksInputEnvelope
   connect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
 }
 
-export type borrow_detailsUpdateManyWithoutBook_copiesNestedInput = {
-  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput> | Prisma.borrow_detailsCreateWithoutBook_copiesInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput[]
-  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput | Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput[]
-  upsert?: Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBook_copiesInput | Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBook_copiesInput[]
-  createMany?: Prisma.borrow_detailsCreateManyBook_copiesInputEnvelope
+export type borrow_detailsUpdateManyWithoutBooksNestedInput = {
+  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput> | Prisma.borrow_detailsCreateWithoutBooksInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBooksInput[]
+  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBooksInput | Prisma.borrow_detailsCreateOrConnectWithoutBooksInput[]
+  upsert?: Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBooksInput | Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBooksInput[]
+  createMany?: Prisma.borrow_detailsCreateManyBooksInputEnvelope
   set?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   disconnect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   delete?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   connect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
-  update?: Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBook_copiesInput | Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBook_copiesInput[]
-  updateMany?: Prisma.borrow_detailsUpdateManyWithWhereWithoutBook_copiesInput | Prisma.borrow_detailsUpdateManyWithWhereWithoutBook_copiesInput[]
+  update?: Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBooksInput | Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBooksInput[]
+  updateMany?: Prisma.borrow_detailsUpdateManyWithWhereWithoutBooksInput | Prisma.borrow_detailsUpdateManyWithWhereWithoutBooksInput[]
   deleteMany?: Prisma.borrow_detailsScalarWhereInput | Prisma.borrow_detailsScalarWhereInput[]
 }
 
-export type borrow_detailsUncheckedUpdateManyWithoutBook_copiesNestedInput = {
-  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput> | Prisma.borrow_detailsCreateWithoutBook_copiesInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput[]
-  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput | Prisma.borrow_detailsCreateOrConnectWithoutBook_copiesInput[]
-  upsert?: Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBook_copiesInput | Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBook_copiesInput[]
-  createMany?: Prisma.borrow_detailsCreateManyBook_copiesInputEnvelope
+export type borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput = {
+  create?: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput> | Prisma.borrow_detailsCreateWithoutBooksInput[] | Prisma.borrow_detailsUncheckedCreateWithoutBooksInput[]
+  connectOrCreate?: Prisma.borrow_detailsCreateOrConnectWithoutBooksInput | Prisma.borrow_detailsCreateOrConnectWithoutBooksInput[]
+  upsert?: Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBooksInput | Prisma.borrow_detailsUpsertWithWhereUniqueWithoutBooksInput[]
+  createMany?: Prisma.borrow_detailsCreateManyBooksInputEnvelope
   set?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   disconnect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   delete?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
   connect?: Prisma.borrow_detailsWhereUniqueInput | Prisma.borrow_detailsWhereUniqueInput[]
-  update?: Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBook_copiesInput | Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBook_copiesInput[]
-  updateMany?: Prisma.borrow_detailsUpdateManyWithWhereWithoutBook_copiesInput | Prisma.borrow_detailsUpdateManyWithWhereWithoutBook_copiesInput[]
+  update?: Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBooksInput | Prisma.borrow_detailsUpdateWithWhereUniqueWithoutBooksInput[]
+  updateMany?: Prisma.borrow_detailsUpdateManyWithWhereWithoutBooksInput | Prisma.borrow_detailsUpdateManyWithWhereWithoutBooksInput[]
   deleteMany?: Prisma.borrow_detailsScalarWhereInput | Prisma.borrow_detailsScalarWhereInput[]
 }
 
@@ -394,38 +394,38 @@ export type borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsNestedInput = 
   deleteMany?: Prisma.borrow_detailsScalarWhereInput | Prisma.borrow_detailsScalarWhereInput[]
 }
 
-export type borrow_detailsCreateWithoutBook_copiesInput = {
+export type borrow_detailsCreateWithoutBooksInput = {
   borrow_records: Prisma.borrow_recordsCreateNestedOneWithoutBorrow_detailsInput
 }
 
-export type borrow_detailsUncheckedCreateWithoutBook_copiesInput = {
+export type borrow_detailsUncheckedCreateWithoutBooksInput = {
   borrow_id: number
 }
 
-export type borrow_detailsCreateOrConnectWithoutBook_copiesInput = {
+export type borrow_detailsCreateOrConnectWithoutBooksInput = {
   where: Prisma.borrow_detailsWhereUniqueInput
-  create: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput>
+  create: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput>
 }
 
-export type borrow_detailsCreateManyBook_copiesInputEnvelope = {
-  data: Prisma.borrow_detailsCreateManyBook_copiesInput | Prisma.borrow_detailsCreateManyBook_copiesInput[]
+export type borrow_detailsCreateManyBooksInputEnvelope = {
+  data: Prisma.borrow_detailsCreateManyBooksInput | Prisma.borrow_detailsCreateManyBooksInput[]
   skipDuplicates?: boolean
 }
 
-export type borrow_detailsUpsertWithWhereUniqueWithoutBook_copiesInput = {
+export type borrow_detailsUpsertWithWhereUniqueWithoutBooksInput = {
   where: Prisma.borrow_detailsWhereUniqueInput
-  update: Prisma.XOR<Prisma.borrow_detailsUpdateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedUpdateWithoutBook_copiesInput>
-  create: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedCreateWithoutBook_copiesInput>
+  update: Prisma.XOR<Prisma.borrow_detailsUpdateWithoutBooksInput, Prisma.borrow_detailsUncheckedUpdateWithoutBooksInput>
+  create: Prisma.XOR<Prisma.borrow_detailsCreateWithoutBooksInput, Prisma.borrow_detailsUncheckedCreateWithoutBooksInput>
 }
 
-export type borrow_detailsUpdateWithWhereUniqueWithoutBook_copiesInput = {
+export type borrow_detailsUpdateWithWhereUniqueWithoutBooksInput = {
   where: Prisma.borrow_detailsWhereUniqueInput
-  data: Prisma.XOR<Prisma.borrow_detailsUpdateWithoutBook_copiesInput, Prisma.borrow_detailsUncheckedUpdateWithoutBook_copiesInput>
+  data: Prisma.XOR<Prisma.borrow_detailsUpdateWithoutBooksInput, Prisma.borrow_detailsUncheckedUpdateWithoutBooksInput>
 }
 
-export type borrow_detailsUpdateManyWithWhereWithoutBook_copiesInput = {
+export type borrow_detailsUpdateManyWithWhereWithoutBooksInput = {
   where: Prisma.borrow_detailsScalarWhereInput
-  data: Prisma.XOR<Prisma.borrow_detailsUpdateManyMutationInput, Prisma.borrow_detailsUncheckedUpdateManyWithoutBook_copiesInput>
+  data: Prisma.XOR<Prisma.borrow_detailsUpdateManyMutationInput, Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksInput>
 }
 
 export type borrow_detailsScalarWhereInput = {
@@ -433,15 +433,15 @@ export type borrow_detailsScalarWhereInput = {
   OR?: Prisma.borrow_detailsScalarWhereInput[]
   NOT?: Prisma.borrow_detailsScalarWhereInput | Prisma.borrow_detailsScalarWhereInput[]
   borrow_id?: Prisma.IntFilter<"borrow_details"> | number
-  book_copy_id?: Prisma.IntFilter<"borrow_details"> | number
+  book_id?: Prisma.IntFilter<"borrow_details"> | number
 }
 
 export type borrow_detailsCreateWithoutBorrow_recordsInput = {
-  book_copies: Prisma.book_copiesCreateNestedOneWithoutBorrow_detailsInput
+  books: Prisma.booksCreateNestedOneWithoutBorrow_detailsInput
 }
 
 export type borrow_detailsUncheckedCreateWithoutBorrow_recordsInput = {
-  book_copy_id: number
+  book_id: number
 }
 
 export type borrow_detailsCreateOrConnectWithoutBorrow_recordsInput = {
@@ -470,69 +470,69 @@ export type borrow_detailsUpdateManyWithWhereWithoutBorrow_recordsInput = {
   data: Prisma.XOR<Prisma.borrow_detailsUpdateManyMutationInput, Prisma.borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsInput>
 }
 
-export type borrow_detailsCreateManyBook_copiesInput = {
+export type borrow_detailsCreateManyBooksInput = {
   borrow_id: number
 }
 
-export type borrow_detailsUpdateWithoutBook_copiesInput = {
+export type borrow_detailsUpdateWithoutBooksInput = {
   borrow_records?: Prisma.borrow_recordsUpdateOneRequiredWithoutBorrow_detailsNestedInput
 }
 
-export type borrow_detailsUncheckedUpdateWithoutBook_copiesInput = {
+export type borrow_detailsUncheckedUpdateWithoutBooksInput = {
   borrow_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
-export type borrow_detailsUncheckedUpdateManyWithoutBook_copiesInput = {
+export type borrow_detailsUncheckedUpdateManyWithoutBooksInput = {
   borrow_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type borrow_detailsCreateManyBorrow_recordsInput = {
-  book_copy_id: number
+  book_id: number
 }
 
 export type borrow_detailsUpdateWithoutBorrow_recordsInput = {
-  book_copies?: Prisma.book_copiesUpdateOneRequiredWithoutBorrow_detailsNestedInput
+  books?: Prisma.booksUpdateOneRequiredWithoutBorrow_detailsNestedInput
 }
 
 export type borrow_detailsUncheckedUpdateWithoutBorrow_recordsInput = {
-  book_copy_id?: Prisma.IntFieldUpdateOperationsInput | number
+  book_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type borrow_detailsUncheckedUpdateManyWithoutBorrow_recordsInput = {
-  book_copy_id?: Prisma.IntFieldUpdateOperationsInput | number
+  book_id?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
 
 export type borrow_detailsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   borrow_id?: boolean
-  book_copy_id?: boolean
+  book_id?: boolean
   borrow_records?: boolean | Prisma.borrow_recordsDefaultArgs<ExtArgs>
-  book_copies?: boolean | Prisma.book_copiesDefaultArgs<ExtArgs>
+  books?: boolean | Prisma.booksDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["borrow_details"]>
 
 
 
 export type borrow_detailsSelectScalar = {
   borrow_id?: boolean
-  book_copy_id?: boolean
+  book_id?: boolean
 }
 
-export type borrow_detailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"borrow_id" | "book_copy_id", ExtArgs["result"]["borrow_details"]>
+export type borrow_detailsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"borrow_id" | "book_id", ExtArgs["result"]["borrow_details"]>
 export type borrow_detailsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   borrow_records?: boolean | Prisma.borrow_recordsDefaultArgs<ExtArgs>
-  book_copies?: boolean | Prisma.book_copiesDefaultArgs<ExtArgs>
+  books?: boolean | Prisma.booksDefaultArgs<ExtArgs>
 }
 
 export type $borrow_detailsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "borrow_details"
   objects: {
     borrow_records: Prisma.$borrow_recordsPayload<ExtArgs>
-    book_copies: Prisma.$book_copiesPayload<ExtArgs>
+    books: Prisma.$booksPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     borrow_id: number
-    book_copy_id: number
+    book_id: number
   }, ExtArgs["result"]["borrow_details"]>
   composites: {}
 }
@@ -874,7 +874,7 @@ readonly fields: borrow_detailsFieldRefs;
 export interface Prisma__borrow_detailsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   borrow_records<T extends Prisma.borrow_recordsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.borrow_recordsDefaultArgs<ExtArgs>>): Prisma.Prisma__borrow_recordsClient<runtime.Types.Result.GetResult<Prisma.$borrow_recordsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  book_copies<T extends Prisma.book_copiesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.book_copiesDefaultArgs<ExtArgs>>): Prisma.Prisma__book_copiesClient<runtime.Types.Result.GetResult<Prisma.$book_copiesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  books<T extends Prisma.booksDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.booksDefaultArgs<ExtArgs>>): Prisma.Prisma__booksClient<runtime.Types.Result.GetResult<Prisma.$booksPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -905,7 +905,7 @@ export interface Prisma__borrow_detailsClient<T, Null = never, ExtArgs extends r
  */
 export interface borrow_detailsFieldRefs {
   readonly borrow_id: Prisma.FieldRef<"borrow_details", 'Int'>
-  readonly book_copy_id: Prisma.FieldRef<"borrow_details", 'Int'>
+  readonly book_id: Prisma.FieldRef<"borrow_details", 'Int'>
 }
     
 
