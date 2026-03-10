@@ -54,7 +54,6 @@ export const ModelName = {
   users: 'users',
   authors: 'authors',
   book_authors: 'book_authors',
-  book_copies: 'book_copies',
   books: 'books',
   borrow_details: 'borrow_details',
   borrow_records: 'borrow_records',
@@ -114,17 +113,6 @@ export const Book_authorsScalarFieldEnum = {
 export type Book_authorsScalarFieldEnum = (typeof Book_authorsScalarFieldEnum)[keyof typeof Book_authorsScalarFieldEnum]
 
 
-export const Book_copiesScalarFieldEnum = {
-  id: 'id',
-  book_id: 'book_id',
-  copy_code: 'copy_code',
-  status: 'status',
-  location: 'location'
-} as const
-
-export type Book_copiesScalarFieldEnum = (typeof Book_copiesScalarFieldEnum)[keyof typeof Book_copiesScalarFieldEnum]
-
-
 export const BooksScalarFieldEnum = {
   id: 'id',
   isbn: 'isbn',
@@ -148,7 +136,7 @@ export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof Bo
 
 export const Borrow_detailsScalarFieldEnum = {
   borrow_id: 'borrow_id',
-  book_copy_id: 'book_copy_id'
+  book_id: 'book_id'
 } as const
 
 export type Borrow_detailsScalarFieldEnum = (typeof Borrow_detailsScalarFieldEnum)[keyof typeof Borrow_detailsScalarFieldEnum]
@@ -260,14 +248,6 @@ export const authorsOrderByRelevanceFieldEnum = {
 } as const
 
 export type authorsOrderByRelevanceFieldEnum = (typeof authorsOrderByRelevanceFieldEnum)[keyof typeof authorsOrderByRelevanceFieldEnum]
-
-
-export const book_copiesOrderByRelevanceFieldEnum = {
-  copy_code: 'copy_code',
-  location: 'location'
-} as const
-
-export type book_copiesOrderByRelevanceFieldEnum = (typeof book_copiesOrderByRelevanceFieldEnum)[keyof typeof book_copiesOrderByRelevanceFieldEnum]
 
 
 export const booksOrderByRelevanceFieldEnum = {

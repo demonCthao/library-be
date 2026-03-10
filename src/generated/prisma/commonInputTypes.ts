@@ -171,23 +171,6 @@ export type StringWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedStringFilter<$PrismaModel>
 }
 
-export type Enumbook_copies_statusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.book_copies_status | Prisma.Enumbook_copies_statusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.book_copies_status[] | null
-  notIn?: $Enums.book_copies_status[] | null
-  not?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel> | $Enums.book_copies_status | null
-}
-
-export type Enumbook_copies_statusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.book_copies_status | Prisma.Enumbook_copies_statusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.book_copies_status[] | null
-  notIn?: $Enums.book_copies_status[] | null
-  not?: Prisma.NestedEnumbook_copies_statusNullableWithAggregatesFilter<$PrismaModel> | $Enums.book_copies_status | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel>
-}
-
 export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | null
@@ -486,23 +469,6 @@ export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedStringFilter<$PrismaModel>
   _max?: Prisma.NestedStringFilter<$PrismaModel>
-}
-
-export type NestedEnumbook_copies_statusNullableFilter<$PrismaModel = never> = {
-  equals?: $Enums.book_copies_status | Prisma.Enumbook_copies_statusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.book_copies_status[] | null
-  notIn?: $Enums.book_copies_status[] | null
-  not?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel> | $Enums.book_copies_status | null
-}
-
-export type NestedEnumbook_copies_statusNullableWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.book_copies_status | Prisma.Enumbook_copies_statusFieldRefInput<$PrismaModel> | null
-  in?: $Enums.book_copies_status[] | null
-  notIn?: $Enums.book_copies_status[] | null
-  not?: Prisma.NestedEnumbook_copies_statusNullableWithAggregatesFilter<$PrismaModel> | $Enums.book_copies_status | null
-  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumbook_copies_statusNullableFilter<$PrismaModel>
 }
 
 export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {

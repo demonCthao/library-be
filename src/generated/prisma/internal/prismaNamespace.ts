@@ -387,7 +387,6 @@ export const ModelName = {
   users: 'users',
   authors: 'authors',
   book_authors: 'book_authors',
-  book_copies: 'book_copies',
   books: 'books',
   borrow_details: 'borrow_details',
   borrow_records: 'borrow_records',
@@ -411,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "authors" | "book_authors" | "book_copies" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines"
+    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -610,72 +609,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.book_authorsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.Book_authorsCountAggregateOutputType> | number
-        }
-      }
-    }
-    book_copies: {
-      payload: Prisma.$book_copiesPayload<ExtArgs>
-      fields: Prisma.book_copiesFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.book_copiesFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.book_copiesFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        findFirst: {
-          args: Prisma.book_copiesFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.book_copiesFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        findMany: {
-          args: Prisma.book_copiesFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>[]
-        }
-        create: {
-          args: Prisma.book_copiesCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        createMany: {
-          args: Prisma.book_copiesCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.book_copiesDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        update: {
-          args: Prisma.book_copiesUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        deleteMany: {
-          args: Prisma.book_copiesDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.book_copiesUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.book_copiesUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$book_copiesPayload>
-        }
-        aggregate: {
-          args: Prisma.Book_copiesAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateBook_copies>
-        }
-        groupBy: {
-          args: Prisma.book_copiesGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Book_copiesGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.book_copiesCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.Book_copiesCountAggregateOutputType> | number
         }
       }
     }
@@ -1279,17 +1212,6 @@ export const Book_authorsScalarFieldEnum = {
 export type Book_authorsScalarFieldEnum = (typeof Book_authorsScalarFieldEnum)[keyof typeof Book_authorsScalarFieldEnum]
 
 
-export const Book_copiesScalarFieldEnum = {
-  id: 'id',
-  book_id: 'book_id',
-  copy_code: 'copy_code',
-  status: 'status',
-  location: 'location'
-} as const
-
-export type Book_copiesScalarFieldEnum = (typeof Book_copiesScalarFieldEnum)[keyof typeof Book_copiesScalarFieldEnum]
-
-
 export const BooksScalarFieldEnum = {
   id: 'id',
   isbn: 'isbn',
@@ -1313,7 +1235,7 @@ export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof Bo
 
 export const Borrow_detailsScalarFieldEnum = {
   borrow_id: 'borrow_id',
-  book_copy_id: 'book_copy_id'
+  book_id: 'book_id'
 } as const
 
 export type Borrow_detailsScalarFieldEnum = (typeof Borrow_detailsScalarFieldEnum)[keyof typeof Borrow_detailsScalarFieldEnum]
@@ -1427,14 +1349,6 @@ export const authorsOrderByRelevanceFieldEnum = {
 export type authorsOrderByRelevanceFieldEnum = (typeof authorsOrderByRelevanceFieldEnum)[keyof typeof authorsOrderByRelevanceFieldEnum]
 
 
-export const book_copiesOrderByRelevanceFieldEnum = {
-  copy_code: 'copy_code',
-  location: 'location'
-} as const
-
-export type book_copiesOrderByRelevanceFieldEnum = (typeof book_copiesOrderByRelevanceFieldEnum)[keyof typeof book_copiesOrderByRelevanceFieldEnum]
-
-
 export const booksOrderByRelevanceFieldEnum = {
   isbn: 'isbn',
   title: 'title',
@@ -1534,13 +1448,6 @@ export type Enumusers_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'book_copies_status'
- */
-export type Enumbook_copies_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'book_copies_status'>
     
 
 
@@ -1676,7 +1583,6 @@ export type GlobalOmitConfig = {
   users?: Prisma.usersOmit
   authors?: Prisma.authorsOmit
   book_authors?: Prisma.book_authorsOmit
-  book_copies?: Prisma.book_copiesOmit
   books?: Prisma.booksOmit
   borrow_details?: Prisma.borrow_detailsOmit
   borrow_records?: Prisma.borrow_recordsOmit

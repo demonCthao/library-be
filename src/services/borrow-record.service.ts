@@ -1,9 +1,11 @@
+import dayjs from "dayjs";
 import { BorrowDetailDto } from "../dto/borrow-detail.dto";
 import { NotFoundException } from "../exceptions";
 import { borrow_records, Prisma } from "../generated/prisma/client";
 import { buildPrismaFilter, prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
+import { BorrowStore } from "../types/borrow-store";
 
 interface FindBorrowRecordQuery extends FindAllQuery {
   readerName?: string;
@@ -15,8 +17,42 @@ interface FindBorrowRecordQuery extends FindAllQuery {
 }
 
 class BorrowRecordService extends BaseService<borrow_records> {
-  async store(data: Prisma.borrow_recordsCreateInput): Promise<borrow_records> {
-    return prisma.borrow_records.create({ data });
+  async store(data: BorrowStore): Promise<borrow_records> {
+    var borrowCode = dayjs().format("YYYYMMDD");
+    let nextNumber = 1;
+
+    const lastBorrow = await prisma.borrow_records.findFirst({
+      where: {
+        borrow_code: {
+          startsWith: borrowCode,
+        },
+      },
+      orderBy: {
+        borrow_code: "desc",
+      },
+    });
+
+    if (lastBorrow) {
+      const lastNumber = parseInt(lastBorrow.borrow_code.slice(8));
+      nextNumber = lastNumber + 1;
+    }
+
+    borrowCode = `${borrowCode}${String(nextNumber).padStart(4, "0")}`;
+
+    return prisma.borrow_records.create({
+      data: {
+        borrow_code: borrowCode,
+        due_date: new Date(data.due_date),
+        reader_id: data.reader_id,
+        status: "borrowing",
+        borrow_date: new Date(dayjs().format("YYYY-MM-DD")),
+        borrow_details: {
+          create: data.books.map(bookID => ({
+            book_id: bookID
+          }))
+        }
+      }
+    });
   }
 
   async findAll({ pageIndex = 1, pageSize = 10, borrowDate = "", readerName = "", phone = "", dueDate = "", returnDate = "", status = "" }: FindBorrowRecordQuery): Promise<PaginatedResult<borrow_records>> {
@@ -87,11 +123,7 @@ class BorrowRecordService extends BaseService<borrow_records> {
         readers: true,
         borrow_details: {
           include: {
-            book_copies: {
-              include: {
-                books: true
-              }
-            }
+            books: true
           }
         }
       }

@@ -15,9 +15,7 @@ export class BorrowDetailDto {
     constructor(detail: borrow_records & { readers: readers } & {
         borrow_details: (
             borrow_details & {
-                book_copies: {
-                    books: books;
-                };
+                books: books;
             }
         )[]
     }) {
@@ -29,7 +27,7 @@ export class BorrowDetailDto {
         this.status = detail.status;
         this.borrow_code = detail.borrow_code;
         this.books = detail.borrow_details.map(
-            (item) => new BookDto(item.book_copies.books)
+            (item) => new BookDto(item.books)
         );
     }
 }
