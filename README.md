@@ -136,21 +136,6 @@ CREATE TABLE book_authors (
     ON DELETE CASCADE
 );
 
-CREATE TABLE book_copies (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  book_id INT NOT NULL,
-  copy_code VARCHAR(50) NOT NULL UNIQUE,
-
-  status ENUM('available', 'borrowed', 'lost', 'damaged')
-    DEFAULT 'available',
-
-  location VARCHAR(100),
-
-  FOREIGN KEY (book_id)
-    REFERENCES books(id)
-    ON DELETE CASCADE
-);
-
 CREATE TABLE borrow_records (
   id INT AUTO_INCREMENT PRIMARY KEY,
   reader_id INT NOT NULL,
@@ -169,16 +154,16 @@ CREATE TABLE borrow_records (
 
 CREATE TABLE borrow_details (
   borrow_id INT NOT NULL,
-  book_copy_id INT NOT NULL,
+  book_id INT NOT NULL,
 
-  PRIMARY KEY (borrow_id, book_copy_id),
+  PRIMARY KEY (borrow_id, book_id),
 
   FOREIGN KEY (borrow_id)
     REFERENCES borrow_records(id)
     ON DELETE CASCADE,
 
-  FOREIGN KEY (book_copy_id)
-    REFERENCES book_copies(id)
+  FOREIGN KEY (book_id)
+    REFERENCES books(id)
     ON DELETE CASCADE
 );
 
@@ -246,13 +231,6 @@ INSERT INTO books (isbn, title, description, publish_year, language, pages, publ
 
 INSERT INTO book_authors VALUES
 (1,1),(2,2),(3,3),(4,4),(5,5);
-
-INSERT INTO book_copies (book_id, copy_code, status, location) VALUES
-(1,'CC-001','available','Kệ A1'),
-(1,'CC-002','borrowed','Kệ A1'),
-(2,'RF-001','available','Kệ A2'),
-(3,'EJ-001','available','Kệ A3'),
-(4,'HH-001','available','Kệ B1');
 
 INSERT INTO borrow_records (reader_id, borrow_date, due_date, return_date, status) VALUES
 (1,'2026-02-01','2026-02-10',NULL,'borrowing'),
