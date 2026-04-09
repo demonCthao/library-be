@@ -1,7 +1,9 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
+import { createUploader } from '../middlleware/upload.middleware';
 
 const router = Router();
+const userUpload = createUploader("users");
 const controller = new UserController();
 
 /**
@@ -114,24 +116,22 @@ router.post('/', controller.store.bind(controller));
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               first_name:
+ *               data:
  *                 type: string
- *                 example: "John"
- *               last_name:
+ *                 description: JSON string of book data
+ *                 example: 
+ *               image:
  *                 type: string
- *                 example: "Doe"
- *               email:
- *                 type: string
- *                 example: "john@example.com"
+ *                 format: binary
  *     responses:
  *       200:
  *         description: User updated
  */
-router.put('/:id', controller.update.bind(controller));
+router.put('/:id', userUpload.single("image"), controller.update.bind(controller));
 
 /**
  * @swagger

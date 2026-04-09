@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 import BookService from "../services/book.service";
 import { BaseController } from "./base.controller";
 

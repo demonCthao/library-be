@@ -5,6 +5,8 @@ import { Prisma, users } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
+import path from "path";
+import fs from "fs";
 
 interface FindUserQuery extends FindAllQuery {
   fullName?: string;
@@ -54,7 +56,34 @@ export class UserService extends BaseService<users> {
     return { list, total };
   }
 
-  async update(id: number, data: Partial<users>): Promise<users> {
+  async update(id: number, data: Partial<users>, file?: Express.Multer.File): Promise<users> {
+
+    const existingUser = await prisma.users.findUnique({
+      where: {
+        id: Number(id)
+      }
+    });
+
+    if (!existingUser) {
+      throw new NotFoundException("User");
+    }
+
+    if (file) {
+      // Xóa ảnh cũ
+      if (existingUser.avatar_path) {
+        const oldPath = path.join(
+          process.cwd(),
+          existingUser.avatar_path
+        );
+
+        if (fs.existsSync(oldPath)) {
+          await fs.promises.unlink(oldPath);
+        }
+      }
+
+      data.avatar_path = `/uploads/users/${file.filename}`;
+    }
+
     const res = await prisma.users.update({
       where: { id: Number(id) },
       data
@@ -75,7 +104,19 @@ export class UserService extends BaseService<users> {
 
   async getProfileByID(id: number, authUser: { userId: number; role: string }): Promise<users> {
     const user = await prisma.users.findUnique({
-      where: { id: id }
+      where: { id: id },
+      include: {
+        accounts: {
+          select: {
+            id: true,
+            username: true,
+            failed_attempts: true,
+            locked_until: true,
+            created_at: true,
+            updated_at: true,
+          }
+        }
+      }
     });
 
     if (authUser.userId !== id) {

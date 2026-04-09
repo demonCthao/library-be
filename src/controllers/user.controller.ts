@@ -29,9 +29,16 @@ export class UserController extends BaseController<UserService> {
 
     async update(req: Request, res: Response, next: NextFunction) {
         try {
+            const file = req.file;
+            console.log("🚀 ~ UserController ~ update ~ req.body:", req.body)
+            const parsedData = req.body.data
+                ? JSON.parse(req.body.data)
+                : {};
+
             const user = await this.service.update(
                 Number(req.params.id),
-                req.body
+                parsedData,
+                file
             );
 
             return this.ok(res, user);
