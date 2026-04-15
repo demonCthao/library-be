@@ -394,7 +394,8 @@ export const ModelName = {
   readers: 'readers',
   accounts: 'accounts',
   categories: 'categories',
-  fines: 'fines'
+  fines: 'fines',
+  bank_accounts: 'bank_accounts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -410,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines"
+    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines" | "bank_accounts"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1140,6 +1141,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    bank_accounts: {
+      payload: Prisma.$bank_accountsPayload<ExtArgs>
+      fields: Prisma.bank_accountsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.bank_accountsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.bank_accountsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        findFirst: {
+          args: Prisma.bank_accountsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.bank_accountsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        findMany: {
+          args: Prisma.bank_accountsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>[]
+        }
+        create: {
+          args: Prisma.bank_accountsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        createMany: {
+          args: Prisma.bank_accountsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.bank_accountsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        update: {
+          args: Prisma.bank_accountsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        deleteMany: {
+          args: Prisma.bank_accountsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.bank_accountsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.bank_accountsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$bank_accountsPayload>
+        }
+        aggregate: {
+          args: Prisma.Bank_accountsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBank_accounts>
+        }
+        groupBy: {
+          args: Prisma.bank_accountsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Bank_accountsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.bank_accountsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Bank_accountsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1314,6 +1381,19 @@ export const FinesScalarFieldEnum = {
 export type FinesScalarFieldEnum = (typeof FinesScalarFieldEnum)[keyof typeof FinesScalarFieldEnum]
 
 
+export const Bank_accountsScalarFieldEnum = {
+  id: 'id',
+  bank_name: 'bank_name',
+  bank_code: 'bank_code',
+  account_number: 'account_number',
+  created_at: 'created_at',
+  is_default: 'is_default',
+  owner_name: 'owner_name'
+} as const
+
+export type Bank_accountsScalarFieldEnum = (typeof Bank_accountsScalarFieldEnum)[keyof typeof Bank_accountsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1408,6 +1488,16 @@ export const finesOrderByRelevanceFieldEnum = {
 } as const
 
 export type finesOrderByRelevanceFieldEnum = (typeof finesOrderByRelevanceFieldEnum)[keyof typeof finesOrderByRelevanceFieldEnum]
+
+
+export const bank_accountsOrderByRelevanceFieldEnum = {
+  bank_name: 'bank_name',
+  bank_code: 'bank_code',
+  account_number: 'account_number',
+  owner_name: 'owner_name'
+} as const
+
+export type bank_accountsOrderByRelevanceFieldEnum = (typeof bank_accountsOrderByRelevanceFieldEnum)[keyof typeof bank_accountsOrderByRelevanceFieldEnum]
 
 
 
@@ -1591,6 +1681,7 @@ export type GlobalOmitConfig = {
   accounts?: Prisma.accountsOmit
   categories?: Prisma.categoriesOmit
   fines?: Prisma.finesOmit
+  bank_accounts?: Prisma.bank_accountsOmit
 }
 
 /* Types for Logging */

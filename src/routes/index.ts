@@ -8,6 +8,7 @@ import authorsRouter from "./author.route";
 import categoryRouter from "./category.route";
 import borrowRecordRouter from "./borrow-record.route";
 import publisherRouter from "./publisher.route";
+import bankRouter from "./bank.route";
 import fineRouter from "./fine.route";
 import { authMiddleware } from "../middlleware/auth.middleware";
 import { loginRateLimit } from "../middlleware/rate-limit.middleware";
@@ -24,5 +25,7 @@ router.use("/authors", authMiddleware, authorsRouter);
 router.use("/publishers", authMiddleware, publisherRouter);
 router.use("/fines", authMiddleware, fineRouter);
 router.use("/borrow-record", authMiddleware, borrowRecordRouter);
+router.use("/banks", authMiddleware, bankRouter);
+
 
 export default router;

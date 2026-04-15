@@ -61,7 +61,8 @@ export const ModelName = {
   readers: 'readers',
   accounts: 'accounts',
   categories: 'categories',
-  fines: 'fines'
+  fines: 'fines',
+  bank_accounts: 'bank_accounts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -215,6 +216,19 @@ export const FinesScalarFieldEnum = {
 export type FinesScalarFieldEnum = (typeof FinesScalarFieldEnum)[keyof typeof FinesScalarFieldEnum]
 
 
+export const Bank_accountsScalarFieldEnum = {
+  id: 'id',
+  bank_name: 'bank_name',
+  bank_code: 'bank_code',
+  account_number: 'account_number',
+  created_at: 'created_at',
+  is_default: 'is_default',
+  owner_name: 'owner_name'
+} as const
+
+export type Bank_accountsScalarFieldEnum = (typeof Bank_accountsScalarFieldEnum)[keyof typeof Bank_accountsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -309,4 +323,14 @@ export const finesOrderByRelevanceFieldEnum = {
 } as const
 
 export type finesOrderByRelevanceFieldEnum = (typeof finesOrderByRelevanceFieldEnum)[keyof typeof finesOrderByRelevanceFieldEnum]
+
+
+export const bank_accountsOrderByRelevanceFieldEnum = {
+  bank_name: 'bank_name',
+  bank_code: 'bank_code',
+  account_number: 'account_number',
+  owner_name: 'owner_name'
+} as const
+
+export type bank_accountsOrderByRelevanceFieldEnum = (typeof bank_accountsOrderByRelevanceFieldEnum)[keyof typeof bank_accountsOrderByRelevanceFieldEnum]
 

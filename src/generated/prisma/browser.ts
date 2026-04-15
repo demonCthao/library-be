@@ -72,3 +72,8 @@ export type categories = Prisma.categoriesModel
  * 
  */
 export type fines = Prisma.finesModel
+/**
+ * Model bank_accounts
+ * 
+ */
+export type bank_accounts = Prisma.bank_accountsModel

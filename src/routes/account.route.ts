@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { AccountController } from '../controllers/account.controller';
+import { Router } from "express";
+import { AccountController } from "../controllers/account.controller";
 
 const router = Router();
 const controller = new AccountController();
@@ -46,7 +46,7 @@ const controller = new AccountController();
  *       200:
  *         description: List of users
  */
-router.get('/', controller.findAll.bind(controller));
+router.get("/", controller.findAll.bind(controller));
 
 
 /**
@@ -83,7 +83,7 @@ router.get('/', controller.findAll.bind(controller));
  *       201:
  *         description: Account created
  */
-router.post('/', controller.store.bind(controller));
+router.post("/", controller.store.bind(controller));
 
 /**
  * @swagger
@@ -111,7 +111,7 @@ router.post('/', controller.store.bind(controller));
  *       201:
  *         description: Account updated
  */
-router.put('/', controller.update.bind(controller));
+router.put("/", controller.update.bind(controller));
 
 /**
  * @swagger
