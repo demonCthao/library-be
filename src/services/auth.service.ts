@@ -20,7 +20,8 @@ export class AuthService {
                         phone: true,
                         role: true,
                         status: true,
-                        email: true
+                        email: true,
+                        avatar_path: true
                     }
                 }
             }
@@ -67,7 +68,8 @@ export class AuthService {
             fullName: account.users.full_name,
             loginAt: new Date().getTime(),
             role: account.users.role,
-            email: account.users.email
+            email: account.users.email,
+            avatarPath: account.users.avatar_path
         };
 
         const accessToken = jwt.sign(payload, JWT_SECRET, {
