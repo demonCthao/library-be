@@ -77,3 +77,13 @@ export type fines = Prisma.finesModel
  * 
  */
 export type bank_accounts = Prisma.bank_accountsModel
+/**
+ * Model purchase_order_items
+ * 
+ */
+export type purchase_order_items = Prisma.purchase_order_itemsModel
+/**
+ * Model purchase_orders
+ * 
+ */
+export type purchase_orders = Prisma.purchase_ordersModel

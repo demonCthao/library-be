@@ -39,6 +39,24 @@ class BorrowRecordService extends BaseService<borrow_records> {
 
     borrowCode = `${borrowCode}${String(nextNumber).padStart(4, "0")}`;
 
+    const books = data.books;
+
+    await prisma.$transaction(
+      books.map((bookID) =>
+        prisma.books.update({
+          where: { id: bookID },
+          data: {
+            available_quantity: {
+              decrement: 1,
+            },
+            borrowed_quantity: {
+              increment: 1,
+            },
+          },
+        })
+      ),
+    )
+
     return prisma.borrow_records.create({
       data: {
         borrow_code: borrowCode,
@@ -47,7 +65,7 @@ class BorrowRecordService extends BaseService<borrow_records> {
         status: "borrowing",
         borrow_date: new Date(dayjs().format("YYYY-MM-DD")),
         borrow_details: {
-          create: data.books.map(bookID => ({
+          create: books.map(bookID => ({
             book_id: bookID
           }))
         }
@@ -134,6 +152,48 @@ class BorrowRecordService extends BaseService<borrow_records> {
     }
 
     return new BorrowDetailDto(borrow);
+  }
+
+  async returnBook(id: number) {
+    const borrow = await prisma.borrow_records.findUnique({
+      where: { id },
+      include: {
+        borrow_details: {
+          include: {
+            books: true
+          }
+        }
+      }
+    })
+
+    if (!borrow) {
+      throw new NotFoundException("Borrow");
+    }
+
+    const books = borrow.borrow_details
+
+    await prisma.$transaction([
+      ...books.map((book) =>
+        prisma.books.update({
+          where: { id: book.book_id },
+          data: {
+            available_quantity: {
+              increment: 1,
+            },
+            borrowed_quantity: {
+              decrement: 1,
+            },
+          },
+        })
+      ),
+      prisma.borrow_records.update({
+          where: { id },
+          data: {
+            status: "returned",
+            return_date: new Date().toISOString()
+          }
+        })
+    ]);
   }
 }
 

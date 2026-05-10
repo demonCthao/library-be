@@ -64,4 +64,16 @@ export class BorrowRecordController extends BaseController<BorrowRecordService> 
             next(err);
         }
     }
+
+     async returnBook(req: Request, res: Response, next: NextFunction) {
+        try {
+            const borrow = await this.service.returnBook(
+                Number(req.params.id),
+            );
+
+            return this.ok(res, borrow);
+        } catch (err) {
+            next(err);
+        }
+     }
 }

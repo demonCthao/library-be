@@ -395,7 +395,9 @@ export const ModelName = {
   accounts: 'accounts',
   categories: 'categories',
   fines: 'fines',
-  bank_accounts: 'bank_accounts'
+  bank_accounts: 'bank_accounts',
+  purchase_order_items: 'purchase_order_items',
+  purchase_orders: 'purchase_orders'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines" | "bank_accounts"
+    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines" | "bank_accounts" | "purchase_order_items" | "purchase_orders"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1207,6 +1209,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    purchase_order_items: {
+      payload: Prisma.$purchase_order_itemsPayload<ExtArgs>
+      fields: Prisma.purchase_order_itemsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.purchase_order_itemsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.purchase_order_itemsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        findFirst: {
+          args: Prisma.purchase_order_itemsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.purchase_order_itemsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        findMany: {
+          args: Prisma.purchase_order_itemsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>[]
+        }
+        create: {
+          args: Prisma.purchase_order_itemsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        createMany: {
+          args: Prisma.purchase_order_itemsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.purchase_order_itemsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        update: {
+          args: Prisma.purchase_order_itemsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        deleteMany: {
+          args: Prisma.purchase_order_itemsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.purchase_order_itemsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.purchase_order_itemsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_order_itemsPayload>
+        }
+        aggregate: {
+          args: Prisma.Purchase_order_itemsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePurchase_order_items>
+        }
+        groupBy: {
+          args: Prisma.purchase_order_itemsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Purchase_order_itemsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.purchase_order_itemsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Purchase_order_itemsCountAggregateOutputType> | number
+        }
+      }
+    }
+    purchase_orders: {
+      payload: Prisma.$purchase_ordersPayload<ExtArgs>
+      fields: Prisma.purchase_ordersFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.purchase_ordersFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.purchase_ordersFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        findFirst: {
+          args: Prisma.purchase_ordersFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.purchase_ordersFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        findMany: {
+          args: Prisma.purchase_ordersFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>[]
+        }
+        create: {
+          args: Prisma.purchase_ordersCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        createMany: {
+          args: Prisma.purchase_ordersCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.purchase_ordersDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        update: {
+          args: Prisma.purchase_ordersUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        deleteMany: {
+          args: Prisma.purchase_ordersDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.purchase_ordersUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.purchase_ordersUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$purchase_ordersPayload>
+        }
+        aggregate: {
+          args: Prisma.Purchase_ordersAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePurchase_orders>
+        }
+        groupBy: {
+          args: Prisma.purchase_ordersGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Purchase_ordersGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.purchase_ordersCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Purchase_ordersCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1394,6 +1528,31 @@ export const Bank_accountsScalarFieldEnum = {
 export type Bank_accountsScalarFieldEnum = (typeof Bank_accountsScalarFieldEnum)[keyof typeof Bank_accountsScalarFieldEnum]
 
 
+export const Purchase_order_itemsScalarFieldEnum = {
+  id: 'id',
+  purchase_order_id: 'purchase_order_id',
+  book_id: 'book_id',
+  quantity: 'quantity',
+  unit_price: 'unit_price',
+  created_at: 'created_at'
+} as const
+
+export type Purchase_order_itemsScalarFieldEnum = (typeof Purchase_order_itemsScalarFieldEnum)[keyof typeof Purchase_order_itemsScalarFieldEnum]
+
+
+export const Purchase_ordersScalarFieldEnum = {
+  id: 'id',
+  reader_id: 'reader_id',
+  guest_name: 'guest_name',
+  guest_phone: 'guest_phone',
+  total_price: 'total_price',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type Purchase_ordersScalarFieldEnum = (typeof Purchase_ordersScalarFieldEnum)[keyof typeof Purchase_ordersScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1498,6 +1657,14 @@ export const bank_accountsOrderByRelevanceFieldEnum = {
 } as const
 
 export type bank_accountsOrderByRelevanceFieldEnum = (typeof bank_accountsOrderByRelevanceFieldEnum)[keyof typeof bank_accountsOrderByRelevanceFieldEnum]
+
+
+export const purchase_ordersOrderByRelevanceFieldEnum = {
+  guest_name: 'guest_name',
+  guest_phone: 'guest_phone'
+} as const
+
+export type purchase_ordersOrderByRelevanceFieldEnum = (typeof purchase_ordersOrderByRelevanceFieldEnum)[keyof typeof purchase_ordersOrderByRelevanceFieldEnum]
 
 
 
@@ -1682,6 +1849,8 @@ export type GlobalOmitConfig = {
   categories?: Prisma.categoriesOmit
   fines?: Prisma.finesOmit
   bank_accounts?: Prisma.bank_accountsOmit
+  purchase_order_items?: Prisma.purchase_order_itemsOmit
+  purchase_orders?: Prisma.purchase_ordersOmit
 }
 
 /* Types for Logging */

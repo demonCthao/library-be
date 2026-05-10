@@ -165,6 +165,26 @@ router.delete('/:id', controller.destroy.bind(controller));
 
 /**
  * @swagger
+ * /api/v1/borrow-record/return-book/{id}:
+ *   post:
+ *     summary: Return Book Record
+ *     tags: [Borrow Records]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Borrow Record ID
+ *     responses:
+ *       200:
+ *         description: Return Book Record 
+ */
+router.post('/return-book/:id', controller.returnBook.bind(controller));
+
+/**
+ * @swagger
  * /api/v1/borrow-record/{id}:
  *   get:
  *     summary: Get Borrow Detail By Id

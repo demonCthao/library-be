@@ -180,6 +180,52 @@ CREATE TABLE fines (
     ON DELETE CASCADE
 );
 
+CREATE TABLE purchase_orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    -- Reader đã đăng ký (nullable)
+    reader_id INT NULL,
+
+    -- Khách vãng lai
+    guest_name VARCHAR(255) NULL,
+    guest_phone VARCHAR(20) NULL,
+
+    -- Tổng tiền
+    total_price DECIMAL(10,2) NOT NULL DEFAULT 0,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_purchase_orders_reader
+        FOREIGN KEY (reader_id)
+        REFERENCES readers(id)
+        ON DELETE SET NULL
+);
+
+CREATE TABLE purchase_order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    purchase_order_id INT NOT NULL,
+    book_id INT NOT NULL,
+
+    quantity INT NOT NULL DEFAULT 1,
+
+    -- Giá sách tại thời điểm mua
+    unit_price DECIMAL(10,2) NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_purchase_order_items_order
+        FOREIGN KEY (purchase_order_id)
+        REFERENCES purchase_orders(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_purchase_order_items_book
+        FOREIGN KEY (book_id)
+        REFERENCES books(id)
+);
+
 INSERT INTO users (full_name, email, phone, role, status, lang) VALUES
 ('Admin System', 'admin@library.com', '0900000001', 'admin', 'active', 'vi'),
 ('Nguyễn Văn A', 'a@library.com', '0900000002', 'librarian', 'active', 'vi'),

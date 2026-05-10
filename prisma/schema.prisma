@@ -39,25 +39,26 @@ model book_authors {
 }
 
 model books {
-  id                 Int              @id @default(autoincrement())
-  isbn               String?          @unique(map: "isbn") @db.VarChar(20)
-  title              String           @db.VarChar(255)
-  description        String?          @db.Text
-  publish_year       Int?
-  language           String?          @db.VarChar(50)
-  pages              Int?
-  publisher_id       Int?
-  category_id        Int?
-  created_at         DateTime         @default(now()) @db.Timestamp(0)
-  stock_quantity     Int              @default(0)
-  borrowed_quantity  Int              @default(0)
-  reserved_quantity  Int              @default(0)
-  available_quantity Int              @default(0)
-  avatar_path        String?          @db.VarChar(255)
-  book_authors       book_authors[]
-  publishers         publishers?      @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
-  categories         categories?      @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
-  borrow_details     borrow_details[]
+  id                   Int                    @id @default(autoincrement())
+  isbn                 String?                @unique(map: "isbn") @db.VarChar(20)
+  title                String                 @db.VarChar(255)
+  description          String?                @db.Text
+  publish_year         Int?
+  language             String?                @db.VarChar(50)
+  pages                Int?
+  publisher_id         Int?
+  category_id          Int?
+  created_at           DateTime               @default(now()) @db.Timestamp(0)
+  stock_quantity       Int                    @default(0)
+  borrowed_quantity    Int                    @default(0)
+  reserved_quantity    Int                    @default(0)
+  available_quantity   Int                    @default(0)
+  avatar_path          String?                @db.VarChar(255)
+  book_authors         book_authors[]
+  publishers           publishers?            @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
+  categories           categories?            @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
+  borrow_details       borrow_details[]
+  purchase_order_items purchase_order_items[]
 
   @@index([category_id], map: "category_id")
   @@index([publisher_id], map: "publisher_id")
@@ -98,16 +99,17 @@ model publishers {
 }
 
 model readers {
-  id             Int              @id @default(autoincrement())
-  reader_code    String           @unique(map: "reader_code") @db.VarChar(20)
-  full_name      String           @db.VarChar(100)
-  date_of_birth  DateTime?        @db.Date
-  gender         readers_gender?
-  email          String?          @db.VarChar(100)
-  phone          String?          @db.VarChar(20)
-  address        String?          @db.VarChar(255)
-  created_at     DateTime         @default(now()) @db.Timestamp(0)
-  borrow_records borrow_records[]
+  id              Int               @id @default(autoincrement())
+  reader_code     String            @unique(map: "reader_code") @db.VarChar(20)
+  full_name       String            @db.VarChar(100)
+  date_of_birth   DateTime?         @db.Date
+  gender          readers_gender?
+  email           String?           @db.VarChar(100)
+  phone           String?           @db.VarChar(20)
+  address         String?           @db.VarChar(255)
+  created_at      DateTime          @default(now()) @db.Timestamp(0)
+  borrow_records  borrow_records[]
+  purchase_orders purchase_orders[]
 }
 
 model accounts {
@@ -152,6 +154,34 @@ model bank_accounts {
   created_at     DateTime @default(now()) @db.Timestamp(0)
   is_default     Int
   owner_name     String   @db.VarChar(50)
+}
+
+model purchase_order_items {
+  id                Int             @id @default(autoincrement())
+  purchase_order_id Int
+  book_id           Int
+  quantity          Int             @default(1)
+  unit_price        Decimal         @db.Decimal(10, 2)
+  created_at        DateTime        @default(now()) @db.Timestamp(0)
+  books             books           @relation(fields: [book_id], references: [id], onUpdate: Restrict, map: "fk_purchase_order_items_book")
+  purchase_orders   purchase_orders @relation(fields: [purchase_order_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_purchase_order_items_order")
+
+  @@index([book_id], map: "fk_purchase_order_items_book")
+  @@index([purchase_order_id], map: "fk_purchase_order_items_order")
+}
+
+model purchase_orders {
+  id                   Int                    @id @default(autoincrement())
+  reader_id            Int?
+  guest_name           String?                @db.VarChar(255)
+  guest_phone          String?                @db.VarChar(20)
+  total_price          Decimal                @default(0.00) @db.Decimal(10, 2)
+  created_at           DateTime               @default(now()) @db.Timestamp(0)
+  updated_at           DateTime               @default(now()) @db.Timestamp(0)
+  purchase_order_items purchase_order_items[]
+  readers              readers?               @relation(fields: [reader_id], references: [id], onUpdate: Restrict, map: "fk_purchase_orders_reader")
+
+  @@index([reader_id], map: "fk_purchase_orders_reader")
 }
 
 enum readers_gender {
