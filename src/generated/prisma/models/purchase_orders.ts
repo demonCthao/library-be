@@ -46,6 +46,7 @@ export type Purchase_ordersMinAggregateOutputType = {
   total_price: runtime.Decimal | null
   created_at: Date | null
   updated_at: Date | null
+  purchase_order_code: string | null
 }
 
 export type Purchase_ordersMaxAggregateOutputType = {
@@ -56,6 +57,7 @@ export type Purchase_ordersMaxAggregateOutputType = {
   total_price: runtime.Decimal | null
   created_at: Date | null
   updated_at: Date | null
+  purchase_order_code: string | null
 }
 
 export type Purchase_ordersCountAggregateOutputType = {
@@ -66,6 +68,7 @@ export type Purchase_ordersCountAggregateOutputType = {
   total_price: number
   created_at: number
   updated_at: number
+  purchase_order_code: number
   _all: number
 }
 
@@ -90,6 +93,7 @@ export type Purchase_ordersMinAggregateInputType = {
   total_price?: true
   created_at?: true
   updated_at?: true
+  purchase_order_code?: true
 }
 
 export type Purchase_ordersMaxAggregateInputType = {
@@ -100,6 +104,7 @@ export type Purchase_ordersMaxAggregateInputType = {
   total_price?: true
   created_at?: true
   updated_at?: true
+  purchase_order_code?: true
 }
 
 export type Purchase_ordersCountAggregateInputType = {
@@ -110,6 +115,7 @@ export type Purchase_ordersCountAggregateInputType = {
   total_price?: true
   created_at?: true
   updated_at?: true
+  purchase_order_code?: true
   _all?: true
 }
 
@@ -207,6 +213,7 @@ export type Purchase_ordersGroupByOutputType = {
   total_price: runtime.Decimal
   created_at: Date
   updated_at: Date
+  purchase_order_code: string
   _count: Purchase_ordersCountAggregateOutputType | null
   _avg: Purchase_ordersAvgAggregateOutputType | null
   _sum: Purchase_ordersSumAggregateOutputType | null
@@ -240,6 +247,7 @@ export type purchase_ordersWhereInput = {
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
+  purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
   readers?: Prisma.XOR<Prisma.ReadersNullableScalarRelationFilter, Prisma.readersWhereInput> | null
 }
@@ -252,6 +260,7 @@ export type purchase_ordersOrderByWithRelationInput = {
   total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  purchase_order_code?: Prisma.SortOrder
   purchase_order_items?: Prisma.purchase_order_itemsOrderByRelationAggregateInput
   readers?: Prisma.readersOrderByWithRelationInput
   _relevance?: Prisma.purchase_ordersOrderByRelevanceInput
@@ -268,6 +277,7 @@ export type purchase_ordersWhereUniqueInput = Prisma.AtLeast<{
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
+  purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
   readers?: Prisma.XOR<Prisma.ReadersNullableScalarRelationFilter, Prisma.readersWhereInput> | null
 }, "id">
@@ -280,6 +290,7 @@ export type purchase_ordersOrderByWithAggregationInput = {
   total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  purchase_order_code?: Prisma.SortOrder
   _count?: Prisma.purchase_ordersCountOrderByAggregateInput
   _avg?: Prisma.purchase_ordersAvgOrderByAggregateInput
   _max?: Prisma.purchase_ordersMaxOrderByAggregateInput
@@ -298,6 +309,7 @@ export type purchase_ordersScalarWhereWithAggregatesInput = {
   total_price?: Prisma.DecimalWithAggregatesFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeWithAggregatesFilter<"purchase_orders"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"purchase_orders"> | Date | string
+  purchase_order_code?: Prisma.StringWithAggregatesFilter<"purchase_orders"> | string
 }
 
 export type purchase_ordersCreateInput = {
@@ -306,6 +318,7 @@ export type purchase_ordersCreateInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutPurchase_ordersInput
   readers?: Prisma.readersCreateNestedOneWithoutPurchase_ordersInput
 }
@@ -318,6 +331,7 @@ export type purchase_ordersUncheckedCreateInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutPurchase_ordersInput
 }
 
@@ -327,6 +341,7 @@ export type purchase_ordersUpdateInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutPurchase_ordersNestedInput
   readers?: Prisma.readersUpdateOneWithoutPurchase_ordersNestedInput
 }
@@ -339,6 +354,7 @@ export type purchase_ordersUncheckedUpdateInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutPurchase_ordersNestedInput
 }
 
@@ -350,6 +366,7 @@ export type purchase_ordersCreateManyInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
 }
 
 export type purchase_ordersUpdateManyMutationInput = {
@@ -358,6 +375,7 @@ export type purchase_ordersUpdateManyMutationInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type purchase_ordersUncheckedUpdateManyInput = {
@@ -368,6 +386,7 @@ export type purchase_ordersUncheckedUpdateManyInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type Purchase_ordersListRelationFilter = {
@@ -399,6 +418,7 @@ export type purchase_ordersCountOrderByAggregateInput = {
   total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  purchase_order_code?: Prisma.SortOrder
 }
 
 export type purchase_ordersAvgOrderByAggregateInput = {
@@ -415,6 +435,7 @@ export type purchase_ordersMaxOrderByAggregateInput = {
   total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  purchase_order_code?: Prisma.SortOrder
 }
 
 export type purchase_ordersMinOrderByAggregateInput = {
@@ -425,6 +446,7 @@ export type purchase_ordersMinOrderByAggregateInput = {
   total_price?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
+  purchase_order_code?: Prisma.SortOrder
 }
 
 export type purchase_ordersSumOrderByAggregateInput = {
@@ -495,6 +517,7 @@ export type purchase_ordersCreateWithoutReadersInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutPurchase_ordersInput
 }
 
@@ -505,6 +528,7 @@ export type purchase_ordersUncheckedCreateWithoutReadersInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutPurchase_ordersInput
 }
 
@@ -545,6 +569,7 @@ export type purchase_ordersScalarWhereInput = {
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
+  purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
 }
 
 export type purchase_ordersCreateWithoutPurchase_order_itemsInput = {
@@ -553,6 +578,7 @@ export type purchase_ordersCreateWithoutPurchase_order_itemsInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
   readers?: Prisma.readersCreateNestedOneWithoutPurchase_ordersInput
 }
 
@@ -564,6 +590,7 @@ export type purchase_ordersUncheckedCreateWithoutPurchase_order_itemsInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
 }
 
 export type purchase_ordersCreateOrConnectWithoutPurchase_order_itemsInput = {
@@ -588,6 +615,7 @@ export type purchase_ordersUpdateWithoutPurchase_order_itemsInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   readers?: Prisma.readersUpdateOneWithoutPurchase_ordersNestedInput
 }
 
@@ -599,6 +627,7 @@ export type purchase_ordersUncheckedUpdateWithoutPurchase_order_itemsInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type purchase_ordersCreateManyReadersInput = {
@@ -608,6 +637,7 @@ export type purchase_ordersCreateManyReadersInput = {
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Date | string
   updated_at?: Date | string
+  purchase_order_code: string
 }
 
 export type purchase_ordersUpdateWithoutReadersInput = {
@@ -616,6 +646,7 @@ export type purchase_ordersUpdateWithoutReadersInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutPurchase_ordersNestedInput
 }
 
@@ -626,6 +657,7 @@ export type purchase_ordersUncheckedUpdateWithoutReadersInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutPurchase_ordersNestedInput
 }
 
@@ -636,6 +668,7 @@ export type purchase_ordersUncheckedUpdateManyWithoutReadersInput = {
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -677,6 +710,7 @@ export type purchase_ordersSelect<ExtArgs extends runtime.Types.Extensions.Inter
   total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
+  purchase_order_code?: boolean
   purchase_order_items?: boolean | Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs>
   readers?: boolean | Prisma.purchase_orders$readersArgs<ExtArgs>
   _count?: boolean | Prisma.Purchase_ordersCountOutputTypeDefaultArgs<ExtArgs>
@@ -692,9 +726,10 @@ export type purchase_ordersSelectScalar = {
   total_price?: boolean
   created_at?: boolean
   updated_at?: boolean
+  purchase_order_code?: boolean
 }
 
-export type purchase_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_id" | "guest_name" | "guest_phone" | "total_price" | "created_at" | "updated_at", ExtArgs["result"]["purchase_orders"]>
+export type purchase_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_id" | "guest_name" | "guest_phone" | "total_price" | "created_at" | "updated_at" | "purchase_order_code", ExtArgs["result"]["purchase_orders"]>
 export type purchase_ordersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   purchase_order_items?: boolean | Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs>
   readers?: boolean | Prisma.purchase_orders$readersArgs<ExtArgs>
@@ -715,6 +750,7 @@ export type $purchase_ordersPayload<ExtArgs extends runtime.Types.Extensions.Int
     total_price: runtime.Decimal
     created_at: Date
     updated_at: Date
+    purchase_order_code: string
   }, ExtArgs["result"]["purchase_orders"]>
   composites: {}
 }
@@ -1093,6 +1129,7 @@ export interface purchase_ordersFieldRefs {
   readonly total_price: Prisma.FieldRef<"purchase_orders", 'Decimal'>
   readonly created_at: Prisma.FieldRef<"purchase_orders", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"purchase_orders", 'DateTime'>
+  readonly purchase_order_code: Prisma.FieldRef<"purchase_orders", 'String'>
 }
     
 
@@ -1311,7 +1348,7 @@ export type purchase_ordersCreateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * The data needed to create a purchase_orders.
    */
-  data?: Prisma.XOR<Prisma.purchase_ordersCreateInput, Prisma.purchase_ordersUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.purchase_ordersCreateInput, Prisma.purchase_ordersUncheckedCreateInput>
 }
 
 /**

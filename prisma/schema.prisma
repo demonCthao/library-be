@@ -54,6 +54,7 @@ model books {
   reserved_quantity    Int                    @default(0)
   available_quantity   Int                    @default(0)
   avatar_path          String?                @db.VarChar(255)
+  price                Decimal                @default(0.00) @db.Decimal(10, 2)
   book_authors         book_authors[]
   publishers           publishers?            @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
   categories           categories?            @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
@@ -178,6 +179,7 @@ model purchase_orders {
   total_price          Decimal                @default(0.00) @db.Decimal(10, 2)
   created_at           DateTime               @default(now()) @db.Timestamp(0)
   updated_at           DateTime               @default(now()) @db.Timestamp(0)
+  purchase_order_code  String                 @db.VarChar(20)
   purchase_order_items purchase_order_items[]
   readers              readers?               @relation(fields: [reader_id], references: [id], onUpdate: Restrict, map: "fk_purchase_orders_reader")
 

@@ -1428,7 +1428,8 @@ export const BooksScalarFieldEnum = {
   borrowed_quantity: 'borrowed_quantity',
   reserved_quantity: 'reserved_quantity',
   available_quantity: 'available_quantity',
-  avatar_path: 'avatar_path'
+  avatar_path: 'avatar_path',
+  price: 'price'
 } as const
 
 export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof BooksScalarFieldEnum]
@@ -1547,7 +1548,8 @@ export const Purchase_ordersScalarFieldEnum = {
   guest_phone: 'guest_phone',
   total_price: 'total_price',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  purchase_order_code: 'purchase_order_code'
 } as const
 
 export type Purchase_ordersScalarFieldEnum = (typeof Purchase_ordersScalarFieldEnum)[keyof typeof Purchase_ordersScalarFieldEnum]
@@ -1661,7 +1663,8 @@ export type bank_accountsOrderByRelevanceFieldEnum = (typeof bank_accountsOrderB
 
 export const purchase_ordersOrderByRelevanceFieldEnum = {
   guest_name: 'guest_name',
-  guest_phone: 'guest_phone'
+  guest_phone: 'guest_phone',
+  purchase_order_code: 'purchase_order_code'
 } as const
 
 export type purchase_ordersOrderByRelevanceFieldEnum = (typeof purchase_ordersOrderByRelevanceFieldEnum)[keyof typeof purchase_ordersOrderByRelevanceFieldEnum]
@@ -1709,6 +1712,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
 
 
 /**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
  * Reference to a field of type 'borrow_records_status'
  */
 export type Enumborrow_records_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'borrow_records_status'>
@@ -1719,13 +1729,6 @@ export type Enumborrow_records_statusFieldRefInput<$PrismaModel> = FieldRefInput
  * Reference to a field of type 'readers_gender'
  */
 export type Enumreaders_genderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'readers_gender'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
