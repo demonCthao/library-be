@@ -61,8 +61,8 @@ export class PurchaseOrderService extends BaseService<purchase_orders> {
         return prisma.purchase_orders.create({
             data: {
                 reader_id: data.reader_id,
-                guest_name: data.guest_name,
-                guest_phone: data.guest_phone,
+                guest_name: data.guest_name?? "Khách vãng lai",
+                guest_phone: data.guest_phone?? "",
                 created_at: dateNow,
                 updated_at: dateNow,
                 total_price: totalPrice,
@@ -86,8 +86,7 @@ export class PurchaseOrderService extends BaseService<purchase_orders> {
             },
             phone: {
                 contains: phone
-            }
-            ,
+            },
             email: {
                 contains: email
             }
