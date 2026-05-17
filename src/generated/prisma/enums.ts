@@ -27,17 +27,18 @@ export const borrow_records_status = {
 export type borrow_records_status = (typeof borrow_records_status)[keyof typeof borrow_records_status]
 
 
-export const users_role = {
-  admin: 'admin',
-  librarian: 'librarian'
-} as const
-
-export type users_role = (typeof users_role)[keyof typeof users_role]
-
-
 export const users_status = {
   active: 'active',
   inactive: 'inactive'
 } as const
 
 export type users_status = (typeof users_status)[keyof typeof users_status]
+
+
+export const users_role = {
+  admin: 'admin',
+  librarian: 'librarian',
+  user: 'user'
+} as const
+
+export type users_role = (typeof users_role)[keyof typeof users_role]

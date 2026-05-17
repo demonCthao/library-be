@@ -180,6 +180,7 @@ model purchase_orders {
   created_at           DateTime               @default(now()) @db.Timestamp(0)
   updated_at           DateTime               @default(now()) @db.Timestamp(0)
   purchase_order_code  String                 @db.VarChar(20)
+  payment_status       String                 @default("UNPAID") @db.VarChar(20)
   purchase_order_items purchase_order_items[]
   readers              readers?               @relation(fields: [reader_id], references: [id], onUpdate: Restrict, map: "fk_purchase_orders_reader")
 
@@ -198,12 +199,13 @@ enum borrow_records_status {
   overdue
 }
 
-enum users_role {
-  admin
-  librarian
-}
-
 enum users_status {
   active
   inactive
+}
+
+enum users_role {
+  admin
+  librarian
+  user
 }

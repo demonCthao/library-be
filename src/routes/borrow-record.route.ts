@@ -199,7 +199,7 @@ router.post('/return-book/:id', controller.returnBook.bind(controller));
  *         description: Borrow Record ID
  *     responses:
  *       200:
- *         description: Borrow Record deleted
+ *         description: Borrow Record detail
  */
 router.get('/:id', controller.getBorrowDetailById.bind(controller));
 

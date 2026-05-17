@@ -8,8 +8,8 @@ const controller = new PurchaseOrderController();
  * @swagger
  * /api/v1/purchase-orders:
  *   get:
- *     summary: Get list of Purchase Orders
- *     tags: [PurchaseOrders]
+ *     summary: Get list of [Purchase Orders]
+ *     tags: [Purchase Orders]
  *     parameters:
  *       - in: query
  *         name: phone
@@ -56,7 +56,7 @@ const controller = new PurchaseOrderController();
  *         description: Sort order
  *     responses:
  *       200:
- *         description: List of Purchase Orders
+ *         description: List of [Purchase Orders]
  */
 router.get('/', controller.findAll.bind(controller));
 
@@ -65,7 +65,7 @@ router.get('/', controller.findAll.bind(controller));
  * /api/v1/purchase-orders:
  *   post:
  *     summary: Create new reader
- *     tags: [PurchaseOrders]
+ *     tags: [Purchase Orders]
  *     requestBody:
  *       required: true
  *       content:
@@ -92,16 +92,15 @@ router.post('/', controller.store.bind(controller));
  * @swagger
  * /api/v1/purchase-orders/{id}:
  *   put:
- *     summary: Update reader
- *     tags: [PurchaseOrders]
+ *     summary: Update Purchase Order
+ *     tags: [Purchase Orders]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
- *           type: string
- *           example: 1
- *         description: Reader ID
+ *           type: integer
+ *         example: 1
  *     requestBody:
  *       required: true
  *       content:
@@ -109,14 +108,31 @@ router.post('/', controller.store.bind(controller));
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               reader_id:
+ *                 type: integer
+ *                 nullable: true
+ *                 example: 1
+ *               guest_name:
  *                 type: string
- *               parent_id:
+ *                 nullable: true
+ *                 example: Nguyen Van A
+ *               guest_phone:
+ *                 type: string
+ *                 nullable: true
+ *                 example: "0987654321"
+ *               total_price:
  *                 type: number
- *                 example: "Doe"
+ *                 example: 250000
+ *               payment_status:
+ *                 type: string
+ *                 example: PAID
  *     responses:
  *       200:
- *         description: Reader updated
+ *         description: Purchase order updated successfully
+ *       404:
+ *         description: Purchase order not found
+ *       500:
+ *         description: Internal server error
  */
 router.put('/:id', controller.update.bind(controller));
 
@@ -125,7 +141,7 @@ router.put('/:id', controller.update.bind(controller));
  * /api/v1/purchase-orders/{id}:
  *   delete:
  *     summary: Delete reader
- *     tags: [PurchaseOrders]
+ *     tags: [Purchase Orders]
  *     parameters:
  *       - in: path
  *         name: id
@@ -139,5 +155,25 @@ router.put('/:id', controller.update.bind(controller));
  *         description: Reader deleted
  */
 router.delete('/:id', controller.destroy.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/purchase-orders/{id}:
+ *   get:
+ *     summary: Get Purchase Order Detail By Id
+ *     tags: [Purchase Orders]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Purchase Order ID
+ *     responses:
+ *       200:
+ *         description: Purchase Order detail
+ */
+router.get('/:id', controller.getPurchaseOrderDetailById.bind(controller));
 
 export default router;

@@ -226,6 +226,9 @@ CREATE TABLE purchase_order_items (
         REFERENCES books(id)
 );
 
+ALTER TABLE purchase_orders
+ADD COLUMN payment_status VARCHAR(20) NOT NULL DEFAULT 'UNPAID';
+
 INSERT INTO users (full_name, email, phone, role, status, lang) VALUES
 ('Admin System', 'admin@library.com', '0900000001', 'admin', 'active', 'vi'),
 ('Nguyễn Văn A', 'a@library.com', '0900000002', 'librarian', 'active', 'vi'),
