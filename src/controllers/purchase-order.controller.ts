@@ -63,4 +63,17 @@ export class PurchaseOrderController extends BaseController<PurchaseOrderService
             next(err);
         }
     }
+
+    async updatePurchaseOrderBook(req: Request, res: Response, next: NextFunction) {
+        try {
+            const purchaseOrder = await this.service.updatePurchaseOrderBook(
+                Number(req.params.id),
+                req.body.purchase_order_items
+            );
+
+            return this.ok(res, purchaseOrder);
+        } catch (err) {
+            next(err);
+        }
+    }
 }

@@ -138,6 +138,46 @@ router.put('/:id', controller.update.bind(controller));
 
 /**
  * @swagger
+ * /api/v1/purchase-orders/update-book/{id}:
+ *   post:
+ *     summary: Create Purchase Order Items
+ *     tags: [Purchase Orders]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               items:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     purchase_order_id:
+ *                       type: integer
+ *                       example: 1
+ *                     book_id:
+ *                       type: integer
+ *                       example: 2
+ *                     quantity:
+ *                       type: integer
+ *                       example: 5
+ *                     unit_price:
+ *                       type: number
+ *                       example: 50000
+ *     responses:
+ *       201:
+ *         description: Purchase order items created successfully
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
+router.post('/update-book/:id', controller.updatePurchaseOrderBook.bind(controller));
+
+/**
+ * @swagger
  * /api/v1/purchase-orders/{id}:
  *   delete:
  *     summary: Delete reader

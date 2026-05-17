@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { NotFoundException } from "../exceptions";
-import { Prisma, purchase_orders } from "../generated/prisma/client";
+import { Prisma, purchase_order_items, purchase_orders } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
@@ -225,5 +225,41 @@ export class PurchaseOrderService extends BaseService<purchase_orders> {
         }
 
         return new PurchaseOrderDetailDto(purchaseOrder);
+    }
+
+    async updatePurchaseOrderBook(id: number, data: purchase_order_items[]) {
+        const purchaseOrder = prisma.purchase_orders.findUnique({
+            where: { id: id },
+        })
+
+        if (!purchaseOrder) {
+            throw new NotFoundException("Purchase Order detail");
+        }
+
+        await prisma.$transaction(async (tx) => {
+            const books = await tx.purchase_order_items.findMany({
+                where: { purchase_order_id: id },
+                include: {
+                    books: true,
+                },
+            });
+
+            await tx.purchase_orders.update({
+                where: { id },
+                data: {
+                    total_price: data.reduce((sum, item) => {
+                        return sum + item.quantity * Number(item.unit_price);
+                    }, 0)
+                },
+            });
+
+            await tx.purchase_order_items.deleteMany({
+                where: { purchase_order_id: id },
+            });
+
+            await tx.purchase_order_items.createMany({
+                data: data,
+            });
+        });
     }
 }
