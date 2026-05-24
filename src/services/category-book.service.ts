@@ -5,6 +5,7 @@ import { categories, Prisma } from "../generated/prisma/client";
 import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
+import { books } from "@prisma/client";
 
 interface FindCategoryQuery extends FindAllQuery {
     name?: string;
@@ -80,6 +81,29 @@ class CategoryBookService extends BaseService<categories> {
 
     async getAllBooksAndCategorie(): Promise<categories[]> {
         return await prisma.categories.findMany({
+            include: {
+                books: true
+            }
+        });
+    }
+
+    async getBookDetailById(bookId: string): Promise<books | null> {
+        return await prisma.books.findUnique({
+            where: {
+                id: Number(bookId)
+            },
+            include: {
+                categories: true,
+                publishers: true
+            }
+        });
+    }
+
+    async getBooksByCategoryId(categoryId: string): Promise<categories | null> {
+        return await prisma.categories.findUnique({
+            where: {
+                id: Number(categoryId)
+            },
             include: {
                 books: true
             }

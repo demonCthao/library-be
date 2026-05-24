@@ -12,6 +12,7 @@ type BookPayload = {
     publisher_id: number | null;
     avatar_path: string | null;
     price: Decimal;
+    quantity: number | null
 };
 
 export class BookDto {
@@ -23,8 +24,9 @@ export class BookDto {
     pages: number | null;
     avatar_path: string | null;
     price: Decimal;
+    quantity?: number
 
-    constructor(book: BookPayload) {
+    constructor(book: BookPayload, quantity?: number) {
         this.id = book.id;
         this.title = book.title;
         this.description = book.description;
@@ -33,5 +35,6 @@ export class BookDto {
         this.pages = book.pages;
         this.avatar_path = book.avatar_path;
         this.price = book.price;
+        this.quantity = quantity
     }
 }

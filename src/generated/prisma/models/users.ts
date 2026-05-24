@@ -45,6 +45,8 @@ export type UsersMinAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   avatar_path: string | null
+  user_code: string | null
+  address: string | null
 }
 
 export type UsersMaxAggregateOutputType = {
@@ -58,6 +60,8 @@ export type UsersMaxAggregateOutputType = {
   created_at: Date | null
   updated_at: Date | null
   avatar_path: string | null
+  user_code: string | null
+  address: string | null
 }
 
 export type UsersCountAggregateOutputType = {
@@ -71,6 +75,8 @@ export type UsersCountAggregateOutputType = {
   created_at: number
   updated_at: number
   avatar_path: number
+  user_code: number
+  address: number
   _all: number
 }
 
@@ -94,6 +100,8 @@ export type UsersMinAggregateInputType = {
   created_at?: true
   updated_at?: true
   avatar_path?: true
+  user_code?: true
+  address?: true
 }
 
 export type UsersMaxAggregateInputType = {
@@ -107,6 +115,8 @@ export type UsersMaxAggregateInputType = {
   created_at?: true
   updated_at?: true
   avatar_path?: true
+  user_code?: true
+  address?: true
 }
 
 export type UsersCountAggregateInputType = {
@@ -120,6 +130,8 @@ export type UsersCountAggregateInputType = {
   created_at?: true
   updated_at?: true
   avatar_path?: true
+  user_code?: true
+  address?: true
   _all?: true
 }
 
@@ -220,6 +232,8 @@ export type UsersGroupByOutputType = {
   created_at: Date
   updated_at: Date
   avatar_path: string | null
+  user_code: string | null
+  address: string | null
   _count: UsersCountAggregateOutputType | null
   _avg: UsersAvgAggregateOutputType | null
   _sum: UsersSumAggregateOutputType | null
@@ -256,7 +270,11 @@ export type usersWhereInput = {
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
   avatar_path?: Prisma.StringNullableFilter<"users"> | string | null
+  user_code?: Prisma.StringNullableFilter<"users"> | string | null
+  address?: Prisma.StringNullableFilter<"users"> | string | null
   accounts?: Prisma.XOR<Prisma.AccountsNullableScalarRelationFilter, Prisma.accountsWhereInput> | null
+  borrow_records?: Prisma.Borrow_recordsListRelationFilter
+  purchase_orders?: Prisma.Purchase_ordersListRelationFilter
 }
 
 export type usersOrderByWithRelationInput = {
@@ -270,7 +288,11 @@ export type usersOrderByWithRelationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   accounts?: Prisma.accountsOrderByWithRelationInput
+  borrow_records?: Prisma.borrow_recordsOrderByRelationAggregateInput
+  purchase_orders?: Prisma.purchase_ordersOrderByRelationAggregateInput
   _relevance?: Prisma.usersOrderByRelevanceInput
 }
 
@@ -288,7 +310,11 @@ export type usersWhereUniqueInput = Prisma.AtLeast<{
   created_at?: Prisma.DateTimeFilter<"users"> | Date | string
   updated_at?: Prisma.DateTimeFilter<"users"> | Date | string
   avatar_path?: Prisma.StringNullableFilter<"users"> | string | null
+  user_code?: Prisma.StringNullableFilter<"users"> | string | null
+  address?: Prisma.StringNullableFilter<"users"> | string | null
   accounts?: Prisma.XOR<Prisma.AccountsNullableScalarRelationFilter, Prisma.accountsWhereInput> | null
+  borrow_records?: Prisma.Borrow_recordsListRelationFilter
+  purchase_orders?: Prisma.Purchase_ordersListRelationFilter
 }, "id">
 
 export type usersOrderByWithAggregationInput = {
@@ -302,6 +328,8 @@ export type usersOrderByWithAggregationInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrderInput | Prisma.SortOrder
+  user_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.usersCountOrderByAggregateInput
   _avg?: Prisma.usersAvgOrderByAggregateInput
   _max?: Prisma.usersMaxOrderByAggregateInput
@@ -323,6 +351,8 @@ export type usersScalarWhereWithAggregatesInput = {
   created_at?: Prisma.DateTimeWithAggregatesFilter<"users"> | Date | string
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"users"> | Date | string
   avatar_path?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  user_code?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"users"> | string | null
 }
 
 export type usersCreateInput = {
@@ -335,7 +365,11 @@ export type usersCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
   accounts?: Prisma.accountsCreateNestedOneWithoutUsersInput
+  borrow_records?: Prisma.borrow_recordsCreateNestedManyWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersCreateNestedManyWithoutUsersInput
 }
 
 export type usersUncheckedCreateInput = {
@@ -349,7 +383,11 @@ export type usersUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
   accounts?: Prisma.accountsUncheckedCreateNestedOneWithoutUsersInput
+  borrow_records?: Prisma.borrow_recordsUncheckedCreateNestedManyWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type usersUpdateInput = {
@@ -362,7 +400,11 @@ export type usersUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.accountsUpdateOneWithoutUsersNestedInput
+  borrow_records?: Prisma.borrow_recordsUpdateManyWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUpdateManyWithoutUsersNestedInput
 }
 
 export type usersUncheckedUpdateInput = {
@@ -376,7 +418,11 @@ export type usersUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   accounts?: Prisma.accountsUncheckedUpdateOneWithoutUsersNestedInput
+  borrow_records?: Prisma.borrow_recordsUncheckedUpdateManyWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedUpdateManyWithoutUsersNestedInput
 }
 
 export type usersCreateManyInput = {
@@ -390,6 +436,8 @@ export type usersCreateManyInput = {
   created_at?: Date | string
   updated_at?: Date | string
   avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
 }
 
 export type usersUpdateManyMutationInput = {
@@ -402,6 +450,8 @@ export type usersUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type usersUncheckedUpdateManyInput = {
@@ -415,6 +465,8 @@ export type usersUncheckedUpdateManyInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type usersOrderByRelevanceInput = {
@@ -434,6 +486,8 @@ export type usersCountOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
+  user_code?: Prisma.SortOrder
+  address?: Prisma.SortOrder
 }
 
 export type usersAvgOrderByAggregateInput = {
@@ -451,6 +505,8 @@ export type usersMaxOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
+  user_code?: Prisma.SortOrder
+  address?: Prisma.SortOrder
 }
 
 export type usersMinOrderByAggregateInput = {
@@ -464,10 +520,17 @@ export type usersMinOrderByAggregateInput = {
   created_at?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
+  user_code?: Prisma.SortOrder
+  address?: Prisma.SortOrder
 }
 
 export type usersSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+}
+
+export type UsersNullableScalarRelationFilter = {
+  is?: Prisma.usersWhereInput | null
+  isNot?: Prisma.usersWhereInput | null
 }
 
 export type UsersScalarRelationFilter = {
@@ -499,6 +562,22 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type usersCreateNestedOneWithoutBorrow_recordsInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutBorrow_recordsInput, Prisma.usersUncheckedCreateWithoutBorrow_recordsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutBorrow_recordsInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneWithoutBorrow_recordsNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutBorrow_recordsInput, Prisma.usersUncheckedCreateWithoutBorrow_recordsInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutBorrow_recordsInput
+  upsert?: Prisma.usersUpsertWithoutBorrow_recordsInput
+  disconnect?: Prisma.usersWhereInput | boolean
+  delete?: Prisma.usersWhereInput | boolean
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutBorrow_recordsInput, Prisma.usersUpdateWithoutBorrow_recordsInput>, Prisma.usersUncheckedUpdateWithoutBorrow_recordsInput>
+}
+
 export type usersCreateNestedOneWithoutAccountsInput = {
   create?: Prisma.XOR<Prisma.usersCreateWithoutAccountsInput, Prisma.usersUncheckedCreateWithoutAccountsInput>
   connectOrCreate?: Prisma.usersCreateOrConnectWithoutAccountsInput
@@ -513,6 +592,104 @@ export type usersUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutAccountsInput, Prisma.usersUpdateWithoutAccountsInput>, Prisma.usersUncheckedUpdateWithoutAccountsInput>
 }
 
+export type usersCreateNestedOneWithoutPurchase_ordersInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPurchase_ordersInput, Prisma.usersUncheckedCreateWithoutPurchase_ordersInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPurchase_ordersInput
+  connect?: Prisma.usersWhereUniqueInput
+}
+
+export type usersUpdateOneWithoutPurchase_ordersNestedInput = {
+  create?: Prisma.XOR<Prisma.usersCreateWithoutPurchase_ordersInput, Prisma.usersUncheckedCreateWithoutPurchase_ordersInput>
+  connectOrCreate?: Prisma.usersCreateOrConnectWithoutPurchase_ordersInput
+  upsert?: Prisma.usersUpsertWithoutPurchase_ordersInput
+  disconnect?: Prisma.usersWhereInput | boolean
+  delete?: Prisma.usersWhereInput | boolean
+  connect?: Prisma.usersWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usersUpdateToOneWithWhereWithoutPurchase_ordersInput, Prisma.usersUpdateWithoutPurchase_ordersInput>, Prisma.usersUncheckedUpdateWithoutPurchase_ordersInput>
+}
+
+export type usersCreateWithoutBorrow_recordsInput = {
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  accounts?: Prisma.accountsCreateNestedOneWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersCreateNestedManyWithoutUsersInput
+}
+
+export type usersUncheckedCreateWithoutBorrow_recordsInput = {
+  id?: number
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  accounts?: Prisma.accountsUncheckedCreateNestedOneWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type usersCreateOrConnectWithoutBorrow_recordsInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutBorrow_recordsInput, Prisma.usersUncheckedCreateWithoutBorrow_recordsInput>
+}
+
+export type usersUpsertWithoutBorrow_recordsInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutBorrow_recordsInput, Prisma.usersUncheckedUpdateWithoutBorrow_recordsInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutBorrow_recordsInput, Prisma.usersUncheckedCreateWithoutBorrow_recordsInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutBorrow_recordsInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutBorrow_recordsInput, Prisma.usersUncheckedUpdateWithoutBorrow_recordsInput>
+}
+
+export type usersUpdateWithoutBorrow_recordsInput = {
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.accountsUpdateOneWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUpdateManyWithoutUsersNestedInput
+}
+
+export type usersUncheckedUpdateWithoutBorrow_recordsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.accountsUncheckedUpdateOneWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedUpdateManyWithoutUsersNestedInput
+}
+
 export type usersCreateWithoutAccountsInput = {
   full_name?: string | null
   email?: string | null
@@ -523,6 +700,10 @@ export type usersCreateWithoutAccountsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  borrow_records?: Prisma.borrow_recordsCreateNestedManyWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersCreateNestedManyWithoutUsersInput
 }
 
 export type usersUncheckedCreateWithoutAccountsInput = {
@@ -536,6 +717,10 @@ export type usersUncheckedCreateWithoutAccountsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  borrow_records?: Prisma.borrow_recordsUncheckedCreateNestedManyWithoutUsersInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedCreateNestedManyWithoutUsersInput
 }
 
 export type usersCreateOrConnectWithoutAccountsInput = {
@@ -564,6 +749,10 @@ export type usersUpdateWithoutAccountsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  borrow_records?: Prisma.borrow_recordsUpdateManyWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUpdateManyWithoutUsersNestedInput
 }
 
 export type usersUncheckedUpdateWithoutAccountsInput = {
@@ -577,8 +766,132 @@ export type usersUncheckedUpdateWithoutAccountsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  borrow_records?: Prisma.borrow_recordsUncheckedUpdateManyWithoutUsersNestedInput
+  purchase_orders?: Prisma.purchase_ordersUncheckedUpdateManyWithoutUsersNestedInput
 }
 
+export type usersCreateWithoutPurchase_ordersInput = {
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  accounts?: Prisma.accountsCreateNestedOneWithoutUsersInput
+  borrow_records?: Prisma.borrow_recordsCreateNestedManyWithoutUsersInput
+}
+
+export type usersUncheckedCreateWithoutPurchase_ordersInput = {
+  id?: number
+  full_name?: string | null
+  email?: string | null
+  phone?: string | null
+  role: $Enums.users_role
+  status?: $Enums.users_status | null
+  lang?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  avatar_path?: string | null
+  user_code?: string | null
+  address?: string | null
+  accounts?: Prisma.accountsUncheckedCreateNestedOneWithoutUsersInput
+  borrow_records?: Prisma.borrow_recordsUncheckedCreateNestedManyWithoutUsersInput
+}
+
+export type usersCreateOrConnectWithoutPurchase_ordersInput = {
+  where: Prisma.usersWhereUniqueInput
+  create: Prisma.XOR<Prisma.usersCreateWithoutPurchase_ordersInput, Prisma.usersUncheckedCreateWithoutPurchase_ordersInput>
+}
+
+export type usersUpsertWithoutPurchase_ordersInput = {
+  update: Prisma.XOR<Prisma.usersUpdateWithoutPurchase_ordersInput, Prisma.usersUncheckedUpdateWithoutPurchase_ordersInput>
+  create: Prisma.XOR<Prisma.usersCreateWithoutPurchase_ordersInput, Prisma.usersUncheckedCreateWithoutPurchase_ordersInput>
+  where?: Prisma.usersWhereInput
+}
+
+export type usersUpdateToOneWithWhereWithoutPurchase_ordersInput = {
+  where?: Prisma.usersWhereInput
+  data: Prisma.XOR<Prisma.usersUpdateWithoutPurchase_ordersInput, Prisma.usersUncheckedUpdateWithoutPurchase_ordersInput>
+}
+
+export type usersUpdateWithoutPurchase_ordersInput = {
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.accountsUpdateOneWithoutUsersNestedInput
+  borrow_records?: Prisma.borrow_recordsUpdateManyWithoutUsersNestedInput
+}
+
+export type usersUncheckedUpdateWithoutPurchase_ordersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  full_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.Enumusers_roleFieldUpdateOperationsInput | $Enums.users_role
+  status?: Prisma.NullableEnumusers_statusFieldUpdateOperationsInput | $Enums.users_status | null
+  lang?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.accountsUncheckedUpdateOneWithoutUsersNestedInput
+  borrow_records?: Prisma.borrow_recordsUncheckedUpdateManyWithoutUsersNestedInput
+}
+
+
+/**
+ * Count Type UsersCountOutputType
+ */
+
+export type UsersCountOutputType = {
+  borrow_records: number
+  purchase_orders: number
+}
+
+export type UsersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  borrow_records?: boolean | UsersCountOutputTypeCountBorrow_recordsArgs
+  purchase_orders?: boolean | UsersCountOutputTypeCountPurchase_ordersArgs
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UsersCountOutputType
+   */
+  select?: Prisma.UsersCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountBorrow_recordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.borrow_recordsWhereInput
+}
+
+/**
+ * UsersCountOutputType without action
+ */
+export type UsersCountOutputTypeCountPurchase_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.purchase_ordersWhereInput
+}
 
 
 export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -592,7 +905,12 @@ export type usersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   created_at?: boolean
   updated_at?: boolean
   avatar_path?: boolean
+  user_code?: boolean
+  address?: boolean
   accounts?: boolean | Prisma.users$accountsArgs<ExtArgs>
+  borrow_records?: boolean | Prisma.users$borrow_recordsArgs<ExtArgs>
+  purchase_orders?: boolean | Prisma.users$purchase_ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["users"]>
 
 
@@ -608,17 +926,24 @@ export type usersSelectScalar = {
   created_at?: boolean
   updated_at?: boolean
   avatar_path?: boolean
+  user_code?: boolean
+  address?: boolean
 }
 
-export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "full_name" | "email" | "phone" | "role" | "status" | "lang" | "created_at" | "updated_at" | "avatar_path", ExtArgs["result"]["users"]>
+export type usersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "full_name" | "email" | "phone" | "role" | "status" | "lang" | "created_at" | "updated_at" | "avatar_path" | "user_code" | "address", ExtArgs["result"]["users"]>
 export type usersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.users$accountsArgs<ExtArgs>
+  borrow_records?: boolean | Prisma.users$borrow_recordsArgs<ExtArgs>
+  purchase_orders?: boolean | Prisma.users$purchase_ordersArgs<ExtArgs>
+  _count?: boolean | Prisma.UsersCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "users"
   objects: {
     accounts: Prisma.$accountsPayload<ExtArgs> | null
+    borrow_records: Prisma.$borrow_recordsPayload<ExtArgs>[]
+    purchase_orders: Prisma.$purchase_ordersPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -631,6 +956,8 @@ export type $usersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     created_at: Date
     updated_at: Date
     avatar_path: string | null
+    user_code: string | null
+    address: string | null
   }, ExtArgs["result"]["users"]>
   composites: {}
 }
@@ -972,6 +1299,8 @@ readonly fields: usersFieldRefs;
 export interface Prisma__usersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   accounts<T extends Prisma.users$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$accountsArgs<ExtArgs>>): Prisma.Prisma__accountsClient<runtime.Types.Result.GetResult<Prisma.$accountsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  borrow_records<T extends Prisma.users$borrow_recordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$borrow_recordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$borrow_recordsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchase_orders<T extends Prisma.users$purchase_ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.users$purchase_ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$purchase_ordersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1011,6 +1340,8 @@ export interface usersFieldRefs {
   readonly created_at: Prisma.FieldRef<"users", 'DateTime'>
   readonly updated_at: Prisma.FieldRef<"users", 'DateTime'>
   readonly avatar_path: Prisma.FieldRef<"users", 'String'>
+  readonly user_code: Prisma.FieldRef<"users", 'String'>
+  readonly address: Prisma.FieldRef<"users", 'String'>
 }
     
 
@@ -1370,6 +1701,54 @@ export type users$accountsArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   include?: Prisma.accountsInclude<ExtArgs> | null
   where?: Prisma.accountsWhereInput
+}
+
+/**
+ * users.borrow_records
+ */
+export type users$borrow_recordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the borrow_records
+   */
+  select?: Prisma.borrow_recordsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the borrow_records
+   */
+  omit?: Prisma.borrow_recordsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.borrow_recordsInclude<ExtArgs> | null
+  where?: Prisma.borrow_recordsWhereInput
+  orderBy?: Prisma.borrow_recordsOrderByWithRelationInput | Prisma.borrow_recordsOrderByWithRelationInput[]
+  cursor?: Prisma.borrow_recordsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Borrow_recordsScalarFieldEnum | Prisma.Borrow_recordsScalarFieldEnum[]
+}
+
+/**
+ * users.purchase_orders
+ */
+export type users$purchase_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the purchase_orders
+   */
+  select?: Prisma.purchase_ordersSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the purchase_orders
+   */
+  omit?: Prisma.purchase_ordersOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.purchase_ordersInclude<ExtArgs> | null
+  where?: Prisma.purchase_ordersWhereInput
+  orderBy?: Prisma.purchase_ordersOrderByWithRelationInput | Prisma.purchase_ordersOrderByWithRelationInput[]
+  cursor?: Prisma.purchase_ordersWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Purchase_ordersScalarFieldEnum | Prisma.Purchase_ordersScalarFieldEnum[]
 }
 
 /**

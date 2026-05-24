@@ -10,6 +10,8 @@ export class HttpException extends Error {
         this.message = message;
         this.errors = errors;
 
+        Object.setPrototypeOf(this, new.target.prototype);
+
         Error.captureStackTrace(this, this.constructor);
     }
 }

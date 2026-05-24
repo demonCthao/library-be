@@ -28,19 +28,18 @@ export type AggregatePurchase_orders = {
 
 export type Purchase_ordersAvgAggregateOutputType = {
   id: number | null
-  reader_id: number | null
   total_price: runtime.Decimal | null
+  user_id: number | null
 }
 
 export type Purchase_ordersSumAggregateOutputType = {
   id: number | null
-  reader_id: number | null
   total_price: runtime.Decimal | null
+  user_id: number | null
 }
 
 export type Purchase_ordersMinAggregateOutputType = {
   id: number | null
-  reader_id: number | null
   guest_name: string | null
   guest_phone: string | null
   total_price: runtime.Decimal | null
@@ -48,11 +47,11 @@ export type Purchase_ordersMinAggregateOutputType = {
   updated_at: Date | null
   purchase_order_code: string | null
   payment_status: string | null
+  user_id: number | null
 }
 
 export type Purchase_ordersMaxAggregateOutputType = {
   id: number | null
-  reader_id: number | null
   guest_name: string | null
   guest_phone: string | null
   total_price: runtime.Decimal | null
@@ -60,11 +59,11 @@ export type Purchase_ordersMaxAggregateOutputType = {
   updated_at: Date | null
   purchase_order_code: string | null
   payment_status: string | null
+  user_id: number | null
 }
 
 export type Purchase_ordersCountAggregateOutputType = {
   id: number
-  reader_id: number
   guest_name: number
   guest_phone: number
   total_price: number
@@ -72,25 +71,25 @@ export type Purchase_ordersCountAggregateOutputType = {
   updated_at: number
   purchase_order_code: number
   payment_status: number
+  user_id: number
   _all: number
 }
 
 
 export type Purchase_ordersAvgAggregateInputType = {
   id?: true
-  reader_id?: true
   total_price?: true
+  user_id?: true
 }
 
 export type Purchase_ordersSumAggregateInputType = {
   id?: true
-  reader_id?: true
   total_price?: true
+  user_id?: true
 }
 
 export type Purchase_ordersMinAggregateInputType = {
   id?: true
-  reader_id?: true
   guest_name?: true
   guest_phone?: true
   total_price?: true
@@ -98,11 +97,11 @@ export type Purchase_ordersMinAggregateInputType = {
   updated_at?: true
   purchase_order_code?: true
   payment_status?: true
+  user_id?: true
 }
 
 export type Purchase_ordersMaxAggregateInputType = {
   id?: true
-  reader_id?: true
   guest_name?: true
   guest_phone?: true
   total_price?: true
@@ -110,11 +109,11 @@ export type Purchase_ordersMaxAggregateInputType = {
   updated_at?: true
   purchase_order_code?: true
   payment_status?: true
+  user_id?: true
 }
 
 export type Purchase_ordersCountAggregateInputType = {
   id?: true
-  reader_id?: true
   guest_name?: true
   guest_phone?: true
   total_price?: true
@@ -122,6 +121,7 @@ export type Purchase_ordersCountAggregateInputType = {
   updated_at?: true
   purchase_order_code?: true
   payment_status?: true
+  user_id?: true
   _all?: true
 }
 
@@ -213,7 +213,6 @@ export type purchase_ordersGroupByArgs<ExtArgs extends runtime.Types.Extensions.
 
 export type Purchase_ordersGroupByOutputType = {
   id: number
-  reader_id: number | null
   guest_name: string | null
   guest_phone: string | null
   total_price: runtime.Decimal
@@ -221,6 +220,7 @@ export type Purchase_ordersGroupByOutputType = {
   updated_at: Date
   purchase_order_code: string
   payment_status: string
+  user_id: number | null
   _count: Purchase_ordersCountAggregateOutputType | null
   _avg: Purchase_ordersAvgAggregateOutputType | null
   _sum: Purchase_ordersSumAggregateOutputType | null
@@ -248,7 +248,6 @@ export type purchase_ordersWhereInput = {
   OR?: Prisma.purchase_ordersWhereInput[]
   NOT?: Prisma.purchase_ordersWhereInput | Prisma.purchase_ordersWhereInput[]
   id?: Prisma.IntFilter<"purchase_orders"> | number
-  reader_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
   guest_name?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   guest_phone?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -256,13 +255,13 @@ export type purchase_ordersWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
   payment_status?: Prisma.StringFilter<"purchase_orders"> | string
+  user_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
-  readers?: Prisma.XOR<Prisma.ReadersNullableScalarRelationFilter, Prisma.readersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
 }
 
 export type purchase_ordersOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrderInput | Prisma.SortOrder
   guest_name?: Prisma.SortOrderInput | Prisma.SortOrder
   guest_phone?: Prisma.SortOrderInput | Prisma.SortOrder
   total_price?: Prisma.SortOrder
@@ -270,8 +269,9 @@ export type purchase_ordersOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   purchase_order_code?: Prisma.SortOrder
   payment_status?: Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   purchase_order_items?: Prisma.purchase_order_itemsOrderByRelationAggregateInput
-  readers?: Prisma.readersOrderByWithRelationInput
+  users?: Prisma.usersOrderByWithRelationInput
   _relevance?: Prisma.purchase_ordersOrderByRelevanceInput
 }
 
@@ -280,7 +280,6 @@ export type purchase_ordersWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.purchase_ordersWhereInput | Prisma.purchase_ordersWhereInput[]
   OR?: Prisma.purchase_ordersWhereInput[]
   NOT?: Prisma.purchase_ordersWhereInput | Prisma.purchase_ordersWhereInput[]
-  reader_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
   guest_name?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   guest_phone?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -288,13 +287,13 @@ export type purchase_ordersWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
   payment_status?: Prisma.StringFilter<"purchase_orders"> | string
+  user_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
-  readers?: Prisma.XOR<Prisma.ReadersNullableScalarRelationFilter, Prisma.readersWhereInput> | null
+  users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
 }, "id">
 
 export type purchase_ordersOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrderInput | Prisma.SortOrder
   guest_name?: Prisma.SortOrderInput | Prisma.SortOrder
   guest_phone?: Prisma.SortOrderInput | Prisma.SortOrder
   total_price?: Prisma.SortOrder
@@ -302,6 +301,7 @@ export type purchase_ordersOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrder
   purchase_order_code?: Prisma.SortOrder
   payment_status?: Prisma.SortOrder
+  user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.purchase_ordersCountOrderByAggregateInput
   _avg?: Prisma.purchase_ordersAvgOrderByAggregateInput
   _max?: Prisma.purchase_ordersMaxOrderByAggregateInput
@@ -314,7 +314,6 @@ export type purchase_ordersScalarWhereWithAggregatesInput = {
   OR?: Prisma.purchase_ordersScalarWhereWithAggregatesInput[]
   NOT?: Prisma.purchase_ordersScalarWhereWithAggregatesInput | Prisma.purchase_ordersScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"purchase_orders"> | number
-  reader_id?: Prisma.IntNullableWithAggregatesFilter<"purchase_orders"> | number | null
   guest_name?: Prisma.StringNullableWithAggregatesFilter<"purchase_orders"> | string | null
   guest_phone?: Prisma.StringNullableWithAggregatesFilter<"purchase_orders"> | string | null
   total_price?: Prisma.DecimalWithAggregatesFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -322,6 +321,7 @@ export type purchase_ordersScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"purchase_orders"> | Date | string
   purchase_order_code?: Prisma.StringWithAggregatesFilter<"purchase_orders"> | string
   payment_status?: Prisma.StringWithAggregatesFilter<"purchase_orders"> | string
+  user_id?: Prisma.IntNullableWithAggregatesFilter<"purchase_orders"> | number | null
 }
 
 export type purchase_ordersCreateInput = {
@@ -333,12 +333,11 @@ export type purchase_ordersCreateInput = {
   purchase_order_code: string
   payment_status?: string
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutPurchase_ordersInput
-  readers?: Prisma.readersCreateNestedOneWithoutPurchase_ordersInput
+  users?: Prisma.usersCreateNestedOneWithoutPurchase_ordersInput
 }
 
 export type purchase_ordersUncheckedCreateInput = {
   id?: number
-  reader_id?: number | null
   guest_name?: string | null
   guest_phone?: string | null
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -346,6 +345,7 @@ export type purchase_ordersUncheckedCreateInput = {
   updated_at?: Date | string
   purchase_order_code: string
   payment_status?: string
+  user_id?: number | null
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutPurchase_ordersInput
 }
 
@@ -358,12 +358,11 @@ export type purchase_ordersUpdateInput = {
   purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   payment_status?: Prisma.StringFieldUpdateOperationsInput | string
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutPurchase_ordersNestedInput
-  readers?: Prisma.readersUpdateOneWithoutPurchase_ordersNestedInput
+  users?: Prisma.usersUpdateOneWithoutPurchase_ordersNestedInput
 }
 
 export type purchase_ordersUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -371,12 +370,12 @@ export type purchase_ordersUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   payment_status?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutPurchase_ordersNestedInput
 }
 
 export type purchase_ordersCreateManyInput = {
   id?: number
-  reader_id?: number | null
   guest_name?: string | null
   guest_phone?: string | null
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -384,6 +383,7 @@ export type purchase_ordersCreateManyInput = {
   updated_at?: Date | string
   purchase_order_code: string
   payment_status?: string
+  user_id?: number | null
 }
 
 export type purchase_ordersUpdateManyMutationInput = {
@@ -398,7 +398,6 @@ export type purchase_ordersUpdateManyMutationInput = {
 
 export type purchase_ordersUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -406,6 +405,7 @@ export type purchase_ordersUncheckedUpdateManyInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   payment_status?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type Purchase_ordersListRelationFilter = {
@@ -431,7 +431,6 @@ export type purchase_ordersOrderByRelevanceInput = {
 
 export type purchase_ordersCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrder
   guest_name?: Prisma.SortOrder
   guest_phone?: Prisma.SortOrder
   total_price?: Prisma.SortOrder
@@ -439,17 +438,17 @@ export type purchase_ordersCountOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   purchase_order_code?: Prisma.SortOrder
   payment_status?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
 export type purchase_ordersAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrder
   total_price?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
 export type purchase_ordersMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrder
   guest_name?: Prisma.SortOrder
   guest_phone?: Prisma.SortOrder
   total_price?: Prisma.SortOrder
@@ -457,11 +456,11 @@ export type purchase_ordersMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   purchase_order_code?: Prisma.SortOrder
   payment_status?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
 export type purchase_ordersMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrder
   guest_name?: Prisma.SortOrder
   guest_phone?: Prisma.SortOrder
   total_price?: Prisma.SortOrder
@@ -469,53 +468,54 @@ export type purchase_ordersMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   purchase_order_code?: Prisma.SortOrder
   payment_status?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
 export type purchase_ordersSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  reader_id?: Prisma.SortOrder
   total_price?: Prisma.SortOrder
+  user_id?: Prisma.SortOrder
 }
 
-export type purchase_ordersCreateNestedManyWithoutReadersInput = {
-  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput> | Prisma.purchase_ordersCreateWithoutReadersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutReadersInput[]
-  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutReadersInput | Prisma.purchase_ordersCreateOrConnectWithoutReadersInput[]
-  createMany?: Prisma.purchase_ordersCreateManyReadersInputEnvelope
+export type purchase_ordersCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput> | Prisma.purchase_ordersCreateWithoutUsersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutUsersInput | Prisma.purchase_ordersCreateOrConnectWithoutUsersInput[]
+  createMany?: Prisma.purchase_ordersCreateManyUsersInputEnvelope
   connect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
 }
 
-export type purchase_ordersUncheckedCreateNestedManyWithoutReadersInput = {
-  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput> | Prisma.purchase_ordersCreateWithoutReadersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutReadersInput[]
-  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutReadersInput | Prisma.purchase_ordersCreateOrConnectWithoutReadersInput[]
-  createMany?: Prisma.purchase_ordersCreateManyReadersInputEnvelope
+export type purchase_ordersUncheckedCreateNestedManyWithoutUsersInput = {
+  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput> | Prisma.purchase_ordersCreateWithoutUsersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutUsersInput | Prisma.purchase_ordersCreateOrConnectWithoutUsersInput[]
+  createMany?: Prisma.purchase_ordersCreateManyUsersInputEnvelope
   connect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
 }
 
-export type purchase_ordersUpdateManyWithoutReadersNestedInput = {
-  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput> | Prisma.purchase_ordersCreateWithoutReadersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutReadersInput[]
-  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutReadersInput | Prisma.purchase_ordersCreateOrConnectWithoutReadersInput[]
-  upsert?: Prisma.purchase_ordersUpsertWithWhereUniqueWithoutReadersInput | Prisma.purchase_ordersUpsertWithWhereUniqueWithoutReadersInput[]
-  createMany?: Prisma.purchase_ordersCreateManyReadersInputEnvelope
+export type purchase_ordersUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput> | Prisma.purchase_ordersCreateWithoutUsersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutUsersInput | Prisma.purchase_ordersCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.purchase_ordersUpsertWithWhereUniqueWithoutUsersInput | Prisma.purchase_ordersUpsertWithWhereUniqueWithoutUsersInput[]
+  createMany?: Prisma.purchase_ordersCreateManyUsersInputEnvelope
   set?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   disconnect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   delete?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   connect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
-  update?: Prisma.purchase_ordersUpdateWithWhereUniqueWithoutReadersInput | Prisma.purchase_ordersUpdateWithWhereUniqueWithoutReadersInput[]
-  updateMany?: Prisma.purchase_ordersUpdateManyWithWhereWithoutReadersInput | Prisma.purchase_ordersUpdateManyWithWhereWithoutReadersInput[]
+  update?: Prisma.purchase_ordersUpdateWithWhereUniqueWithoutUsersInput | Prisma.purchase_ordersUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.purchase_ordersUpdateManyWithWhereWithoutUsersInput | Prisma.purchase_ordersUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.purchase_ordersScalarWhereInput | Prisma.purchase_ordersScalarWhereInput[]
 }
 
-export type purchase_ordersUncheckedUpdateManyWithoutReadersNestedInput = {
-  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput> | Prisma.purchase_ordersCreateWithoutReadersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutReadersInput[]
-  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutReadersInput | Prisma.purchase_ordersCreateOrConnectWithoutReadersInput[]
-  upsert?: Prisma.purchase_ordersUpsertWithWhereUniqueWithoutReadersInput | Prisma.purchase_ordersUpsertWithWhereUniqueWithoutReadersInput[]
-  createMany?: Prisma.purchase_ordersCreateManyReadersInputEnvelope
+export type purchase_ordersUncheckedUpdateManyWithoutUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput> | Prisma.purchase_ordersCreateWithoutUsersInput[] | Prisma.purchase_ordersUncheckedCreateWithoutUsersInput[]
+  connectOrCreate?: Prisma.purchase_ordersCreateOrConnectWithoutUsersInput | Prisma.purchase_ordersCreateOrConnectWithoutUsersInput[]
+  upsert?: Prisma.purchase_ordersUpsertWithWhereUniqueWithoutUsersInput | Prisma.purchase_ordersUpsertWithWhereUniqueWithoutUsersInput[]
+  createMany?: Prisma.purchase_ordersCreateManyUsersInputEnvelope
   set?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   disconnect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   delete?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
   connect?: Prisma.purchase_ordersWhereUniqueInput | Prisma.purchase_ordersWhereUniqueInput[]
-  update?: Prisma.purchase_ordersUpdateWithWhereUniqueWithoutReadersInput | Prisma.purchase_ordersUpdateWithWhereUniqueWithoutReadersInput[]
-  updateMany?: Prisma.purchase_ordersUpdateManyWithWhereWithoutReadersInput | Prisma.purchase_ordersUpdateManyWithWhereWithoutReadersInput[]
+  update?: Prisma.purchase_ordersUpdateWithWhereUniqueWithoutUsersInput | Prisma.purchase_ordersUpdateWithWhereUniqueWithoutUsersInput[]
+  updateMany?: Prisma.purchase_ordersUpdateManyWithWhereWithoutUsersInput | Prisma.purchase_ordersUpdateManyWithWhereWithoutUsersInput[]
   deleteMany?: Prisma.purchase_ordersScalarWhereInput | Prisma.purchase_ordersScalarWhereInput[]
 }
 
@@ -533,7 +533,7 @@ export type purchase_ordersUpdateOneRequiredWithoutPurchase_order_itemsNestedInp
   update?: Prisma.XOR<Prisma.XOR<Prisma.purchase_ordersUpdateToOneWithWhereWithoutPurchase_order_itemsInput, Prisma.purchase_ordersUpdateWithoutPurchase_order_itemsInput>, Prisma.purchase_ordersUncheckedUpdateWithoutPurchase_order_itemsInput>
 }
 
-export type purchase_ordersCreateWithoutReadersInput = {
+export type purchase_ordersCreateWithoutUsersInput = {
   guest_name?: string | null
   guest_phone?: string | null
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -544,7 +544,7 @@ export type purchase_ordersCreateWithoutReadersInput = {
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutPurchase_ordersInput
 }
 
-export type purchase_ordersUncheckedCreateWithoutReadersInput = {
+export type purchase_ordersUncheckedCreateWithoutUsersInput = {
   id?: number
   guest_name?: string | null
   guest_phone?: string | null
@@ -556,30 +556,30 @@ export type purchase_ordersUncheckedCreateWithoutReadersInput = {
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutPurchase_ordersInput
 }
 
-export type purchase_ordersCreateOrConnectWithoutReadersInput = {
+export type purchase_ordersCreateOrConnectWithoutUsersInput = {
   where: Prisma.purchase_ordersWhereUniqueInput
-  create: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput>
+  create: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput>
 }
 
-export type purchase_ordersCreateManyReadersInputEnvelope = {
-  data: Prisma.purchase_ordersCreateManyReadersInput | Prisma.purchase_ordersCreateManyReadersInput[]
+export type purchase_ordersCreateManyUsersInputEnvelope = {
+  data: Prisma.purchase_ordersCreateManyUsersInput | Prisma.purchase_ordersCreateManyUsersInput[]
   skipDuplicates?: boolean
 }
 
-export type purchase_ordersUpsertWithWhereUniqueWithoutReadersInput = {
+export type purchase_ordersUpsertWithWhereUniqueWithoutUsersInput = {
   where: Prisma.purchase_ordersWhereUniqueInput
-  update: Prisma.XOR<Prisma.purchase_ordersUpdateWithoutReadersInput, Prisma.purchase_ordersUncheckedUpdateWithoutReadersInput>
-  create: Prisma.XOR<Prisma.purchase_ordersCreateWithoutReadersInput, Prisma.purchase_ordersUncheckedCreateWithoutReadersInput>
+  update: Prisma.XOR<Prisma.purchase_ordersUpdateWithoutUsersInput, Prisma.purchase_ordersUncheckedUpdateWithoutUsersInput>
+  create: Prisma.XOR<Prisma.purchase_ordersCreateWithoutUsersInput, Prisma.purchase_ordersUncheckedCreateWithoutUsersInput>
 }
 
-export type purchase_ordersUpdateWithWhereUniqueWithoutReadersInput = {
+export type purchase_ordersUpdateWithWhereUniqueWithoutUsersInput = {
   where: Prisma.purchase_ordersWhereUniqueInput
-  data: Prisma.XOR<Prisma.purchase_ordersUpdateWithoutReadersInput, Prisma.purchase_ordersUncheckedUpdateWithoutReadersInput>
+  data: Prisma.XOR<Prisma.purchase_ordersUpdateWithoutUsersInput, Prisma.purchase_ordersUncheckedUpdateWithoutUsersInput>
 }
 
-export type purchase_ordersUpdateManyWithWhereWithoutReadersInput = {
+export type purchase_ordersUpdateManyWithWhereWithoutUsersInput = {
   where: Prisma.purchase_ordersScalarWhereInput
-  data: Prisma.XOR<Prisma.purchase_ordersUpdateManyMutationInput, Prisma.purchase_ordersUncheckedUpdateManyWithoutReadersInput>
+  data: Prisma.XOR<Prisma.purchase_ordersUpdateManyMutationInput, Prisma.purchase_ordersUncheckedUpdateManyWithoutUsersInput>
 }
 
 export type purchase_ordersScalarWhereInput = {
@@ -587,7 +587,6 @@ export type purchase_ordersScalarWhereInput = {
   OR?: Prisma.purchase_ordersScalarWhereInput[]
   NOT?: Prisma.purchase_ordersScalarWhereInput | Prisma.purchase_ordersScalarWhereInput[]
   id?: Prisma.IntFilter<"purchase_orders"> | number
-  reader_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
   guest_name?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   guest_phone?: Prisma.StringNullableFilter<"purchase_orders"> | string | null
   total_price?: Prisma.DecimalFilter<"purchase_orders"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -595,6 +594,7 @@ export type purchase_ordersScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"purchase_orders"> | Date | string
   purchase_order_code?: Prisma.StringFilter<"purchase_orders"> | string
   payment_status?: Prisma.StringFilter<"purchase_orders"> | string
+  user_id?: Prisma.IntNullableFilter<"purchase_orders"> | number | null
 }
 
 export type purchase_ordersCreateWithoutPurchase_order_itemsInput = {
@@ -605,12 +605,11 @@ export type purchase_ordersCreateWithoutPurchase_order_itemsInput = {
   updated_at?: Date | string
   purchase_order_code: string
   payment_status?: string
-  readers?: Prisma.readersCreateNestedOneWithoutPurchase_ordersInput
+  users?: Prisma.usersCreateNestedOneWithoutPurchase_ordersInput
 }
 
 export type purchase_ordersUncheckedCreateWithoutPurchase_order_itemsInput = {
   id?: number
-  reader_id?: number | null
   guest_name?: string | null
   guest_phone?: string | null
   total_price?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -618,6 +617,7 @@ export type purchase_ordersUncheckedCreateWithoutPurchase_order_itemsInput = {
   updated_at?: Date | string
   purchase_order_code: string
   payment_status?: string
+  user_id?: number | null
 }
 
 export type purchase_ordersCreateOrConnectWithoutPurchase_order_itemsInput = {
@@ -644,12 +644,11 @@ export type purchase_ordersUpdateWithoutPurchase_order_itemsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   payment_status?: Prisma.StringFieldUpdateOperationsInput | string
-  readers?: Prisma.readersUpdateOneWithoutPurchase_ordersNestedInput
+  users?: Prisma.usersUpdateOneWithoutPurchase_ordersNestedInput
 }
 
 export type purchase_ordersUncheckedUpdateWithoutPurchase_order_itemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -657,9 +656,10 @@ export type purchase_ordersUncheckedUpdateWithoutPurchase_order_itemsInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   purchase_order_code?: Prisma.StringFieldUpdateOperationsInput | string
   payment_status?: Prisma.StringFieldUpdateOperationsInput | string
+  user_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
-export type purchase_ordersCreateManyReadersInput = {
+export type purchase_ordersCreateManyUsersInput = {
   id?: number
   guest_name?: string | null
   guest_phone?: string | null
@@ -670,7 +670,7 @@ export type purchase_ordersCreateManyReadersInput = {
   payment_status?: string
 }
 
-export type purchase_ordersUpdateWithoutReadersInput = {
+export type purchase_ordersUpdateWithoutUsersInput = {
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -681,7 +681,7 @@ export type purchase_ordersUpdateWithoutReadersInput = {
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutPurchase_ordersNestedInput
 }
 
-export type purchase_ordersUncheckedUpdateWithoutReadersInput = {
+export type purchase_ordersUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -693,7 +693,7 @@ export type purchase_ordersUncheckedUpdateWithoutReadersInput = {
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutPurchase_ordersNestedInput
 }
 
-export type purchase_ordersUncheckedUpdateManyWithoutReadersInput = {
+export type purchase_ordersUncheckedUpdateManyWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   guest_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   guest_phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -737,7 +737,6 @@ export type Purchase_ordersCountOutputTypeCountPurchase_order_itemsArgs<ExtArgs 
 
 export type purchase_ordersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  reader_id?: boolean
   guest_name?: boolean
   guest_phone?: boolean
   total_price?: boolean
@@ -745,8 +744,9 @@ export type purchase_ordersSelect<ExtArgs extends runtime.Types.Extensions.Inter
   updated_at?: boolean
   purchase_order_code?: boolean
   payment_status?: boolean
+  user_id?: boolean
   purchase_order_items?: boolean | Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs>
-  readers?: boolean | Prisma.purchase_orders$readersArgs<ExtArgs>
+  users?: boolean | Prisma.purchase_orders$usersArgs<ExtArgs>
   _count?: boolean | Prisma.Purchase_ordersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["purchase_orders"]>
 
@@ -754,7 +754,6 @@ export type purchase_ordersSelect<ExtArgs extends runtime.Types.Extensions.Inter
 
 export type purchase_ordersSelectScalar = {
   id?: boolean
-  reader_id?: boolean
   guest_name?: boolean
   guest_phone?: boolean
   total_price?: boolean
@@ -762,12 +761,13 @@ export type purchase_ordersSelectScalar = {
   updated_at?: boolean
   purchase_order_code?: boolean
   payment_status?: boolean
+  user_id?: boolean
 }
 
-export type purchase_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_id" | "guest_name" | "guest_phone" | "total_price" | "created_at" | "updated_at" | "purchase_order_code" | "payment_status", ExtArgs["result"]["purchase_orders"]>
+export type purchase_ordersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "guest_name" | "guest_phone" | "total_price" | "created_at" | "updated_at" | "purchase_order_code" | "payment_status" | "user_id", ExtArgs["result"]["purchase_orders"]>
 export type purchase_ordersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   purchase_order_items?: boolean | Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs>
-  readers?: boolean | Prisma.purchase_orders$readersArgs<ExtArgs>
+  users?: boolean | Prisma.purchase_orders$usersArgs<ExtArgs>
   _count?: boolean | Prisma.Purchase_ordersCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -775,11 +775,10 @@ export type $purchase_ordersPayload<ExtArgs extends runtime.Types.Extensions.Int
   name: "purchase_orders"
   objects: {
     purchase_order_items: Prisma.$purchase_order_itemsPayload<ExtArgs>[]
-    readers: Prisma.$readersPayload<ExtArgs> | null
+    users: Prisma.$usersPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    reader_id: number | null
     guest_name: string | null
     guest_phone: string | null
     total_price: runtime.Decimal
@@ -787,6 +786,7 @@ export type $purchase_ordersPayload<ExtArgs extends runtime.Types.Extensions.Int
     updated_at: Date
     purchase_order_code: string
     payment_status: string
+    user_id: number | null
   }, ExtArgs["result"]["purchase_orders"]>
   composites: {}
 }
@@ -1128,7 +1128,7 @@ readonly fields: purchase_ordersFieldRefs;
 export interface Prisma__purchase_ordersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   purchase_order_items<T extends Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.purchase_orders$purchase_order_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$purchase_order_itemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  readers<T extends Prisma.purchase_orders$readersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.purchase_orders$readersArgs<ExtArgs>>): Prisma.Prisma__readersClient<runtime.Types.Result.GetResult<Prisma.$readersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  users<T extends Prisma.purchase_orders$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.purchase_orders$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1159,7 +1159,6 @@ export interface Prisma__purchase_ordersClient<T, Null = never, ExtArgs extends 
  */
 export interface purchase_ordersFieldRefs {
   readonly id: Prisma.FieldRef<"purchase_orders", 'Int'>
-  readonly reader_id: Prisma.FieldRef<"purchase_orders", 'Int'>
   readonly guest_name: Prisma.FieldRef<"purchase_orders", 'String'>
   readonly guest_phone: Prisma.FieldRef<"purchase_orders", 'String'>
   readonly total_price: Prisma.FieldRef<"purchase_orders", 'Decimal'>
@@ -1167,6 +1166,7 @@ export interface purchase_ordersFieldRefs {
   readonly updated_at: Prisma.FieldRef<"purchase_orders", 'DateTime'>
   readonly purchase_order_code: Prisma.FieldRef<"purchase_orders", 'String'>
   readonly payment_status: Prisma.FieldRef<"purchase_orders", 'String'>
+  readonly user_id: Prisma.FieldRef<"purchase_orders", 'Int'>
 }
     
 
@@ -1534,22 +1534,22 @@ export type purchase_orders$purchase_order_itemsArgs<ExtArgs extends runtime.Typ
 }
 
 /**
- * purchase_orders.readers
+ * purchase_orders.users
  */
-export type purchase_orders$readersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type purchase_orders$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the readers
+   * Select specific fields to fetch from the users
    */
-  select?: Prisma.readersSelect<ExtArgs> | null
+  select?: Prisma.usersSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the readers
+   * Omit specific fields from the users
    */
-  omit?: Prisma.readersOmit<ExtArgs> | null
+  omit?: Prisma.usersOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  where?: Prisma.readersWhereInput
+  include?: Prisma.usersInclude<ExtArgs> | null
+  where?: Prisma.usersWhereInput
 }
 
 /**

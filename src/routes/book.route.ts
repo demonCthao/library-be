@@ -71,38 +71,29 @@ router.get('/', controller.findAll.bind(controller));
 /**
  * @swagger
  * /api/v1/books:
- *   post:
- *     summary: Create new book
- *     tags: [Books]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - card_id
- *               - first_name
- *               - last_name
- *               - email
- *             properties:
- *               card_id:
- *                 type: string
- *                 example: "CARD001"
- *               first_name:
- *                 type: string
- *                 example: "John"
- *               last_name:
- *                 type: string
- *                 example: "Doe"
- *               email:
- *                 type: string
- *                 example: "john@example.com"
- *     responses:
- *       201:
- *         description: Book created
+ * post:
+ * summary: Create new book
+ * tags: [Books]
+ * requestBody:
+ * required: true
+ * content:
+ * multipart/form-data:
+ * schema:
+ * type: object
+ * properties:
+ * data:
+ * type: string
+ * description: JSON string chứa thông tin sách (không bao gồm id)
+ * example: '{"isbn":"9786042081234","title":"Cún nhỏ nói dối","description":"Tiểu thuyết","publish_year":2010,"language":"Vietnamese","pages":378,"publisher_id":2,"category_id":4,"price":"80000","content":"<p>Nội dung sách...</p>"}'
+ * image:
+ * type: string
+ * format: binary
+ * description: File ảnh bìa sách
+ * responses:
+ * 201:
+ * description: Book created successfully
  */
-router.post('/', controller.store.bind(controller));
+router.post('/', bookUpload.single("image"), controller.store.bind(controller));
 
 /**
  * @swagger

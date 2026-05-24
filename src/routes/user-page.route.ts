@@ -1,74 +1,18 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
 import { createUploader } from '../middlleware/upload.middleware';
+import { UserPageController } from '../controllers/user-page.controller';
 
 const router = Router();
-const userUpload = createUploader("users");
-const controller = new UserController();
+const userUpload = createUploader("users-pages");
+const controller = new UserPageController();
 
 /**
  * @swagger
- * /api/v1/users:
- *   get:
- *     summary: Get list of users
- *     tags: [Users]
- *     parameters:
- *       - in: query
- *         name: fullName
- *         schema:
- *           type: string
- *           example: 
- *         description: Full Name
- *       - in: query
- *         name: phone
- *         schema:
- *           type: string
- *           example: 
- *         description: Phone
- *       - in: query
- *         name: pageIndex
- *         schema:
- *           type: integer
- *           example: 1
- *         description: Page number
- *       - in: query
- *         name: pageSize
- *         schema:
- *           type: integer
- *           example: 10
- *         description: Items per page
- *       - in: query
- *         name: orderBy
- *         schema:
- *           type: string
- *           example: fullName
- *         description: Field to sort by
- *       - in: query
- *         name: order
- *         schema:
- *           type: string
- *           enum: [asc, desc]
- *           example: desc
- *         description: Sort order
- *     responses:
- *       200:
- *         description: List of users
- */
-router.get('/', controller.findAll.bind(controller));
-
-/**
- * @swagger
- * tags:
- *   name: Users
- *   description: User management
- */
-
-/**
- * @swagger
- * /api/v1/users:
+ * /api/v1/users-pages/register:
  *   post:
  *     summary: Create new user
- *     tags: [Users]
+ *     tags: [Users-Pages]
  *     requestBody:
  *       required: true
  *       content:
@@ -97,14 +41,14 @@ router.get('/', controller.findAll.bind(controller));
  *       201:
  *         description: User created
  */
-router.post('/', controller.store.bind(controller));
+router.post('/register', controller.store.bind(controller));
 
 /**
  * @swagger
- * /api/v1/users/{id}:
+ * /api/v1/users-pages/{id}:
  *   put:
  *     summary: Update user
- *     tags: [Users]
+ *     tags: [Users-Pages]
  *     parameters:
  *       - in: path
  *         name: id
@@ -135,10 +79,10 @@ router.put('/:id', userUpload.single("image"), controller.update.bind(controller
 
 /**
  * @swagger
- * /api/v1/users/{id}:
+ * /api/v1/users-pages/{id}:
  *   delete:
  *     summary: Delete user
- *     tags: [Users]
+ *     tags: [Users-Pages]
  *     parameters:
  *       - in: path
  *         name: id
@@ -155,10 +99,10 @@ router.delete('/:id', controller.destroy.bind(controller));
 
 /**
  * @swagger
- * /api/v1/users/profile/{id}:
+ * /api/v1/users-pages/orders/{id}:
  *   get:
- *     summary: Get profile user by ID
- *     tags: [Users]
+ *     summary: Get order user by ID
+ *     tags: [Users-Pages]
  *     parameters:
  *       - in: path
  *         name: id
@@ -169,28 +113,16 @@ router.delete('/:id', controller.destroy.bind(controller));
  *         description: User ID
  *     responses:
  *       200:
- *         description: Get User By ID
+ *         description: Get Order By User ID
  */
-router.get("/profile/:id", controller.getProfileByID.bind(controller));
+router.get("/orders/:id", controller.getOrderByID.bind(controller));
 
 /**
  * @swagger
- * /api/v1/users/excel:
- *   post:
- *     summary: Export user
- *     tags: [Users]
- *     responses:
- *       200:
- *         description: Export Excel User
- */
-router.post("/excel", controller.exportExcel.bind(controller));
-
-/**
- * @swagger
- * /api/v1/users/keyword:
+ * /api/v1/users-pages/keyword:
  *   get:
  *     summary: Get list of users by keyword
- *     tags: [Users]
+ *     tags: [Users-Pages]
  *     parameters:
  *       - in: query
  *         name: keyword
@@ -202,5 +134,29 @@ router.post("/excel", controller.exportExcel.bind(controller));
  *         description: List of users by keyword
  */
 router.get("/keyword", controller.getUserByKeyword.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/users-pages/cart/details:
+ * get:
+ * summary: Get full book details for cart from query data
+ * tags: [Users-Pages]
+ * parameters:
+ * - in: query
+ * name: user_id
+ * schema:
+ * type: integer
+ * example: 1
+ * - in: query
+ * name: books
+ * description: JSON string of cart items or serialized array
+ * schema:
+ * type: string
+ * example: '[{"book_id": 10, "quantity": 2}, {"book_id": 12, "quantity": 1}]'
+ * responses:
+ * 200:
+ * description: List of detailed books in cart with totals
+ */
+router.get("/cart/details", controller.getCartDetails.bind(controller));
 
 export default router;

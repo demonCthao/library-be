@@ -69,6 +69,7 @@ export type BooksMinAggregateOutputType = {
   available_quantity: number | null
   avatar_path: string | null
   price: runtime.Decimal | null
+  content: string | null
 }
 
 export type BooksMaxAggregateOutputType = {
@@ -88,6 +89,7 @@ export type BooksMaxAggregateOutputType = {
   available_quantity: number | null
   avatar_path: string | null
   price: runtime.Decimal | null
+  content: string | null
 }
 
 export type BooksCountAggregateOutputType = {
@@ -107,6 +109,7 @@ export type BooksCountAggregateOutputType = {
   available_quantity: number
   avatar_path: number
   price: number
+  content: number
   _all: number
 }
 
@@ -154,6 +157,7 @@ export type BooksMinAggregateInputType = {
   available_quantity?: true
   avatar_path?: true
   price?: true
+  content?: true
 }
 
 export type BooksMaxAggregateInputType = {
@@ -173,6 +177,7 @@ export type BooksMaxAggregateInputType = {
   available_quantity?: true
   avatar_path?: true
   price?: true
+  content?: true
 }
 
 export type BooksCountAggregateInputType = {
@@ -192,6 +197,7 @@ export type BooksCountAggregateInputType = {
   available_quantity?: true
   avatar_path?: true
   price?: true
+  content?: true
   _all?: true
 }
 
@@ -298,6 +304,7 @@ export type BooksGroupByOutputType = {
   available_quantity: number
   avatar_path: string | null
   price: runtime.Decimal
+  content: string | null
   _count: BooksCountAggregateOutputType | null
   _avg: BooksAvgAggregateOutputType | null
   _sum: BooksSumAggregateOutputType | null
@@ -340,6 +347,7 @@ export type booksWhereInput = {
   available_quantity?: Prisma.IntFilter<"books"> | number
   avatar_path?: Prisma.StringNullableFilter<"books"> | string | null
   price?: Prisma.DecimalFilter<"books"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.StringNullableFilter<"books"> | string | null
   book_authors?: Prisma.Book_authorsListRelationFilter
   publishers?: Prisma.XOR<Prisma.PublishersNullableScalarRelationFilter, Prisma.publishersWhereInput> | null
   categories?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.categoriesWhereInput> | null
@@ -364,6 +372,7 @@ export type booksOrderByWithRelationInput = {
   available_quantity?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
   book_authors?: Prisma.book_authorsOrderByRelationAggregateInput
   publishers?: Prisma.publishersOrderByWithRelationInput
   categories?: Prisma.categoriesOrderByWithRelationInput
@@ -392,6 +401,7 @@ export type booksWhereUniqueInput = Prisma.AtLeast<{
   available_quantity?: Prisma.IntFilter<"books"> | number
   avatar_path?: Prisma.StringNullableFilter<"books"> | string | null
   price?: Prisma.DecimalFilter<"books"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.StringNullableFilter<"books"> | string | null
   book_authors?: Prisma.Book_authorsListRelationFilter
   publishers?: Prisma.XOR<Prisma.PublishersNullableScalarRelationFilter, Prisma.publishersWhereInput> | null
   categories?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.categoriesWhereInput> | null
@@ -416,6 +426,7 @@ export type booksOrderByWithAggregationInput = {
   available_quantity?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrderInput | Prisma.SortOrder
   price?: Prisma.SortOrder
+  content?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.booksCountOrderByAggregateInput
   _avg?: Prisma.booksAvgOrderByAggregateInput
   _max?: Prisma.booksMaxOrderByAggregateInput
@@ -443,6 +454,7 @@ export type booksScalarWhereWithAggregatesInput = {
   available_quantity?: Prisma.IntWithAggregatesFilter<"books"> | number
   avatar_path?: Prisma.StringNullableWithAggregatesFilter<"books"> | string | null
   price?: Prisma.DecimalWithAggregatesFilter<"books"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.StringNullableWithAggregatesFilter<"books"> | string | null
 }
 
 export type booksCreateInput = {
@@ -459,6 +471,7 @@ export type booksCreateInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
@@ -483,6 +496,7 @@ export type booksUncheckedCreateInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
@@ -502,6 +516,7 @@ export type booksUpdateInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
@@ -526,6 +541,7 @@ export type booksUncheckedUpdateInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
@@ -548,6 +564,7 @@ export type booksCreateManyInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
 }
 
 export type booksUpdateManyMutationInput = {
@@ -564,6 +581,7 @@ export type booksUpdateManyMutationInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type booksUncheckedUpdateManyInput = {
@@ -583,6 +601,7 @@ export type booksUncheckedUpdateManyInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BooksScalarRelationFilter = {
@@ -613,6 +632,7 @@ export type booksCountOrderByAggregateInput = {
   available_quantity?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  content?: Prisma.SortOrder
 }
 
 export type booksAvgOrderByAggregateInput = {
@@ -645,6 +665,7 @@ export type booksMaxOrderByAggregateInput = {
   available_quantity?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  content?: Prisma.SortOrder
 }
 
 export type booksMinOrderByAggregateInput = {
@@ -664,6 +685,7 @@ export type booksMinOrderByAggregateInput = {
   available_quantity?: Prisma.SortOrder
   avatar_path?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  content?: Prisma.SortOrder
 }
 
 export type booksSumOrderByAggregateInput = {
@@ -845,6 +867,7 @@ export type booksCreateWithoutBook_authorsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
@@ -868,6 +891,7 @@ export type booksUncheckedCreateWithoutBook_authorsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
@@ -902,6 +926,7 @@ export type booksUpdateWithoutBook_authorsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
@@ -925,6 +950,7 @@ export type booksUncheckedUpdateWithoutBook_authorsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
@@ -943,6 +969,7 @@ export type booksCreateWithoutBorrow_detailsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
@@ -966,6 +993,7 @@ export type booksUncheckedCreateWithoutBorrow_detailsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
@@ -1000,6 +1028,7 @@ export type booksUpdateWithoutBorrow_detailsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
@@ -1023,6 +1052,7 @@ export type booksUncheckedUpdateWithoutBorrow_detailsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
@@ -1041,6 +1071,7 @@ export type booksCreateWithoutPublishersInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
@@ -1063,6 +1094,7 @@ export type booksUncheckedCreateWithoutPublishersInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
@@ -1114,6 +1146,7 @@ export type booksScalarWhereInput = {
   available_quantity?: Prisma.IntFilter<"books"> | number
   avatar_path?: Prisma.StringNullableFilter<"books"> | string | null
   price?: Prisma.DecimalFilter<"books"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.StringNullableFilter<"books"> | string | null
 }
 
 export type booksCreateWithoutCategoriesInput = {
@@ -1130,6 +1163,7 @@ export type booksCreateWithoutCategoriesInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
@@ -1152,6 +1186,7 @@ export type booksUncheckedCreateWithoutCategoriesInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
@@ -1197,6 +1232,7 @@ export type booksCreateWithoutPurchase_order_itemsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
@@ -1220,6 +1256,7 @@ export type booksUncheckedCreateWithoutPurchase_order_itemsInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
 }
@@ -1254,6 +1291,7 @@ export type booksUpdateWithoutPurchase_order_itemsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
@@ -1277,6 +1315,7 @@ export type booksUncheckedUpdateWithoutPurchase_order_itemsInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
 }
@@ -1297,6 +1336,7 @@ export type booksCreateManyPublishersInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
 }
 
 export type booksUpdateWithoutPublishersInput = {
@@ -1313,6 +1353,7 @@ export type booksUpdateWithoutPublishersInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
@@ -1335,6 +1376,7 @@ export type booksUncheckedUpdateWithoutPublishersInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
@@ -1356,6 +1398,7 @@ export type booksUncheckedUpdateManyWithoutPublishersInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type booksCreateManyCategoriesInput = {
@@ -1374,6 +1417,7 @@ export type booksCreateManyCategoriesInput = {
   available_quantity?: number
   avatar_path?: string | null
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
 }
 
 export type booksUpdateWithoutCategoriesInput = {
@@ -1390,6 +1434,7 @@ export type booksUpdateWithoutCategoriesInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
@@ -1412,6 +1457,7 @@ export type booksUncheckedUpdateWithoutCategoriesInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
@@ -1433,6 +1479,7 @@ export type booksUncheckedUpdateManyWithoutCategoriesInput = {
   available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
   avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1501,6 +1548,7 @@ export type booksSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   available_quantity?: boolean
   avatar_path?: boolean
   price?: boolean
+  content?: boolean
   book_authors?: boolean | Prisma.books$book_authorsArgs<ExtArgs>
   publishers?: boolean | Prisma.books$publishersArgs<ExtArgs>
   categories?: boolean | Prisma.books$categoriesArgs<ExtArgs>
@@ -1528,9 +1576,10 @@ export type booksSelectScalar = {
   available_quantity?: boolean
   avatar_path?: boolean
   price?: boolean
+  content?: boolean
 }
 
-export type booksOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "isbn" | "title" | "description" | "publish_year" | "language" | "pages" | "publisher_id" | "category_id" | "created_at" | "stock_quantity" | "borrowed_quantity" | "reserved_quantity" | "available_quantity" | "avatar_path" | "price", ExtArgs["result"]["books"]>
+export type booksOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "isbn" | "title" | "description" | "publish_year" | "language" | "pages" | "publisher_id" | "category_id" | "created_at" | "stock_quantity" | "borrowed_quantity" | "reserved_quantity" | "available_quantity" | "avatar_path" | "price" | "content", ExtArgs["result"]["books"]>
 export type booksInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   book_authors?: boolean | Prisma.books$book_authorsArgs<ExtArgs>
   publishers?: boolean | Prisma.books$publishersArgs<ExtArgs>
@@ -1566,6 +1615,7 @@ export type $booksPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     available_quantity: number
     avatar_path: string | null
     price: runtime.Decimal
+    content: string | null
   }, ExtArgs["result"]["books"]>
   composites: {}
 }
@@ -1956,6 +2006,7 @@ export interface booksFieldRefs {
   readonly available_quantity: Prisma.FieldRef<"books", 'Int'>
   readonly avatar_path: Prisma.FieldRef<"books", 'String'>
   readonly price: Prisma.FieldRef<"books", 'Decimal'>
+  readonly content: Prisma.FieldRef<"books", 'String'>
 }
     
 

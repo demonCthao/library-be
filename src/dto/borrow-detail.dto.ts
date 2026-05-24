@@ -1,10 +1,10 @@
-import { books, borrow_details, borrow_records, readers } from "../generated/prisma/client";
+import { books, borrow_details, borrow_records, users } from "../generated/prisma/client";
 import { BookDto } from "./book.dto";
-import { ReaderDto } from "./reader.dto";
+import { UserDto } from "./user.dto";
 
 export class BorrowDetailDto {
     id: number;
-    reader: ReaderDto;
+    users: UserDto;
     borrow_date: Date;
     due_date: Date;
     return_date: Date | null;
@@ -12,7 +12,7 @@ export class BorrowDetailDto {
     borrow_code: string;
     books: BookDto[];
 
-    constructor(detail: borrow_records & { readers: readers } & {
+    constructor(detail: borrow_records & { users: users } & {
         borrow_details: (
             borrow_details & {
                 books: books;
@@ -20,7 +20,7 @@ export class BorrowDetailDto {
         )[]
     }) {
         this.id = detail.id;
-        this.reader = new ReaderDto(detail.readers);
+        this.users = new UserDto(detail.users);
         this.borrow_date = detail.borrow_date;
         this.due_date = detail.due_date;
         this.return_date = detail.return_date;

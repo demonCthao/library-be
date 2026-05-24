@@ -248,8 +248,6 @@ export type readersWhereInput = {
   phone?: Prisma.StringNullableFilter<"readers"> | string | null
   address?: Prisma.StringNullableFilter<"readers"> | string | null
   created_at?: Prisma.DateTimeFilter<"readers"> | Date | string
-  borrow_records?: Prisma.Borrow_recordsListRelationFilter
-  purchase_orders?: Prisma.Purchase_ordersListRelationFilter
 }
 
 export type readersOrderByWithRelationInput = {
@@ -262,8 +260,6 @@ export type readersOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
-  borrow_records?: Prisma.borrow_recordsOrderByRelationAggregateInput
-  purchase_orders?: Prisma.purchase_ordersOrderByRelationAggregateInput
   _relevance?: Prisma.readersOrderByRelevanceInput
 }
 
@@ -280,8 +276,6 @@ export type readersWhereUniqueInput = Prisma.AtLeast<{
   phone?: Prisma.StringNullableFilter<"readers"> | string | null
   address?: Prisma.StringNullableFilter<"readers"> | string | null
   created_at?: Prisma.DateTimeFilter<"readers"> | Date | string
-  borrow_records?: Prisma.Borrow_recordsListRelationFilter
-  purchase_orders?: Prisma.Purchase_ordersListRelationFilter
 }, "id" | "reader_code">
 
 export type readersOrderByWithAggregationInput = {
@@ -325,8 +319,6 @@ export type readersCreateInput = {
   phone?: string | null
   address?: string | null
   created_at?: Date | string
-  borrow_records?: Prisma.borrow_recordsCreateNestedManyWithoutReadersInput
-  purchase_orders?: Prisma.purchase_ordersCreateNestedManyWithoutReadersInput
 }
 
 export type readersUncheckedCreateInput = {
@@ -339,8 +331,6 @@ export type readersUncheckedCreateInput = {
   phone?: string | null
   address?: string | null
   created_at?: Date | string
-  borrow_records?: Prisma.borrow_recordsUncheckedCreateNestedManyWithoutReadersInput
-  purchase_orders?: Prisma.purchase_ordersUncheckedCreateNestedManyWithoutReadersInput
 }
 
 export type readersUpdateInput = {
@@ -352,8 +342,6 @@ export type readersUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrow_records?: Prisma.borrow_recordsUpdateManyWithoutReadersNestedInput
-  purchase_orders?: Prisma.purchase_ordersUpdateManyWithoutReadersNestedInput
 }
 
 export type readersUncheckedUpdateInput = {
@@ -366,8 +354,6 @@ export type readersUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrow_records?: Prisma.borrow_recordsUncheckedUpdateManyWithoutReadersNestedInput
-  purchase_orders?: Prisma.purchase_ordersUncheckedUpdateManyWithoutReadersNestedInput
 }
 
 export type readersCreateManyInput = {
@@ -403,11 +389,6 @@ export type readersUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ReadersScalarRelationFilter = {
-  is?: Prisma.readersWhereInput
-  isNot?: Prisma.readersWhereInput
 }
 
 export type readersOrderByRelevanceInput = {
@@ -460,215 +441,10 @@ export type readersSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type ReadersNullableScalarRelationFilter = {
-  is?: Prisma.readersWhereInput | null
-  isNot?: Prisma.readersWhereInput | null
-}
-
-export type readersCreateNestedOneWithoutBorrow_recordsInput = {
-  create?: Prisma.XOR<Prisma.readersCreateWithoutBorrow_recordsInput, Prisma.readersUncheckedCreateWithoutBorrow_recordsInput>
-  connectOrCreate?: Prisma.readersCreateOrConnectWithoutBorrow_recordsInput
-  connect?: Prisma.readersWhereUniqueInput
-}
-
-export type readersUpdateOneRequiredWithoutBorrow_recordsNestedInput = {
-  create?: Prisma.XOR<Prisma.readersCreateWithoutBorrow_recordsInput, Prisma.readersUncheckedCreateWithoutBorrow_recordsInput>
-  connectOrCreate?: Prisma.readersCreateOrConnectWithoutBorrow_recordsInput
-  upsert?: Prisma.readersUpsertWithoutBorrow_recordsInput
-  connect?: Prisma.readersWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.readersUpdateToOneWithWhereWithoutBorrow_recordsInput, Prisma.readersUpdateWithoutBorrow_recordsInput>, Prisma.readersUncheckedUpdateWithoutBorrow_recordsInput>
-}
-
 export type NullableEnumreaders_genderFieldUpdateOperationsInput = {
   set?: $Enums.readers_gender | null
 }
 
-export type readersCreateNestedOneWithoutPurchase_ordersInput = {
-  create?: Prisma.XOR<Prisma.readersCreateWithoutPurchase_ordersInput, Prisma.readersUncheckedCreateWithoutPurchase_ordersInput>
-  connectOrCreate?: Prisma.readersCreateOrConnectWithoutPurchase_ordersInput
-  connect?: Prisma.readersWhereUniqueInput
-}
-
-export type readersUpdateOneWithoutPurchase_ordersNestedInput = {
-  create?: Prisma.XOR<Prisma.readersCreateWithoutPurchase_ordersInput, Prisma.readersUncheckedCreateWithoutPurchase_ordersInput>
-  connectOrCreate?: Prisma.readersCreateOrConnectWithoutPurchase_ordersInput
-  upsert?: Prisma.readersUpsertWithoutPurchase_ordersInput
-  disconnect?: Prisma.readersWhereInput | boolean
-  delete?: Prisma.readersWhereInput | boolean
-  connect?: Prisma.readersWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.readersUpdateToOneWithWhereWithoutPurchase_ordersInput, Prisma.readersUpdateWithoutPurchase_ordersInput>, Prisma.readersUncheckedUpdateWithoutPurchase_ordersInput>
-}
-
-export type readersCreateWithoutBorrow_recordsInput = {
-  reader_code: string
-  full_name: string
-  date_of_birth?: Date | string | null
-  gender?: $Enums.readers_gender | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  created_at?: Date | string
-  purchase_orders?: Prisma.purchase_ordersCreateNestedManyWithoutReadersInput
-}
-
-export type readersUncheckedCreateWithoutBorrow_recordsInput = {
-  id?: number
-  reader_code: string
-  full_name: string
-  date_of_birth?: Date | string | null
-  gender?: $Enums.readers_gender | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  created_at?: Date | string
-  purchase_orders?: Prisma.purchase_ordersUncheckedCreateNestedManyWithoutReadersInput
-}
-
-export type readersCreateOrConnectWithoutBorrow_recordsInput = {
-  where: Prisma.readersWhereUniqueInput
-  create: Prisma.XOR<Prisma.readersCreateWithoutBorrow_recordsInput, Prisma.readersUncheckedCreateWithoutBorrow_recordsInput>
-}
-
-export type readersUpsertWithoutBorrow_recordsInput = {
-  update: Prisma.XOR<Prisma.readersUpdateWithoutBorrow_recordsInput, Prisma.readersUncheckedUpdateWithoutBorrow_recordsInput>
-  create: Prisma.XOR<Prisma.readersCreateWithoutBorrow_recordsInput, Prisma.readersUncheckedCreateWithoutBorrow_recordsInput>
-  where?: Prisma.readersWhereInput
-}
-
-export type readersUpdateToOneWithWhereWithoutBorrow_recordsInput = {
-  where?: Prisma.readersWhereInput
-  data: Prisma.XOR<Prisma.readersUpdateWithoutBorrow_recordsInput, Prisma.readersUncheckedUpdateWithoutBorrow_recordsInput>
-}
-
-export type readersUpdateWithoutBorrow_recordsInput = {
-  reader_code?: Prisma.StringFieldUpdateOperationsInput | string
-  full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  gender?: Prisma.NullableEnumreaders_genderFieldUpdateOperationsInput | $Enums.readers_gender | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchase_orders?: Prisma.purchase_ordersUpdateManyWithoutReadersNestedInput
-}
-
-export type readersUncheckedUpdateWithoutBorrow_recordsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_code?: Prisma.StringFieldUpdateOperationsInput | string
-  full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  gender?: Prisma.NullableEnumreaders_genderFieldUpdateOperationsInput | $Enums.readers_gender | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  purchase_orders?: Prisma.purchase_ordersUncheckedUpdateManyWithoutReadersNestedInput
-}
-
-export type readersCreateWithoutPurchase_ordersInput = {
-  reader_code: string
-  full_name: string
-  date_of_birth?: Date | string | null
-  gender?: $Enums.readers_gender | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  created_at?: Date | string
-  borrow_records?: Prisma.borrow_recordsCreateNestedManyWithoutReadersInput
-}
-
-export type readersUncheckedCreateWithoutPurchase_ordersInput = {
-  id?: number
-  reader_code: string
-  full_name: string
-  date_of_birth?: Date | string | null
-  gender?: $Enums.readers_gender | null
-  email?: string | null
-  phone?: string | null
-  address?: string | null
-  created_at?: Date | string
-  borrow_records?: Prisma.borrow_recordsUncheckedCreateNestedManyWithoutReadersInput
-}
-
-export type readersCreateOrConnectWithoutPurchase_ordersInput = {
-  where: Prisma.readersWhereUniqueInput
-  create: Prisma.XOR<Prisma.readersCreateWithoutPurchase_ordersInput, Prisma.readersUncheckedCreateWithoutPurchase_ordersInput>
-}
-
-export type readersUpsertWithoutPurchase_ordersInput = {
-  update: Prisma.XOR<Prisma.readersUpdateWithoutPurchase_ordersInput, Prisma.readersUncheckedUpdateWithoutPurchase_ordersInput>
-  create: Prisma.XOR<Prisma.readersCreateWithoutPurchase_ordersInput, Prisma.readersUncheckedCreateWithoutPurchase_ordersInput>
-  where?: Prisma.readersWhereInput
-}
-
-export type readersUpdateToOneWithWhereWithoutPurchase_ordersInput = {
-  where?: Prisma.readersWhereInput
-  data: Prisma.XOR<Prisma.readersUpdateWithoutPurchase_ordersInput, Prisma.readersUncheckedUpdateWithoutPurchase_ordersInput>
-}
-
-export type readersUpdateWithoutPurchase_ordersInput = {
-  reader_code?: Prisma.StringFieldUpdateOperationsInput | string
-  full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  gender?: Prisma.NullableEnumreaders_genderFieldUpdateOperationsInput | $Enums.readers_gender | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrow_records?: Prisma.borrow_recordsUpdateManyWithoutReadersNestedInput
-}
-
-export type readersUncheckedUpdateWithoutPurchase_ordersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  reader_code?: Prisma.StringFieldUpdateOperationsInput | string
-  full_name?: Prisma.StringFieldUpdateOperationsInput | string
-  date_of_birth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  gender?: Prisma.NullableEnumreaders_genderFieldUpdateOperationsInput | $Enums.readers_gender | null
-  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  borrow_records?: Prisma.borrow_recordsUncheckedUpdateManyWithoutReadersNestedInput
-}
-
-
-/**
- * Count Type ReadersCountOutputType
- */
-
-export type ReadersCountOutputType = {
-  borrow_records: number
-  purchase_orders: number
-}
-
-export type ReadersCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  borrow_records?: boolean | ReadersCountOutputTypeCountBorrow_recordsArgs
-  purchase_orders?: boolean | ReadersCountOutputTypeCountPurchase_ordersArgs
-}
-
-/**
- * ReadersCountOutputType without action
- */
-export type ReadersCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ReadersCountOutputType
-   */
-  select?: Prisma.ReadersCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * ReadersCountOutputType without action
- */
-export type ReadersCountOutputTypeCountBorrow_recordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.borrow_recordsWhereInput
-}
-
-/**
- * ReadersCountOutputType without action
- */
-export type ReadersCountOutputTypeCountPurchase_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.purchase_ordersWhereInput
-}
 
 
 export type readersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -681,9 +457,6 @@ export type readersSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   phone?: boolean
   address?: boolean
   created_at?: boolean
-  borrow_records?: boolean | Prisma.readers$borrow_recordsArgs<ExtArgs>
-  purchase_orders?: boolean | Prisma.readers$purchase_ordersArgs<ExtArgs>
-  _count?: boolean | Prisma.ReadersCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["readers"]>
 
 
@@ -701,18 +474,10 @@ export type readersSelectScalar = {
 }
 
 export type readersOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reader_code" | "full_name" | "date_of_birth" | "gender" | "email" | "phone" | "address" | "created_at", ExtArgs["result"]["readers"]>
-export type readersInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  borrow_records?: boolean | Prisma.readers$borrow_recordsArgs<ExtArgs>
-  purchase_orders?: boolean | Prisma.readers$purchase_ordersArgs<ExtArgs>
-  _count?: boolean | Prisma.ReadersCountOutputTypeDefaultArgs<ExtArgs>
-}
 
 export type $readersPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "readers"
-  objects: {
-    borrow_records: Prisma.$borrow_recordsPayload<ExtArgs>[]
-    purchase_orders: Prisma.$purchase_ordersPayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     reader_code: string
@@ -1063,8 +828,6 @@ readonly fields: readersFieldRefs;
  */
 export interface Prisma__readersClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  borrow_records<T extends Prisma.readers$borrow_recordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.readers$borrow_recordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$borrow_recordsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  purchase_orders<T extends Prisma.readers$purchase_ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.readers$purchase_ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$purchase_ordersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1120,10 +883,6 @@ export type readersFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * Filter, which readers to fetch.
    */
   where: Prisma.readersWhereUniqueInput
@@ -1142,10 +901,6 @@ export type readersFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * Filter, which readers to fetch.
    */
   where: Prisma.readersWhereUniqueInput
@@ -1163,10 +918,6 @@ export type readersFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the readers
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
   /**
    * Filter, which readers to fetch.
    */
@@ -1216,10 +967,6 @@ export type readersFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * Filter, which readers to fetch.
    */
   where?: Prisma.readersWhereInput
@@ -1268,10 +1015,6 @@ export type readersFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * Filter, which readers to fetch.
    */
   where?: Prisma.readersWhereInput
@@ -1315,10 +1058,6 @@ export type readersCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * The data needed to create a readers.
    */
   data: Prisma.XOR<Prisma.readersCreateInput, Prisma.readersUncheckedCreateInput>
@@ -1347,10 +1086,6 @@ export type readersUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the readers
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
   /**
    * The data needed to update a readers.
    */
@@ -1392,10 +1127,6 @@ export type readersUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * The filter to search for the readers to update in case it exists.
    */
   where: Prisma.readersWhereUniqueInput
@@ -1422,10 +1153,6 @@ export type readersDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
-  /**
    * Filter which readers to delete.
    */
   where: Prisma.readersWhereUniqueInput
@@ -1446,54 +1173,6 @@ export type readersDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * readers.borrow_records
- */
-export type readers$borrow_recordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the borrow_records
-   */
-  select?: Prisma.borrow_recordsSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the borrow_records
-   */
-  omit?: Prisma.borrow_recordsOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.borrow_recordsInclude<ExtArgs> | null
-  where?: Prisma.borrow_recordsWhereInput
-  orderBy?: Prisma.borrow_recordsOrderByWithRelationInput | Prisma.borrow_recordsOrderByWithRelationInput[]
-  cursor?: Prisma.borrow_recordsWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Borrow_recordsScalarFieldEnum | Prisma.Borrow_recordsScalarFieldEnum[]
-}
-
-/**
- * readers.purchase_orders
- */
-export type readers$purchase_ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the purchase_orders
-   */
-  select?: Prisma.purchase_ordersSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the purchase_orders
-   */
-  omit?: Prisma.purchase_ordersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.purchase_ordersInclude<ExtArgs> | null
-  where?: Prisma.purchase_ordersWhereInput
-  orderBy?: Prisma.purchase_ordersOrderByWithRelationInput | Prisma.purchase_ordersOrderByWithRelationInput[]
-  cursor?: Prisma.purchase_ordersWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.Purchase_ordersScalarFieldEnum | Prisma.Purchase_ordersScalarFieldEnum[]
-}
-
-/**
  * readers without action
  */
 export type readersDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1505,8 +1184,4 @@ export type readersDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the readers
    */
   omit?: Prisma.readersOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.readersInclude<ExtArgs> | null
 }

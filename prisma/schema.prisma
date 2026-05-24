@@ -8,17 +8,21 @@ datasource db {
 }
 
 model users {
-  id          Int           @id @default(autoincrement())
-  full_name   String?       @db.VarChar(100)
-  email       String?       @db.VarChar(100)
-  phone       String?       @db.VarChar(20)
-  role        users_role
-  status      users_status? @default(active)
-  lang        String?       @default("vi") @db.VarChar(10)
-  created_at  DateTime      @default(now()) @db.Timestamp(0)
-  updated_at  DateTime      @default(now()) @db.Timestamp(0)
-  avatar_path String?       @db.VarChar(255)
-  accounts    accounts?
+  id              Int               @id @default(autoincrement())
+  full_name       String?           @db.VarChar(100)
+  email           String?           @db.VarChar(100)
+  phone           String?           @db.VarChar(20)
+  role            users_role
+  status          users_status?     @default(active)
+  lang            String?           @default("vi") @db.VarChar(10)
+  created_at      DateTime          @default(now()) @db.Timestamp(0)
+  updated_at      DateTime          @default(now()) @db.Timestamp(0)
+  avatar_path     String?           @db.VarChar(255)
+  user_code       String?           @db.VarChar(50)
+  address         String?           @db.VarChar(255)
+  accounts        accounts?
+  borrow_records  borrow_records[]
+  purchase_orders purchase_orders[]
 }
 
 model authors {
@@ -55,6 +59,7 @@ model books {
   available_quantity   Int                    @default(0)
   avatar_path          String?                @db.VarChar(255)
   price                Decimal                @default(0.00) @db.Decimal(10, 2)
+  content              String?                @db.LongText
   book_authors         book_authors[]
   publishers           publishers?            @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
   categories           categories?            @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
@@ -77,17 +82,17 @@ model borrow_details {
 
 model borrow_records {
   id             Int                    @id @default(autoincrement())
-  reader_id      Int
   borrow_date    DateTime               @db.Date
   due_date       DateTime               @db.Date
   return_date    DateTime?              @db.Date
   status         borrow_records_status? @default(borrowing)
   borrow_code    String                 @db.Char(20)
+  user_id        Int?
   borrow_details borrow_details[]
-  readers        readers                @relation(fields: [reader_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "borrow_records_ibfk_1")
+  users          users?                 @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_borrow_records_user")
   fines          fines[]
 
-  @@index([reader_id], map: "reader_id")
+  @@index([user_id], map: "fk_borrow_records_user")
 }
 
 model publishers {
@@ -100,17 +105,15 @@ model publishers {
 }
 
 model readers {
-  id              Int               @id @default(autoincrement())
-  reader_code     String            @unique(map: "reader_code") @db.VarChar(20)
-  full_name       String            @db.VarChar(100)
-  date_of_birth   DateTime?         @db.Date
-  gender          readers_gender?
-  email           String?           @db.VarChar(100)
-  phone           String?           @db.VarChar(20)
-  address         String?           @db.VarChar(255)
-  created_at      DateTime          @default(now()) @db.Timestamp(0)
-  borrow_records  borrow_records[]
-  purchase_orders purchase_orders[]
+  id            Int             @id @default(autoincrement())
+  reader_code   String          @unique(map: "reader_code") @db.VarChar(20)
+  full_name     String          @db.VarChar(100)
+  date_of_birth DateTime?       @db.Date
+  gender        readers_gender?
+  email         String?         @db.VarChar(100)
+  phone         String?         @db.VarChar(20)
+  address       String?         @db.VarChar(255)
+  created_at    DateTime        @default(now()) @db.Timestamp(0)
 }
 
 model accounts {
@@ -173,7 +176,6 @@ model purchase_order_items {
 
 model purchase_orders {
   id                   Int                    @id @default(autoincrement())
-  reader_id            Int?
   guest_name           String?                @db.VarChar(255)
   guest_phone          String?                @db.VarChar(20)
   total_price          Decimal                @default(0.00) @db.Decimal(10, 2)
@@ -181,10 +183,11 @@ model purchase_orders {
   updated_at           DateTime               @default(now()) @db.Timestamp(0)
   purchase_order_code  String                 @db.VarChar(20)
   payment_status       String                 @default("UNPAID") @db.VarChar(20)
+  user_id              Int?
   purchase_order_items purchase_order_items[]
-  readers              readers?               @relation(fields: [reader_id], references: [id], onUpdate: Restrict, map: "fk_purchase_orders_reader")
+  users                users?                 @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_purchase_orders_user")
 
-  @@index([reader_id], map: "fk_purchase_orders_reader")
+  @@index([user_id], map: "fk_purchase_orders_user")
 }
 
 enum readers_gender {

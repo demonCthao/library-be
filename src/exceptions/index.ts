@@ -26,7 +26,7 @@ export class UnauthorizedException extends HttpException {
 
 export class AlreadyExistsException extends HttpException {
     constructor(resource = 'Resource') {
-        super(409, `${resource} already exists`);
+        super(409, `${resource} đã tồn tại`);
     }
 }
 

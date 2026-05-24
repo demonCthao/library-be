@@ -103,7 +103,24 @@ router.get('/', controller.findAll.bind(controller));
  *                 example: 1
  *               books:
  *                 type: array
- *                 example: [1,2,3]
+ *                 description: Danh sách sách mượn kèm số lượng
+ *                 items:
+ *                   type: object
+ *                   required:
+ *                     - book_id
+ *                     - qty
+ *                   properties:
+ *                     book_id:
+ *                       type: number
+ *                       example: 1
+ *                     qty:
+ *                       type: number
+ *                       example: 2
+ *                 example:
+ *                   - book_id: 1
+ *                     qty: 2
+ *                   - book_id: 2
+ *                     qty: 1
  *     responses:
  *       201:
  *         description: Borrow Record created

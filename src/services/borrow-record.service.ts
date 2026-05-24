@@ -42,15 +42,15 @@ class BorrowRecordService extends BaseService<borrow_records> {
     const books = data.books;
 
     await prisma.$transaction(
-      books.map((bookID) =>
+      books.map((book) =>
         prisma.books.update({
-          where: { id: bookID },
+          where: { id: book.book_id },
           data: {
             available_quantity: {
-              decrement: 1,
+              decrement: book.qty,
             },
             borrowed_quantity: {
-              increment: 1,
+              increment: book.qty,
             },
           },
         })
@@ -61,12 +61,12 @@ class BorrowRecordService extends BaseService<borrow_records> {
       data: {
         borrow_code: borrowCode,
         due_date: new Date(data.due_date),
-        reader_id: data.reader_id,
+        user_id: data.reader_id,
         status: "borrowing",
         borrow_date: new Date(dayjs().format("YYYY-MM-DD")),
         borrow_details: {
-          create: books.map(bookID => ({
-            book_id: bookID
+          create: books.map(book => ({
+            book_id: book.book_id
           }))
         }
       }
@@ -78,7 +78,7 @@ class BorrowRecordService extends BaseService<borrow_records> {
     const limitSearch = Number(pageSize) || 10;
 
     const where: Prisma.borrow_recordsWhereInput = {
-      readers: readerName || phone ? { full_name: buildPrismaFilter("string", readerName), phone: buildPrismaFilter("string", phone) } : undefined,
+      users: readerName || phone ? { full_name: buildPrismaFilter("string", readerName), phone: buildPrismaFilter("string", phone) } : undefined,
       borrow_date: borrowDate ? { gte: new Date(borrowDate) } : undefined,
       due_date: dueDate ? { gte: new Date(dueDate) } : undefined,
       return_date: returnDate ? { gte: new Date(returnDate) } : undefined,
@@ -92,7 +92,7 @@ class BorrowRecordService extends BaseService<borrow_records> {
         orderBy: { due_date: "desc" },
         where: where,
         include: {
-          readers: {
+          users: {
             select: {
               full_name: true,
               phone: true,
@@ -138,20 +138,27 @@ class BorrowRecordService extends BaseService<borrow_records> {
     const borrow = await prisma.borrow_records.findUnique({
       where: { id },
       include: {
-        readers: true,
+        users: true,
         borrow_details: {
           include: {
-            books: true
-          }
-        }
-      }
+            books: true,
+          },
+        },
+      },
     });
 
     if (!borrow) {
-      throw new NotFoundException("Borrow detail");
+      throw new NotFoundException("Borrow record not found");
     }
 
-    return new BorrowDetailDto(borrow);
+    if (!borrow.users) {
+      throw new NotFoundException("User not found for this borrow record");
+    }
+
+    return new BorrowDetailDto({
+      ...borrow,
+      users: borrow.users,
+    });
   }
 
   async returnBook(id: number) {
@@ -187,12 +194,12 @@ class BorrowRecordService extends BaseService<borrow_records> {
         })
       ),
       prisma.borrow_records.update({
-          where: { id },
-          data: {
-            status: "returned",
-            return_date: new Date().toISOString()
-          }
-        })
+        where: { id },
+        data: {
+          status: "returned",
+          return_date: new Date().toISOString()
+        }
+      })
     ]);
   }
 }

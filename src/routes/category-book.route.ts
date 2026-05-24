@@ -20,77 +20,8 @@ router.get('/', controller.findAll.bind(controller));
 
 /**
  * @swagger
- * /api/v1/category-books:
- *   post:
- *     summary: Create new book
- *     tags: [Category-Books]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - card_id
- *               - first_name
- *               - last_name
- *               - email
- *             properties:
- *               card_id:
- *                 type: string
- *                 example: "CARD001"
- *               first_name:
- *                 type: string
- *                 example: "John"
- *               last_name:
- *                 type: string
- *                 example: "Doe"
- *               email:
- *                 type: string
- *                 example: "john@example.com"
- *     responses:
- *       201:
- *         description: Book created
- */
-router.post('/', controller.store.bind(controller));
-
-/**
- * @swagger
- * /api/v1/category-books/{id}:
- *   put:
- *     summary: Update book
- *     tags: [Category-Books]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *           example: 1
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               data:
- *                 type: string
- *                 description: JSON string of book data
- *                 example: 
- *               image:
- *                 type: string
- *                 format: binary
- *     responses:
- *       200:
- *         description: Book updated successfully
- */
-router.put('/:id', bookUpload.single("image"), controller.update.bind(controller));
-
-/**
- * @swagger
- * /api/v1/category-books/{id}:
- *   delete:
+ * /api/v1/category-books/:id:
+ *   get:
  *     summary: Delete book
  *     tags: [Category-Books]
  *     parameters:
@@ -103,9 +34,29 @@ router.put('/:id', bookUpload.single("image"), controller.update.bind(controller
  *         description: Book ID
  *     responses:
  *       200:
- *         description: Book deleted
+ *         description: Book
  */
-router.delete('/:id', controller.destroy.bind(controller));
+router.get('/:id', controller.getBookDetailById.bind(controller));
+
+/**
+ * @swagger
+ * /api/v1/category-books/books/:id:
+ *   get:
+ *     summary: Get books from category ID
+ *     tags: [Category-Books]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: Book ID
+ *     responses:
+ *       200:
+ *         description: Book
+ */
+router.get('/books/:id', controller.getBooksByCategoryId.bind(controller));
 
 /**
  * @swagger

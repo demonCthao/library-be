@@ -26,7 +26,7 @@ export class CategoryBookController extends BaseController<CategoryBookService> 
     }
 
     async destroy(req: Request, res: Response, next: NextFunction) {
-       throw new Error();
+        throw new Error();
     }
 
     async exportExcel(_req: Request, res: Response, next: NextFunction) {
@@ -35,5 +35,25 @@ export class CategoryBookController extends BaseController<CategoryBookService> 
 
     async getBookByKeyword(req: Request, res: Response, next: NextFunction) {
         throw new Error();
+    }
+
+    async getBookDetailById(req: Request, res: Response, next: NextFunction) {
+        try {
+            const books = await this.service.getBookDetailById(req.params.id as string);
+
+            return this.ok(res, books);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async getBooksByCategoryId(req: Request, res: Response, next: NextFunction) {
+        try {
+            const books = await this.service.getBooksByCategoryId(req.params.id as string);
+
+            return this.ok(res, books);
+        } catch (err) {
+            next(err);
+        }
     }
 }

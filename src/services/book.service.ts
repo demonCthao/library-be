@@ -17,8 +17,29 @@ interface FindBookQuery extends FindAllQuery {
 }
 
 class BookService extends BaseService<books> {
-  async store(data: Prisma.booksCreateInput): Promise<books> {
-    return prisma.books.create({ data });
+
+  async store(data: any, file?: Express.Multer.File): Promise<books> {
+    const insertData: Prisma.booksUncheckedCreateInput = {
+      title: data.title,
+      description: data.description,
+      publish_year: data.publish_year ? Number(data.publish_year) : undefined,
+      pages: data.pages ? Number(data.pages) : undefined,
+      language: data.language,
+      content: data.content,
+      category_id: data.category_id ? Number(data.category_id) : undefined,
+      publisher_id: data.publisher_id ? Number(data.publisher_id) : undefined,
+      available_quantity: data.available_quantity? Number(data.available_quantity) : 0,
+      stock_quantity: data.stock_quantity? Number(data.stock_quantity) : 0,
+    };
+
+    // 2. Nếu có file ảnh, gán đường dẫn vào (giống hệt logic update của bạn)
+    if (file) {
+      // Lưu ý: dùng đúng tên field trong DB của bạn (avatar_path hoặc image_path)
+      (insertData as any).avatar_path = `/uploads/books/${file.filename}`;
+    }
+    return await prisma.books.create({
+      data: insertData
+    });
   }
 
   async findAll({ pageIndex = 1, pageSize = 10, title = "", description = "", publish_year = "", category_id = "" }: FindBookQuery): Promise<PaginatedResult<books>> {

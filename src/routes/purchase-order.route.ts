@@ -64,7 +64,7 @@ router.get('/', controller.findAll.bind(controller));
  * @swagger
  * /api/v1/purchase-orders:
  *   post:
- *     summary: Create new reader
+ *     summary: Create new purchase order
  *     tags: [Purchase Orders]
  *     requestBody:
  *       required: true
@@ -73,18 +73,48 @@ router.get('/', controller.findAll.bind(controller));
  *           schema:
  *             type: object
  *             required:
- *               - name
+ *               - user_id
+ *               - books
  *             properties:
- *               name:
- *                 type: string
- *                 example: reader 1
- *               parent_id:
- *                 type: string
- *                 nullable: true
+ *               user_id:
+ *                 type: number
  *                 example: 1
+ *
+ *               books:
+ *                 type: array
+ *                 description: Danh sách sách mua
+ *                 items:
+ *                   type: object
+ *                   required:
+ *                     - book_id
+ *                     - qty
+ *                     - price
+ *                   properties:
+ *                     book_id:
+ *                       type: number
+ *                       example: 1
+ *
+ *                     qty:
+ *                       type: number
+ *                       minimum: 1
+ *                       example: 2
+ *
+ *                     price:
+ *                       type: number
+ *                       example: 120000
+ *
+ *                 example:
+ *                   - book_id: 1
+ *                     qty: 2
+ *                     price: 120000
+ *
+ *                   - book_id: 2
+ *                     qty: 1
+ *                     price: 90000
+ *
  *     responses:
  *       201:
- *         description: Reader created
+ *         description: Purchase order created successfully
  */
 router.post('/', controller.store.bind(controller));
 

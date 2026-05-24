@@ -9,7 +9,12 @@ export class BookController extends BaseController<BookService> {
 
     async store(req: Request, res: Response, next: NextFunction) {
         try {
-            const book = await this.service.store(req.body);
+            const file = req.file;
+            const parsedData = req.body.data
+                ? JSON.parse(req.body.data)
+                : {};
+
+            const book = await this.service.store(parsedData, file);
 
             return this.created(res, book);
         } catch (err) {

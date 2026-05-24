@@ -1,15 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import UserService from '../services/user.service';
 import { BaseController } from './base.controller';
+import UserPageService from '../services/user-page.service';
 
-export class UserController extends BaseController<UserService> {
+export class UserPageController extends BaseController<UserPageService> {
     constructor() {
-        super(new UserService());
+        super(new UserPageService());
     }
 
     async store(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await this.service.store(req.body);
+            const user = await this.service.register(req.body);
 
             return this.created(res, user);
         } catch (err) {
@@ -30,6 +31,7 @@ export class UserController extends BaseController<UserService> {
     async update(req: Request, res: Response, next: NextFunction) {
         try {
             const file = req.file;
+            console.log("🚀 ~ UserController ~ update ~ req.body:", req.body)
             const parsedData = req.body.data
                 ? JSON.parse(req.body.data)
                 : {};
@@ -58,11 +60,10 @@ export class UserController extends BaseController<UserService> {
         }
     }
 
-    async getProfileByID(req: Request, res: Response, next: NextFunction) {
+    async getOrderByID(req: Request, res: Response, next: NextFunction) {
         try {
-            const user = await this.service.getProfileByID(
-                Number(req.params.id),
-                req.user
+            const user = await this.service.getOrderByUserID(
+                Number(req.params.id)
             );
 
             return this.ok(res, user);
@@ -71,20 +72,29 @@ export class UserController extends BaseController<UserService> {
         }
     }
 
-
-    async exportExcel(_req: Request, res: Response, next: NextFunction) {
+    async getUserByKeyword(req: Request, res: Response, next: NextFunction) {
         try {
-            const file = await this.service.exportUsers(res);
+            const reader = await this.service.getUserByKeyword(req.query.keyword as string);
 
-            return this.ok(res, file);
+            return this.ok(res, reader);
         } catch (err) {
             next(err);
         }
     }
 
-    async getUserByKeyword(req: Request, res: Response, next: NextFunction) {
+    async getCartDetails(req: Request, res: Response, next: NextFunction) {
         try {
-            const reader = await this.service.getUserByKeyword(req.query.keyword as string);
+            const { user_id, books } = req.query;
+            const userId = user_id ? Number(user_id) : null;
+
+            let parsedBooks = [];
+            if (typeof books === 'string') {
+                parsedBooks = JSON.parse(books);
+            } else if (Array.isArray(books)) {
+                parsedBooks = books;
+            }
+
+            const reader = await this.service.getCartDetails(userId, parsedBooks);
 
             return this.ok(res, reader);
         } catch (err) {

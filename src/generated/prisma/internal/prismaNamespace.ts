@@ -1390,7 +1390,9 @@ export const UsersScalarFieldEnum = {
   lang: 'lang',
   created_at: 'created_at',
   updated_at: 'updated_at',
-  avatar_path: 'avatar_path'
+  avatar_path: 'avatar_path',
+  user_code: 'user_code',
+  address: 'address'
 } as const
 
 export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
@@ -1429,7 +1431,8 @@ export const BooksScalarFieldEnum = {
   reserved_quantity: 'reserved_quantity',
   available_quantity: 'available_quantity',
   avatar_path: 'avatar_path',
-  price: 'price'
+  price: 'price',
+  content: 'content'
 } as const
 
 export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof BooksScalarFieldEnum]
@@ -1445,12 +1448,12 @@ export type Borrow_detailsScalarFieldEnum = (typeof Borrow_detailsScalarFieldEnu
 
 export const Borrow_recordsScalarFieldEnum = {
   id: 'id',
-  reader_id: 'reader_id',
   borrow_date: 'borrow_date',
   due_date: 'due_date',
   return_date: 'return_date',
   status: 'status',
-  borrow_code: 'borrow_code'
+  borrow_code: 'borrow_code',
+  user_id: 'user_id'
 } as const
 
 export type Borrow_recordsScalarFieldEnum = (typeof Borrow_recordsScalarFieldEnum)[keyof typeof Borrow_recordsScalarFieldEnum]
@@ -1543,14 +1546,14 @@ export type Purchase_order_itemsScalarFieldEnum = (typeof Purchase_order_itemsSc
 
 export const Purchase_ordersScalarFieldEnum = {
   id: 'id',
-  reader_id: 'reader_id',
   guest_name: 'guest_name',
   guest_phone: 'guest_phone',
   total_price: 'total_price',
   created_at: 'created_at',
   updated_at: 'updated_at',
   purchase_order_code: 'purchase_order_code',
-  payment_status: 'payment_status'
+  payment_status: 'payment_status',
+  user_id: 'user_id'
 } as const
 
 export type Purchase_ordersScalarFieldEnum = (typeof Purchase_ordersScalarFieldEnum)[keyof typeof Purchase_ordersScalarFieldEnum]
@@ -1577,7 +1580,9 @@ export const usersOrderByRelevanceFieldEnum = {
   email: 'email',
   phone: 'phone',
   lang: 'lang',
-  avatar_path: 'avatar_path'
+  avatar_path: 'avatar_path',
+  user_code: 'user_code',
+  address: 'address'
 } as const
 
 export type usersOrderByRelevanceFieldEnum = (typeof usersOrderByRelevanceFieldEnum)[keyof typeof usersOrderByRelevanceFieldEnum]
@@ -1596,7 +1601,8 @@ export const booksOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
   language: 'language',
-  avatar_path: 'avatar_path'
+  avatar_path: 'avatar_path',
+  content: 'content'
 } as const
 
 export type booksOrderByRelevanceFieldEnum = (typeof booksOrderByRelevanceFieldEnum)[keyof typeof booksOrderByRelevanceFieldEnum]

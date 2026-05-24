@@ -7,6 +7,8 @@ import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
 import path from "path";
 import fs from "fs";
+import dayjs from "dayjs";
+import { UserDto } from "../dto/user.dto";
 
 interface FindUserQuery extends FindAllQuery {
   fullName?: string;
@@ -16,7 +18,32 @@ interface FindUserQuery extends FindAllQuery {
 export class UserService extends BaseService<users> {
 
   async store(data: Prisma.usersCreateInput): Promise<users> {
-    return prisma.users.create({ data });
+    var userCode = dayjs().format("YYYYMMDD");
+    let nextNumber = 1;
+
+    const lastUser = await prisma.users.findFirst({
+      where: {
+        user_code: {
+          startsWith: userCode,
+        },
+      },
+      orderBy: {
+        user_code: "desc",
+      },
+    });
+
+    if (lastUser && lastUser?.user_code) {
+      const lastNumber = parseInt(lastUser?.user_code?.slice(8));
+      nextNumber = lastNumber + 1;
+    }
+
+    userCode = `USR${userCode}${String(nextNumber).padStart(4, "0")}`;
+
+    return prisma.users.create({
+      data: {
+        ...data
+      }
+    });
   }
 
   async findAll({ pageIndex = 1, pageSize = 10, fullName = "", phone = "" }: FindUserQuery): Promise<PaginatedResult<users>> {
@@ -182,6 +209,36 @@ export class UserService extends BaseService<users> {
     }
 
     await workbook.commit();
+  }
+
+  async getUserByKeyword(keyword: string): Promise<UserDto[]> {
+    console.log("🚀 ~ ReaderService ~ getReaderByKeyword ~ keyword:", keyword)
+    if (keyword) {
+      const where: Prisma.usersWhereInput = {
+        OR: [
+          {
+            phone: {
+              contains: keyword,
+            },
+          },
+          {
+            full_name: {
+              contains: keyword,
+            },
+          },
+          {
+            user_code: {
+              contains: keyword,
+            }
+          }
+        ]
+      }
+      const users = await prisma.users.findMany({ where, orderBy: { full_name: "asc" } });
+
+      return users;
+    }
+
+    return [];
   }
 }
 
