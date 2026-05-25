@@ -64,7 +64,9 @@ export const ModelName = {
   fines: 'fines',
   bank_accounts: 'bank_accounts',
   purchase_order_items: 'purchase_order_items',
-  purchase_orders: 'purchase_orders'
+  purchase_orders: 'purchase_orders',
+  goods_receipt_details: 'goods_receipt_details',
+  goods_receipts: 'goods_receipts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -262,6 +264,28 @@ export const Purchase_ordersScalarFieldEnum = {
 export type Purchase_ordersScalarFieldEnum = (typeof Purchase_ordersScalarFieldEnum)[keyof typeof Purchase_ordersScalarFieldEnum]
 
 
+export const Goods_receipt_detailsScalarFieldEnum = {
+  id: 'id',
+  goods_receipt_id: 'goods_receipt_id',
+  book_id: 'book_id',
+  quantity: 'quantity',
+  import_price: 'import_price'
+} as const
+
+export type Goods_receipt_detailsScalarFieldEnum = (typeof Goods_receipt_detailsScalarFieldEnum)[keyof typeof Goods_receipt_detailsScalarFieldEnum]
+
+
+export const Goods_receiptsScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  publisher_id: 'publisher_id',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type Goods_receiptsScalarFieldEnum = (typeof Goods_receiptsScalarFieldEnum)[keyof typeof Goods_receiptsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -379,4 +403,11 @@ export const purchase_ordersOrderByRelevanceFieldEnum = {
 } as const
 
 export type purchase_ordersOrderByRelevanceFieldEnum = (typeof purchase_ordersOrderByRelevanceFieldEnum)[keyof typeof purchase_ordersOrderByRelevanceFieldEnum]
+
+
+export const goods_receiptsOrderByRelevanceFieldEnum = {
+  code: 'code'
+} as const
+
+export type goods_receiptsOrderByRelevanceFieldEnum = (typeof goods_receiptsOrderByRelevanceFieldEnum)[keyof typeof goods_receiptsOrderByRelevanceFieldEnum]
 

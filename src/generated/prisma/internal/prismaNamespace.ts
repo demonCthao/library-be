@@ -397,7 +397,9 @@ export const ModelName = {
   fines: 'fines',
   bank_accounts: 'bank_accounts',
   purchase_order_items: 'purchase_order_items',
-  purchase_orders: 'purchase_orders'
+  purchase_orders: 'purchase_orders',
+  goods_receipt_details: 'goods_receipt_details',
+  goods_receipts: 'goods_receipts'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines" | "bank_accounts" | "purchase_order_items" | "purchase_orders"
+    modelProps: "users" | "authors" | "book_authors" | "books" | "borrow_details" | "borrow_records" | "publishers" | "readers" | "accounts" | "categories" | "fines" | "bank_accounts" | "purchase_order_items" | "purchase_orders" | "goods_receipt_details" | "goods_receipts"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1341,6 +1343,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    goods_receipt_details: {
+      payload: Prisma.$goods_receipt_detailsPayload<ExtArgs>
+      fields: Prisma.goods_receipt_detailsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.goods_receipt_detailsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.goods_receipt_detailsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        findFirst: {
+          args: Prisma.goods_receipt_detailsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.goods_receipt_detailsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        findMany: {
+          args: Prisma.goods_receipt_detailsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>[]
+        }
+        create: {
+          args: Prisma.goods_receipt_detailsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        createMany: {
+          args: Prisma.goods_receipt_detailsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.goods_receipt_detailsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        update: {
+          args: Prisma.goods_receipt_detailsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        deleteMany: {
+          args: Prisma.goods_receipt_detailsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.goods_receipt_detailsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.goods_receipt_detailsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receipt_detailsPayload>
+        }
+        aggregate: {
+          args: Prisma.Goods_receipt_detailsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGoods_receipt_details>
+        }
+        groupBy: {
+          args: Prisma.goods_receipt_detailsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Goods_receipt_detailsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.goods_receipt_detailsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Goods_receipt_detailsCountAggregateOutputType> | number
+        }
+      }
+    }
+    goods_receipts: {
+      payload: Prisma.$goods_receiptsPayload<ExtArgs>
+      fields: Prisma.goods_receiptsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.goods_receiptsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.goods_receiptsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        findFirst: {
+          args: Prisma.goods_receiptsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.goods_receiptsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        findMany: {
+          args: Prisma.goods_receiptsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>[]
+        }
+        create: {
+          args: Prisma.goods_receiptsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        createMany: {
+          args: Prisma.goods_receiptsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.goods_receiptsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        update: {
+          args: Prisma.goods_receiptsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        deleteMany: {
+          args: Prisma.goods_receiptsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.goods_receiptsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.goods_receiptsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$goods_receiptsPayload>
+        }
+        aggregate: {
+          args: Prisma.Goods_receiptsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGoods_receipts>
+        }
+        groupBy: {
+          args: Prisma.goods_receiptsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Goods_receiptsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.goods_receiptsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.Goods_receiptsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1559,6 +1693,28 @@ export const Purchase_ordersScalarFieldEnum = {
 export type Purchase_ordersScalarFieldEnum = (typeof Purchase_ordersScalarFieldEnum)[keyof typeof Purchase_ordersScalarFieldEnum]
 
 
+export const Goods_receipt_detailsScalarFieldEnum = {
+  id: 'id',
+  goods_receipt_id: 'goods_receipt_id',
+  book_id: 'book_id',
+  quantity: 'quantity',
+  import_price: 'import_price'
+} as const
+
+export type Goods_receipt_detailsScalarFieldEnum = (typeof Goods_receipt_detailsScalarFieldEnum)[keyof typeof Goods_receipt_detailsScalarFieldEnum]
+
+
+export const Goods_receiptsScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  publisher_id: 'publisher_id',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type Goods_receiptsScalarFieldEnum = (typeof Goods_receiptsScalarFieldEnum)[keyof typeof Goods_receiptsScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1676,6 +1832,13 @@ export const purchase_ordersOrderByRelevanceFieldEnum = {
 } as const
 
 export type purchase_ordersOrderByRelevanceFieldEnum = (typeof purchase_ordersOrderByRelevanceFieldEnum)[keyof typeof purchase_ordersOrderByRelevanceFieldEnum]
+
+
+export const goods_receiptsOrderByRelevanceFieldEnum = {
+  code: 'code'
+} as const
+
+export type goods_receiptsOrderByRelevanceFieldEnum = (typeof goods_receiptsOrderByRelevanceFieldEnum)[keyof typeof goods_receiptsOrderByRelevanceFieldEnum]
 
 
 
@@ -1862,6 +2025,8 @@ export type GlobalOmitConfig = {
   bank_accounts?: Prisma.bank_accountsOmit
   purchase_order_items?: Prisma.purchase_order_itemsOmit
   purchase_orders?: Prisma.purchase_ordersOmit
+  goods_receipt_details?: Prisma.goods_receipt_detailsOmit
+  goods_receipts?: Prisma.goods_receiptsOmit
 }
 
 /* Types for Logging */

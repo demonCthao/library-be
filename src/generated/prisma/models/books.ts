@@ -352,6 +352,7 @@ export type booksWhereInput = {
   publishers?: Prisma.XOR<Prisma.PublishersNullableScalarRelationFilter, Prisma.publishersWhereInput> | null
   categories?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.categoriesWhereInput> | null
   borrow_details?: Prisma.Borrow_detailsListRelationFilter
+  goods_receipt_details?: Prisma.Goods_receipt_detailsListRelationFilter
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
 }
 
@@ -377,6 +378,7 @@ export type booksOrderByWithRelationInput = {
   publishers?: Prisma.publishersOrderByWithRelationInput
   categories?: Prisma.categoriesOrderByWithRelationInput
   borrow_details?: Prisma.borrow_detailsOrderByRelationAggregateInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsOrderByRelationAggregateInput
   purchase_order_items?: Prisma.purchase_order_itemsOrderByRelationAggregateInput
   _relevance?: Prisma.booksOrderByRelevanceInput
 }
@@ -406,6 +408,7 @@ export type booksWhereUniqueInput = Prisma.AtLeast<{
   publishers?: Prisma.XOR<Prisma.PublishersNullableScalarRelationFilter, Prisma.publishersWhereInput> | null
   categories?: Prisma.XOR<Prisma.CategoriesNullableScalarRelationFilter, Prisma.categoriesWhereInput> | null
   borrow_details?: Prisma.Borrow_detailsListRelationFilter
+  goods_receipt_details?: Prisma.Goods_receipt_detailsListRelationFilter
   purchase_order_items?: Prisma.Purchase_order_itemsListRelationFilter
 }, "id" | "isbn">
 
@@ -476,6 +479,7 @@ export type booksCreateInput = {
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
 }
 
@@ -499,6 +503,7 @@ export type booksUncheckedCreateInput = {
   content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
 
@@ -521,6 +526,7 @@ export type booksUpdateInput = {
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
 }
 
@@ -544,6 +550,7 @@ export type booksUncheckedUpdateInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
@@ -853,6 +860,20 @@ export type booksUpdateOneRequiredWithoutPurchase_order_itemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.booksUpdateToOneWithWhereWithoutPurchase_order_itemsInput, Prisma.booksUpdateWithoutPurchase_order_itemsInput>, Prisma.booksUncheckedUpdateWithoutPurchase_order_itemsInput>
 }
 
+export type booksCreateNestedOneWithoutGoods_receipt_detailsInput = {
+  create?: Prisma.XOR<Prisma.booksCreateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedCreateWithoutGoods_receipt_detailsInput>
+  connectOrCreate?: Prisma.booksCreateOrConnectWithoutGoods_receipt_detailsInput
+  connect?: Prisma.booksWhereUniqueInput
+}
+
+export type booksUpdateOneRequiredWithoutGoods_receipt_detailsNestedInput = {
+  create?: Prisma.XOR<Prisma.booksCreateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedCreateWithoutGoods_receipt_detailsInput>
+  connectOrCreate?: Prisma.booksCreateOrConnectWithoutGoods_receipt_detailsInput
+  upsert?: Prisma.booksUpsertWithoutGoods_receipt_detailsInput
+  connect?: Prisma.booksWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.booksUpdateToOneWithWhereWithoutGoods_receipt_detailsInput, Prisma.booksUpdateWithoutGoods_receipt_detailsInput>, Prisma.booksUncheckedUpdateWithoutGoods_receipt_detailsInput>
+}
+
 export type booksCreateWithoutBook_authorsInput = {
   isbn?: string | null
   title: string
@@ -871,6 +892,7 @@ export type booksCreateWithoutBook_authorsInput = {
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
 }
 
@@ -893,6 +915,7 @@ export type booksUncheckedCreateWithoutBook_authorsInput = {
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   content?: string | null
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
 
@@ -930,6 +953,7 @@ export type booksUpdateWithoutBook_authorsInput = {
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
 }
 
@@ -952,6 +976,7 @@ export type booksUncheckedUpdateWithoutBook_authorsInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
@@ -973,6 +998,7 @@ export type booksCreateWithoutBorrow_detailsInput = {
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
 }
 
@@ -995,6 +1021,7 @@ export type booksUncheckedCreateWithoutBorrow_detailsInput = {
   price?: runtime.Decimal | runtime.DecimalJsLike | number | string
   content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
 
@@ -1032,6 +1059,7 @@ export type booksUpdateWithoutBorrow_detailsInput = {
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
 }
 
@@ -1054,6 +1082,7 @@ export type booksUncheckedUpdateWithoutBorrow_detailsInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
@@ -1075,6 +1104,7 @@ export type booksCreateWithoutPublishersInput = {
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
 }
 
@@ -1097,6 +1127,7 @@ export type booksUncheckedCreateWithoutPublishersInput = {
   content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
 
@@ -1167,6 +1198,7 @@ export type booksCreateWithoutCategoriesInput = {
   book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
 }
 
@@ -1189,6 +1221,7 @@ export type booksUncheckedCreateWithoutCategoriesInput = {
   content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
 }
 
@@ -1237,6 +1270,7 @@ export type booksCreateWithoutPurchase_order_itemsInput = {
   publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
   categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsCreateNestedManyWithoutBooksInput
 }
 
 export type booksUncheckedCreateWithoutPurchase_order_itemsInput = {
@@ -1259,6 +1293,7 @@ export type booksUncheckedCreateWithoutPurchase_order_itemsInput = {
   content?: string | null
   book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
   borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedCreateNestedManyWithoutBooksInput
 }
 
 export type booksCreateOrConnectWithoutPurchase_order_itemsInput = {
@@ -1296,6 +1331,7 @@ export type booksUpdateWithoutPurchase_order_itemsInput = {
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
 }
 
 export type booksUncheckedUpdateWithoutPurchase_order_itemsInput = {
@@ -1318,6 +1354,113 @@ export type booksUncheckedUpdateWithoutPurchase_order_itemsInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
+}
+
+export type booksCreateWithoutGoods_receipt_detailsInput = {
+  isbn?: string | null
+  title: string
+  description?: string | null
+  publish_year?: number | null
+  language?: string | null
+  pages?: number | null
+  created_at?: Date | string
+  stock_quantity?: number
+  borrowed_quantity?: number
+  reserved_quantity?: number
+  available_quantity?: number
+  avatar_path?: string | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
+  book_authors?: Prisma.book_authorsCreateNestedManyWithoutBooksInput
+  publishers?: Prisma.publishersCreateNestedOneWithoutBooksInput
+  categories?: Prisma.categoriesCreateNestedOneWithoutBooksInput
+  borrow_details?: Prisma.borrow_detailsCreateNestedManyWithoutBooksInput
+  purchase_order_items?: Prisma.purchase_order_itemsCreateNestedManyWithoutBooksInput
+}
+
+export type booksUncheckedCreateWithoutGoods_receipt_detailsInput = {
+  id?: number
+  isbn?: string | null
+  title: string
+  description?: string | null
+  publish_year?: number | null
+  language?: string | null
+  pages?: number | null
+  publisher_id?: number | null
+  category_id?: number | null
+  created_at?: Date | string
+  stock_quantity?: number
+  borrowed_quantity?: number
+  reserved_quantity?: number
+  available_quantity?: number
+  avatar_path?: string | null
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: string | null
+  book_authors?: Prisma.book_authorsUncheckedCreateNestedManyWithoutBooksInput
+  borrow_details?: Prisma.borrow_detailsUncheckedCreateNestedManyWithoutBooksInput
+  purchase_order_items?: Prisma.purchase_order_itemsUncheckedCreateNestedManyWithoutBooksInput
+}
+
+export type booksCreateOrConnectWithoutGoods_receipt_detailsInput = {
+  where: Prisma.booksWhereUniqueInput
+  create: Prisma.XOR<Prisma.booksCreateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedCreateWithoutGoods_receipt_detailsInput>
+}
+
+export type booksUpsertWithoutGoods_receipt_detailsInput = {
+  update: Prisma.XOR<Prisma.booksUpdateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedUpdateWithoutGoods_receipt_detailsInput>
+  create: Prisma.XOR<Prisma.booksCreateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedCreateWithoutGoods_receipt_detailsInput>
+  where?: Prisma.booksWhereInput
+}
+
+export type booksUpdateToOneWithWhereWithoutGoods_receipt_detailsInput = {
+  where?: Prisma.booksWhereInput
+  data: Prisma.XOR<Prisma.booksUpdateWithoutGoods_receipt_detailsInput, Prisma.booksUncheckedUpdateWithoutGoods_receipt_detailsInput>
+}
+
+export type booksUpdateWithoutGoods_receipt_detailsInput = {
+  isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publish_year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  borrowed_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
+  publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
+  categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
+  borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
+}
+
+export type booksUncheckedUpdateWithoutGoods_receipt_detailsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  isbn?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publish_year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  language?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pages?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  publisher_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  stock_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  borrowed_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  reserved_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  available_quantity?: Prisma.IntFieldUpdateOperationsInput | number
+  avatar_path?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
+  borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
 export type booksCreateManyPublishersInput = {
@@ -1357,6 +1500,7 @@ export type booksUpdateWithoutPublishersInput = {
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   categories?: Prisma.categoriesUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
 }
 
@@ -1379,6 +1523,7 @@ export type booksUncheckedUpdateWithoutPublishersInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
@@ -1438,6 +1583,7 @@ export type booksUpdateWithoutCategoriesInput = {
   book_authors?: Prisma.book_authorsUpdateManyWithoutBooksNestedInput
   publishers?: Prisma.publishersUpdateOneWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUpdateManyWithoutBooksNestedInput
 }
 
@@ -1460,6 +1606,7 @@ export type booksUncheckedUpdateWithoutCategoriesInput = {
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   book_authors?: Prisma.book_authorsUncheckedUpdateManyWithoutBooksNestedInput
   borrow_details?: Prisma.borrow_detailsUncheckedUpdateManyWithoutBooksNestedInput
+  goods_receipt_details?: Prisma.goods_receipt_detailsUncheckedUpdateManyWithoutBooksNestedInput
   purchase_order_items?: Prisma.purchase_order_itemsUncheckedUpdateManyWithoutBooksNestedInput
 }
 
@@ -1490,12 +1637,14 @@ export type booksUncheckedUpdateManyWithoutCategoriesInput = {
 export type BooksCountOutputType = {
   book_authors: number
   borrow_details: number
+  goods_receipt_details: number
   purchase_order_items: number
 }
 
 export type BooksCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   book_authors?: boolean | BooksCountOutputTypeCountBook_authorsArgs
   borrow_details?: boolean | BooksCountOutputTypeCountBorrow_detailsArgs
+  goods_receipt_details?: boolean | BooksCountOutputTypeCountGoods_receipt_detailsArgs
   purchase_order_items?: boolean | BooksCountOutputTypeCountPurchase_order_itemsArgs
 }
 
@@ -1521,6 +1670,13 @@ export type BooksCountOutputTypeCountBook_authorsArgs<ExtArgs extends runtime.Ty
  */
 export type BooksCountOutputTypeCountBorrow_detailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.borrow_detailsWhereInput
+}
+
+/**
+ * BooksCountOutputType without action
+ */
+export type BooksCountOutputTypeCountGoods_receipt_detailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.goods_receipt_detailsWhereInput
 }
 
 /**
@@ -1553,6 +1709,7 @@ export type booksSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   publishers?: boolean | Prisma.books$publishersArgs<ExtArgs>
   categories?: boolean | Prisma.books$categoriesArgs<ExtArgs>
   borrow_details?: boolean | Prisma.books$borrow_detailsArgs<ExtArgs>
+  goods_receipt_details?: boolean | Prisma.books$goods_receipt_detailsArgs<ExtArgs>
   purchase_order_items?: boolean | Prisma.books$purchase_order_itemsArgs<ExtArgs>
   _count?: boolean | Prisma.BooksCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["books"]>
@@ -1585,6 +1742,7 @@ export type booksInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   publishers?: boolean | Prisma.books$publishersArgs<ExtArgs>
   categories?: boolean | Prisma.books$categoriesArgs<ExtArgs>
   borrow_details?: boolean | Prisma.books$borrow_detailsArgs<ExtArgs>
+  goods_receipt_details?: boolean | Prisma.books$goods_receipt_detailsArgs<ExtArgs>
   purchase_order_items?: boolean | Prisma.books$purchase_order_itemsArgs<ExtArgs>
   _count?: boolean | Prisma.BooksCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1596,6 +1754,7 @@ export type $booksPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     publishers: Prisma.$publishersPayload<ExtArgs> | null
     categories: Prisma.$categoriesPayload<ExtArgs> | null
     borrow_details: Prisma.$borrow_detailsPayload<ExtArgs>[]
+    goods_receipt_details: Prisma.$goods_receipt_detailsPayload<ExtArgs>[]
     purchase_order_items: Prisma.$purchase_order_itemsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1960,6 +2119,7 @@ export interface Prisma__booksClient<T, Null = never, ExtArgs extends runtime.Ty
   publishers<T extends Prisma.books$publishersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.books$publishersArgs<ExtArgs>>): Prisma.Prisma__publishersClient<runtime.Types.Result.GetResult<Prisma.$publishersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   categories<T extends Prisma.books$categoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.books$categoriesArgs<ExtArgs>>): Prisma.Prisma__categoriesClient<runtime.Types.Result.GetResult<Prisma.$categoriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   borrow_details<T extends Prisma.books$borrow_detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.books$borrow_detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$borrow_detailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  goods_receipt_details<T extends Prisma.books$goods_receipt_detailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.books$goods_receipt_detailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$goods_receipt_detailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchase_order_items<T extends Prisma.books$purchase_order_itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.books$purchase_order_itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$purchase_order_itemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2433,6 +2593,30 @@ export type books$borrow_detailsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.Borrow_detailsScalarFieldEnum | Prisma.Borrow_detailsScalarFieldEnum[]
+}
+
+/**
+ * books.goods_receipt_details
+ */
+export type books$goods_receipt_detailsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the goods_receipt_details
+   */
+  select?: Prisma.goods_receipt_detailsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the goods_receipt_details
+   */
+  omit?: Prisma.goods_receipt_detailsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.goods_receipt_detailsInclude<ExtArgs> | null
+  where?: Prisma.goods_receipt_detailsWhereInput
+  orderBy?: Prisma.goods_receipt_detailsOrderByWithRelationInput | Prisma.goods_receipt_detailsOrderByWithRelationInput[]
+  cursor?: Prisma.goods_receipt_detailsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.Goods_receipt_detailsScalarFieldEnum | Prisma.Goods_receipt_detailsScalarFieldEnum[]
 }
 
 /**

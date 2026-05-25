@@ -11,6 +11,7 @@ import publisherRouter from "./publisher.route";
 import bankRouter from "./bank.route";
 import purchaseOrderRouter from "./purchase-order.route";
 import CategoryBookRouter from "./category-book.route";
+import goodsReciptRouter from "./goods-receipt.route";
 import UserPageRouter from "./user-page.route";
 import fineRouter from "./fine.route";
 import { authMiddleware } from "../middlleware/auth.middleware";
@@ -30,6 +31,7 @@ router.use("/fines", authMiddleware, fineRouter);
 router.use("/borrow-record", authMiddleware, borrowRecordRouter);
 router.use("/banks", authMiddleware, bankRouter);
 router.use("/purchase-orders", authMiddleware, purchaseOrderRouter);
+router.use("/goods-receipts", authMiddleware, goodsReciptRouter);
 router.use("/category-books", CategoryBookRouter);
 router.use("/users-pages", UserPageRouter);
 

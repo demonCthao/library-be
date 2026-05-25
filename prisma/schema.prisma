@@ -43,28 +43,29 @@ model book_authors {
 }
 
 model books {
-  id                   Int                    @id @default(autoincrement())
-  isbn                 String?                @unique(map: "isbn") @db.VarChar(20)
-  title                String                 @db.VarChar(255)
-  description          String?                @db.Text
-  publish_year         Int?
-  language             String?                @db.VarChar(50)
-  pages                Int?
-  publisher_id         Int?
-  category_id          Int?
-  created_at           DateTime               @default(now()) @db.Timestamp(0)
-  stock_quantity       Int                    @default(0)
-  borrowed_quantity    Int                    @default(0)
-  reserved_quantity    Int                    @default(0)
-  available_quantity   Int                    @default(0)
-  avatar_path          String?                @db.VarChar(255)
-  price                Decimal                @default(0.00) @db.Decimal(10, 2)
-  content              String?                @db.LongText
-  book_authors         book_authors[]
-  publishers           publishers?            @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
-  categories           categories?            @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
-  borrow_details       borrow_details[]
-  purchase_order_items purchase_order_items[]
+  id                    Int                     @id @default(autoincrement())
+  isbn                  String?                 @unique(map: "isbn") @db.VarChar(20)
+  title                 String                  @db.VarChar(255)
+  description           String?                 @db.Text
+  publish_year          Int?
+  language              String?                 @db.VarChar(50)
+  pages                 Int?
+  publisher_id          Int?
+  category_id           Int?
+  created_at            DateTime                @default(now()) @db.Timestamp(0)
+  stock_quantity        Int                     @default(0)
+  borrowed_quantity     Int                     @default(0)
+  reserved_quantity     Int                     @default(0)
+  available_quantity    Int                     @default(0)
+  avatar_path           String?                 @db.VarChar(255)
+  price                 Decimal                 @default(0.00) @db.Decimal(10, 2)
+  content               String?                 @db.LongText
+  book_authors          book_authors[]
+  publishers            publishers?             @relation(fields: [publisher_id], references: [id], onUpdate: Restrict, map: "books_ibfk_1")
+  categories            categories?             @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "books_ibfk_2")
+  borrow_details        borrow_details[]
+  goods_receipt_details goods_receipt_details[]
+  purchase_order_items  purchase_order_items[]
 
   @@index([category_id], map: "category_id")
   @@index([publisher_id], map: "publisher_id")
@@ -188,6 +189,30 @@ model purchase_orders {
   users                users?                 @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_purchase_orders_user")
 
   @@index([user_id], map: "fk_purchase_orders_user")
+}
+
+model goods_receipt_details {
+  id               Int            @id @default(autoincrement())
+  goods_receipt_id Int
+  book_id          Int
+  quantity         Int            @default(0)
+  import_price     Decimal        @db.Decimal(12, 2)
+  books            books          @relation(fields: [book_id], references: [id], onUpdate: Restrict, map: "fk_grd_book")
+  goods_receipts   goods_receipts @relation(fields: [goods_receipt_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_grd_goods_receipt")
+
+  @@index([book_id], map: "fk_grd_book")
+  @@index([goods_receipt_id], map: "fk_grd_goods_receipt")
+}
+
+model goods_receipts {
+  id                    Int                     @id @default(autoincrement())
+  code                  String                  @unique(map: "code") @db.VarChar(50)
+  publisher_id          Int
+  created_by            Int
+  created_at            DateTime                @default(now()) @db.Timestamp(0)
+  goods_receipt_details goods_receipt_details[]
+
+  @@index([code], map: "idx_gr_code")
 }
 
 enum readers_gender {

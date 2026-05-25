@@ -87,3 +87,13 @@ export type purchase_order_items = Prisma.purchase_order_itemsModel
  * 
  */
 export type purchase_orders = Prisma.purchase_ordersModel
+/**
+ * Model goods_receipt_details
+ * 
+ */
+export type goods_receipt_details = Prisma.goods_receipt_detailsModel
+/**
+ * Model goods_receipts
+ * 
+ */
+export type goods_receipts = Prisma.goods_receiptsModel
