@@ -88,4 +88,54 @@ router.post("/excel", controller.exportExcel.bind(controller));
  */
 router.get("/keyword", controller.getBookByKeyword.bind(controller));
 
+/**
+ * @swagger
+ * /api/v1/category-books/{bookId}/chapter:
+ * get:
+ * summary: Lấy nội dung chương sách theo index (Phân trang đọc sách)
+ * tags: [Category-Books]
+ * parameters:
+ * - in: path
+ * name: bookId
+ * required: true
+ * schema:
+ * type: integer
+ * description: ID của cuốn sách cần đọc
+ * example: 1
+ * - in: query
+ * name: chapterIndex
+ * required: false
+ * schema:
+ * type: integer
+ * default: 0
+ * description: Số thứ tự chương cần lấy (Bắt đầu từ 0 cho chương 1)
+ * example: 0
+ * responses:
+ * 200:
+ * description: Trả về DTO chứa thông tin sách và nội dung chương hiện tại
+ * content:
+ * application/json:
+ * schema:
+ * type: object
+ * properties:
+ * id:
+ * type: integer
+ * example: 1
+ * title:
+ * type: string
+ * example: "Đắc Nhân Tâm"
+ * currentChapterIndex:
+ * type: integer
+ * example: 0
+ * chapterContent:
+ * type: string
+ * example: "Nội dung chi tiết của chương 1..."
+ * totalChapters:
+ * type: integer
+ * example: 12
+ * 404:
+ * description: Không tìm thấy sách với ID tương ứng
+ */
+router.get("/:bookId/chapter", controller.getBookChapterByIndex.bind(controller));
+
 export default router;

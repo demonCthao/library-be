@@ -6,6 +6,7 @@ import { prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
 import { books } from "@prisma/client";
+import { BookChapterDTO } from "../dto/book-chapter.dto";
 
 interface FindCategoryQuery extends FindAllQuery {
     name?: string;
@@ -108,6 +109,60 @@ class CategoryBookService extends BaseService<categories> {
                 books: true
             }
         });
+    }
+
+    async getBookChapterByIndex(bookId: number, chapterIndex: number): Promise<BookChapterDTO | null> {
+        const book = await prisma.books.findUnique({
+            where: { id: bookId },
+        });
+
+        if (!book) return null;
+
+        if (!book.content || book.content.trim() === "") {
+            return new BookChapterDTO(
+                book.id,
+                book.title,
+                0,
+                "",
+                0,
+                book.avatar_path,
+                book.isbn,
+                book.description
+            );
+        }
+
+        const chapters = book.content
+            .split('[co-chapter-split]')
+            .map((chapter) => chapter.trim())
+            .filter((chapter) => chapter !== "");
+
+        const totalChapters = chapters.length;
+
+        if (chapterIndex < 0 || chapterIndex >= totalChapters) {
+            return new BookChapterDTO(
+                book.id,
+                book.title,
+                chapterIndex,
+                "Chương này không tồn tại hoặc đã bị xóa.",
+                totalChapters,
+                book.avatar_path,
+                book.isbn,
+                book.description
+            );
+        }
+
+        const currentChapterContent = chapters[chapterIndex];
+
+        return new BookChapterDTO(
+            book.id,
+            book.title,
+            chapterIndex,
+            currentChapterContent,
+            totalChapters,
+            book.avatar_path,
+            book.isbn,
+            book.description
+        );
     }
 
 }
