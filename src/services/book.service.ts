@@ -10,7 +10,7 @@ import { BaseService } from "./base.service";
 
 interface FindBookQuery extends FindAllQuery {
   title?: string;
-  description?: string;
+  isbn?: string;
   publish_year?: string;
   category_id?: string;
 }
@@ -46,13 +46,13 @@ class BookService extends BaseService<books> {
     });
   }
 
-  async findAll({ pageIndex = 1, pageSize = 10, title = "", description = "", publish_year = "", category_id = "" }: FindBookQuery): Promise<PaginatedResult<books>> {
+  async findAll({ pageIndex = 1, pageSize = 10, title = "", isbn = "", publish_year = "", category_id = "" }: FindBookQuery): Promise<PaginatedResult<books>> {
     const pageSearch = Math.max(1, Number(pageIndex)) || 1;
     const limitSearch = Number(pageSize) || 10;
 
     const where: Prisma.booksWhereInput = {
       title: title ? { contains: title } : undefined,
-      description: description ? { contains: description } : undefined,
+      isbn: isbn ? { contains: isbn } : undefined,
       publish_year: buildPrismaFilter("number", publish_year),
       category_id: buildPrismaFilter("number", category_id),
     };
