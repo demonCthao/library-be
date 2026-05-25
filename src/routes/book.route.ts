@@ -83,8 +83,8 @@ router.get('/', controller.findAll.bind(controller));
  * properties:
  * data:
  * type: string
- * description: JSON string chứa thông tin sách (không bao gồm id)
- * example: '{"isbn":"9786042081234","title":"Cún nhỏ nói dối","description":"Tiểu thuyết","publish_year":2010,"language":"Vietnamese","pages":378,"publisher_id":2,"category_id":4,"price":"80000","content":"<p>Nội dung sách...</p>"}'
+ * description: JSON string chứa thông tin sách
+ * example: '{"book_code":"B001","isbn":"9786042081234","title":"Cún nhỏ nói dối","description":"Tiểu thuyết","publish_year":2010,"language":"Vietnamese","pages":378,"publisher_id":2,"category_id":4,"price":"80000"}'
  * image:
  * type: string
  * format: binary
@@ -92,6 +92,8 @@ router.get('/', controller.findAll.bind(controller));
  * responses:
  * 201:
  * description: Book created successfully
+ * 400:
+ * description: Book code already exists
  */
 router.post('/', bookUpload.single("image"), controller.store.bind(controller));
 

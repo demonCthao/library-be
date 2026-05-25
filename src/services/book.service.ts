@@ -1,13 +1,12 @@
 import ExcelJS from "exceljs";
-import path from "path";
-import fs from "fs";
 import { Response } from "express";
-import { NotFoundException } from "../exceptions";
+import fs from "fs";
+import path from "path";
+import { AlreadyExistsException, NotFoundException } from "../exceptions";
 import { books, Prisma } from "../generated/prisma/client";
 import { buildPrismaFilter, prisma } from "../lib/prisma";
 import { FindAllQuery } from "../types/search-query";
 import { BaseService } from "./base.service";
-import { BookSearchResult } from "../dto/book-search-result";
 
 interface FindBookQuery extends FindAllQuery {
   title?: string;
@@ -19,7 +18,16 @@ interface FindBookQuery extends FindAllQuery {
 class BookService extends BaseService<books> {
 
   async store(data: any, file?: Express.Multer.File): Promise<books> {
+    const existingBook = await prisma.books.findUnique({
+      where: { isbn: data.isbn }
+    });
+
+    if (existingBook) {
+      throw new AlreadyExistsException(`Mã sách ${data.isbn}`);
+    }
+
     const insertData: Prisma.booksUncheckedCreateInput = {
+      isbn: data.isbn,
       title: data.title,
       description: data.description,
       publish_year: data.publish_year ? Number(data.publish_year) : undefined,
@@ -28,15 +36,11 @@ class BookService extends BaseService<books> {
       content: data.content,
       category_id: data.category_id ? Number(data.category_id) : undefined,
       publisher_id: data.publisher_id ? Number(data.publisher_id) : undefined,
-      available_quantity: data.available_quantity? Number(data.available_quantity) : 0,
-      stock_quantity: data.stock_quantity? Number(data.stock_quantity) : 0,
+      available_quantity: data.available_quantity ? Number(data.available_quantity) : 0,
+      stock_quantity: data.stock_quantity ? Number(data.stock_quantity) : 0,
+      avatar_path: file ? `/uploads/books/${file.filename}` : undefined,
     };
 
-    // 2. Nếu có file ảnh, gán đường dẫn vào (giống hệt logic update của bạn)
-    if (file) {
-      // Lưu ý: dùng đúng tên field trong DB của bạn (avatar_path hoặc image_path)
-      (insertData as any).avatar_path = `/uploads/books/${file.filename}`;
-    }
     return await prisma.books.create({
       data: insertData
     });
